@@ -1,0 +1,62 @@
+{% extends 'modelo/modelo.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block css %}
+<!-- css -->
+<link rel="stylesheet" href="{% static 'css/modelo/estilo.css' %}">
+<link rel="stylesheet" href="{% static 'css/protocolo/estilo.css' %}">
+{% endblock %}
+
+{% block titulo %}
+<title>Protocolo - Desenho da Figura Humana</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="alert alert-light">
+    <h3>Protocolo - Desenho da Figura Humana</h3>
+</div>
+
+<hr>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="form-row d-flex justify-content-center">
+        <div class="col-md-4">
+            {{ form.paciente|as_crispy_field }}
+        </div>
+
+        <div class="col-md-2">
+            {{ form.data_avaliacao|as_crispy_field }}
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 class="mb-4">Desenho da Figura Humana</h2>
+
+    <div class="form-row mt-3">
+        <div class="col-md-3">
+            {{ form.desenho_figura_humana|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <div class="col-md-5">
+            {{ form.obs_desenho_figura_humana|as_crispy_field }}
+        </div>
+    </div>
+
+    <div class="form-row float-right">
+        <a class="btn btn-danger m-4" href="{% url 'details-paciente' id_paciente %}" title="Cancelar">
+            Cancelar
+        </a>
+
+        <button type="submit" class="btn btn-info m-4" title="Confirmar">
+            Confirmar
+        </button>
+    </div>
+</form>
+{% endblock %}

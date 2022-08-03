@@ -1,0 +1,205 @@
+{% extends 'modelo/modelo.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block css %}
+<!-- css -->
+<link rel="stylesheet" href="{% static 'css/modelo/estilo.css' %}">
+<link rel="stylesheet" href="{% static 'css/protocolo/estilo.css' %}">
+{% endblock %}
+
+{% block titulo %}
+<title>Protocolo - Segunda Unidade Funcional</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="alert alert-light">
+    <h3>Protocolo - Segunda Unidade Funcional</h3>
+
+    <hr>
+
+    <div class="row ml-2">
+        <ul class="list-group list-unstyled">
+            <li>1 - Perfil Apráxico - Realização imperfeita, incompleta e descoordenada.</li>
+            <li>2 - Perfil Dispráxico - Realização com dificuldades de controle.</li>
+            <li>3 - Perfil Eupráxico - Realização controlada e adequada.</li>
+            <li>4 - Perfil Hiperpráxico - Realização perfeita, econômica, harmoniosa e bem controlada.</li>
+        </ul>
+    </div>
+</div>
+
+<hr>
+
+<form class="mt-5" method="post">
+    {% csrf_token %}
+
+    <div class="form-row d-flex justify-content-center">
+        <div class="col-md-4">
+            {{ form.paciente|as_crispy_field }}
+        </div>
+
+        <div class="col-md-2">
+            {{ form.data_avaliacao|as_crispy_field }}
+        </div>
+    </div>
+
+    <hr>
+
+    <ul class="nav nav-pills justify-content-center mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active font-weight-bold" id="pills-nocao-corporal-tab" data-toggle="pill" href="#pills-nocao-corporal"
+               role="tab"
+               aria-controls="pills-nocao-corporal" aria-selected="true">Noção Corporal</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link font-weight-bold" id="pills-lateralizacao-tab" data-toggle="pill" href="#pills-lateralizacao" role="tab"
+               aria-controls="pills-lateralizacao" aria-selected="false">Lateralização</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link font-weight-bold" id="pills-estruturacao-tab" data-toggle="pill" href="#pills-estruturacao" role="tab"
+               aria-controls="pills-estruturacao" aria-selected="false">Estruturação Espaço Temporal</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-nocao-corporal" role="tabpanel"
+             aria-labelledby="pills-nocao-corporal-tab">
+            <h2 class="mb-4">Noção Corporal</h2>
+
+            <h4>Cinestesia</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.nomeia_pontos_tateis|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Imitação de Gestos</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.imitacao_de_gestos|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6">
+                    {{ form.obs_imitacao_de_gestos|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Auto-Imagem</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.no_avaliador|as_crispy_field }}
+                </div>
+                <div class="col-md-2">
+                    {{ form.no_mesmo|as_crispy_field }}
+                </div>
+                <div class="col-md-2">
+                    {{ form.no_objeto|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-lateralizacao" role="tabpanel" aria-labelledby="pills-lateralizacao-tab">
+            <h2 class="mb-4">Lateralização</h2>
+
+            <h4>Lateralizações</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.lateralizacao_ocular|as_crispy_field }}
+                </div>
+                 <div class="col-md-2">
+                    {{ form.lateralizacao_manual|as_crispy_field }}
+                </div>
+                <div class="col-md-2">
+                    {{ form.lateralizacao_pedal|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6">
+                    {{ form.obs_lateralizacoes|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Reconhecimento Direita/Esquerda</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.reconhecimento_verbal|as_crispy_field }}
+                </div>
+
+                <div class="col-md-2">
+                    {{ form.reconhecimento_gestual|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.reconhecimento_tatil|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_reconhecimento_tatil|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-estruturacao" role="tabpanel" aria-labelledby="pills-estruturacao-tab">
+            <h2 class="mb-4">Estruturação Espaço Temporal</h2>
+
+            <h4>Organização Perceptiva</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.organizacao_perceptiva|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Estruturação Dinâmica Espacial</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.estruturacao_dinamica_espacial|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Representação Topográfica</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.representacao_topografica|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Estruturação Ritmica</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.codificacao|as_crispy_field }}
+                </div>
+                <div class="col-md-3">
+                    {{ form.decodificacao|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.transcodificacao_auditiva|as_crispy_field }}
+                </div>
+                <div class="col-md-3">
+                    {{ form.transcodificacao_visual|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-2">
+                <div class="col-md-6">
+                    {{ form.obs_estruturacao_ritmica|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row float-right">
+        <a class="btn btn-danger m-4" href="{% url 'details-paciente' id_paciente %}" title="Cancelar">
+            Cancelar
+        </a>
+
+        <button type="submit" class="btn btn-info m-4" title="Confirmar">
+            Confirmar
+        </button>
+    </div>
+</form>
+{% endblock %}

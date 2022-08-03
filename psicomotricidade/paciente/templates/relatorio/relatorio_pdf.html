@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style type="text/css">
+        .info-paciente h1 {
+            font-size: 2.3rem;
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+        .info-paciente h2 {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size: 1.6rem;
+            text-align: center;
+        }
+        .main h1 {
+            margin-bottom: 0;
+            font-size: 2rem;
+            text-align: center;
+        }
+        .main h2 {
+            margin-top: 0;
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        .section-unidades-funcionais h2 {
+            margin-bottom: 0;
+            font-size: 1.8rem;
+        }
+        .section-unidades-funcionais h3 {
+            margin-bottom: 0px;
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.6rem;
+        }
+        .section-unidades-funcionais img {
+            height: 300px;
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+        .table-goodnough {
+            margin-bottom: 0;
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-top: 0;
+        }
+        .txt-relatorio h5 {
+            margin-top: 0px;
+            margin-bottom: 0;
+            font-size: 1.3rem;
+        }
+        .txt-relatorio h4 {
+            margin-top: 0px;
+            margin-bottom: 0;
+            font-size: 1.4rem;
+        }
+        .txt-relatorio p {
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        .datas-avaliacoes {
+            text-align: center;
+        }
+        .datas-avaliacoes strong {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size: 1.2rem;
+        }
+        .datas-avaliacoes span {
+            font-size: 1.1rem;
+        }
+
+    </style>
+
+    <title>Relatório Paciente {{ nome }}</title>
+</head>
+<body>
+
+<div class="info-paciente">
+    <h1>Paciente: {{ nome }}</h1>
+    <h2>{{ idade }}</h2>
+</div>
+<div class="datas-avaliacoes">
+    <span>
+        <strong>Avaliações Referentes á primeira Unidade Funcional:</strong>
+        {% for primeira in primeira_unidade %}
+
+        {{ primeira.data_avaliacao }};
+    </span>
+    {% empty %}
+    --
+    {% endfor %}
+</div>
+<div class="datas-avaliacoes">
+                <span>
+                    <strong>Avaliações Referentes á Segunda Unidade Funcional:</strong>
+                {% for segunda in segunda_unidade %}
+                    {{ segunda.data_avaliacao }};
+                </span>
+    {% empty %}
+    --
+    {% endfor %}
+</div>
+<div class="datas-avaliacoes">
+                <span>
+                    <strong>Avaliações Referentes á Terceira Unidade Funcional:</strong>
+                {% for terceira in terceira_unidade %}
+                    {{ terceira.data_avaliacao }};
+                </span>
+    {% empty %}
+    --
+    {% endfor %}
+</div>
+
+<main class="main">
+
+    <!-- Primeira unidade -->
+    {%if primeira_unidade%}
+    <section class="section-unidades-funcionais">
+        <hr>
+        <h2>Aspectos da Tonicidade</h2>
+        <div>
+
+            <div class="txt-relatorio">
+
+                <h5>Extensibilidade dos membros superiores</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_extensibilidade_membros_superiores }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_extensibilidade_membros_superiores }}</p>
+
+                <h5>Observações:</h5>
+                {% for primeira in primeira_unidade %}
+                <p>{{ primeira.obs_extensibilidade_membros_superiores }}</p>
+                {% endfor %}
+
+                <h5>Extensibilidade dos membros inferiores</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_extensibilidade_membros_inferiores }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_extensibilidade_membros_inferiores }}</p>
+
+                <h5>Observações:</h5>
+                {% for primeira in primeira_unidade %}
+                <p>{{ primeira.obs_extensibilidade_membros_inferiores }}</p>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div>
+
+            <div class="txt-relatorio">
+                <h5>Paratonia nos membros superiores</h5>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_paratonia_membros_superiores }}</p>
+            </div>
+        </div>
+
+        <div>
+
+            <div class="txt-relatorio">
+                <h5>Diadococinesia na Pronação</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_pronacao }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_pronacao }}</p>
+
+                <h5>Diadococinesia na Supinação</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_supinacao }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_supinacao }}</p>
+            </div>
+        </div>
+        <div>
+            <div class="txt-relatorio">
+                <h5>Sincinesia em Movimento Tônico</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_tonico }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_tonico }}</p>
+
+                <h5>Observações:</h5>
+                {% for primeira in primeira_unidade %}
+                <p>{{ primeira.obs_tonico }}</p>
+                {% endfor %}
+
+                <h5>Sincinesia em Movimento Tônico-cinético</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_tonico_cinetico }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_tonico_cinetico }}</p>
+
+                <h5>Observações:</h5>
+                {% for primeira in primeira_unidade %}
+                <p>{{ primeira.obs_tonico_cinetico }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <h2>Aspectos da Equilibração</h2>
+        <div>
+            <div class="txt-relatorio">
+                <h5>Imobilidade</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_imobilidade }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_imobilidade }}</p>
+
+                <h5>Observações:</h5>
+                {% for primeira in primeira_unidade %}
+                <p>{{ primeira.obs_imobilidade }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {%endif%}
+
+    <!-- Segunda unidade -->
+    {%if segunda_unidade%}
+    <section class="section-unidades-funcionais">
+
+        <h2>Aspectos da Noção Corporal</h2>
+        <div>
+            <img src="media_graph/cinestesia.webp">
+
+            <div class="txt-relatorio">
+                <h5>Nomeação de pontos táteis</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_nomeia_pontos_tateis }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_nomeia_pontos_tateis }}</p>
+            </div>
+        </div>
+
+        <div>
+            <img src="media_graph/imitacao_de_gestos.webp">
+            <div class="txt-relatorio">
+            Bergès & Lézine, 1978 - imitação de gestos tabela base quantitativa
+            </div>
+
+            <div class="txt-relatorio">
+                <h5>Imitação de gestos</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_imitacao_de_gestos }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_imitacao_de_gestos }}</p>
+
+                <h5>Observações:</h5>
+                {% for segunda in segunda_unidade %}
+                <p>{{ segunda.obs_imitacao_de_gestos }}</p>
+                {% endfor %}
+            </div>
+
+
+
+        </div>
+
+        <div>
+            <div>
+
+                <!-- Tablea goodenough -------------------  -->
+                <h4>Tabela montada baseada nos exercicios da figura humana:</h4>
+                                <div class="table-goodnough">
+                                    <img src="media_goodnough/goodnough.webp">
+                                </div>
+                <!--    Fim tabela Tablea goodenough -------------------  -->
+
+                <!-- Fig Humana -------------------
+                <img src="media_graph/figura_humana.webp">
+                <div class="txt-relatorio">
+                    {% if figura.obs_desenho_figura_humana %}
+                        <h5>Observações:</h5>
+                        {% for figura in desenho_figura_humana %}
+                        <p>{{ figura.obs_desenho_figura_humana }}</p>
+                        {% endfor %}
+                    {% else %}
+                    {% endif %}
+                </div>
+                  ----------------------Fim FigHumana   ------------------------     -->
+
+
+            </div>
+        </div>
+
+        <h2>Aspectos da Lateralização</h2>
+        <div>
+
+
+            <div class="txt-relatorio">
+                <h5>Dominancia lateral funcional ocular</h5>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_lateralizacao_ocular }}</p>
+
+                <h5>Dominancia lateral funcional manual</h5>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_lateralizacao_manual }}</p>
+
+                <h5>Dominancia lateral funcional pedal</h5>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_lateralizacao_pedal }}</p>
+
+                <h5>Observações:</h5>
+                {% for segunda in segunda_unidade %}
+                <p>{{ segunda.obs_lateralizacoes }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+
+            <!--<div class="txt-relatorio">
+                <h5>Re verbal</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_reconhecimento_verbal }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_reconhecimento_verbal }}</p>
+
+                <h5>Reconhecimento gestual</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_reconhecimento_gestual }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_reconhecimento_gestual }}</p>
+
+                <h5>Reconhecimento tátil</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_reconhecimento_tatil }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_reconhecimento_tatil }}</p>
+                <h5>Observações:</h5>
+                {% for segunda in segunda_unidade %}
+                <p>{{ segunda.obs_reconhecimento_tatil }}</p>
+                {% endfor %}
+            </div>-->
+        </div>
+
+        <h2>Aspectos da estruturação Espaço Temporal</h2>
+        <div>
+
+
+            <div class="txt-relatorio">
+                <h5>Organização perceptiva</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_organizacao_perceptiva }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_organizacao_perceptiva }}</p>
+            </div>
+        </div>
+
+        <div>
+
+
+            <div class="txt-relatorio">
+                <h5>Estruturação dinâmica espacial</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_estruturacao_dinamica }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_estruturacao_dinamica }}</p>
+            </div>
+        </div>
+
+        <div>
+
+
+            <div class="txt-relatorio">
+                <h5>Representação topográfica</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_representacao_topografica }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_representacao_topografica }}</p>
+            </div>
+        </div>
+
+        <div>
+            <img src="media_graph/estruturacao_ritmica.webp">
+            <div class="txt-relatorio">
+            Stambak, M. (1972). Trois Épreuves de Rytme.
+            </div>
+
+            <div class="txt-relatorio">
+                <h5>Codificação</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_codificacao }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_codificacao }}</p>
+
+                <h5>Decodificação</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_decodificacao }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_decodificacao }}</p>
+
+                <h5>Transcodificação auditiva</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_transcodificacao_auditiva }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_transcodificacao_auditiva }}</p>
+
+                <h5>Transcodificação visual</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_transcodificacao_visual }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_transcodificacao_visual }}</p>
+
+                <h5>Observações sobre à Estruturação Rítmica</h5>
+                {% for segunda in segunda_unidade %}
+                <p>{{ segunda.obs_estruturacao_ritmica }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+    {%endif%}
+
+    <!-- Terceira unidade -->
+    {%if terceira_unidade%}
+    <section class="section-unidades-funcionais">
+
+        <h2>Aspectos da Praxia Global</h2>
+        <div>
+
+            <div class="txt-relatorio">
+                <h5>Coordenação Óculo-manual ao Jogar bolas.</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_jogar_quatro_bolas }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_jogar_quatro_bolas }}</p>
+
+                <h5>Coordenação Óculo-manual ao Agarrar bolas.</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_agarrar_bola_de_tenis }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_agarrar_bola_de_tenis }}</p>
+
+                <h5>Observações sobre à Coordenação Óculo-manual:</h5>
+                {% for terceira in terceira_unidade %}
+                <p>{{ terceira.obs_oculo_manual }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+
+
+
+            <div class="txt-relatorio">
+                <h5>Coordenação Óculo-pedal ao chutar bolas</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_quatro_chutes_ao_gol }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_quatro_chutes_ao_gol }}</p>
+                <h5>Observações:</h5>
+                {% for terceira in terceira_unidade %}
+                <p>{{ terceira.obs_oculo_pedal }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+
+
+
+            <div class="txt-relatorio">
+                <h5>Dissociação dos Membros superiores</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_dissociacao_membros_superiores }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_dissociacao_membros_superiores }}</p>
+                <h5>Observações:</h5>
+                {% for terceira in terceira_unidade %}
+                <p>{{ terceira.obs_dissociacao_membros_superiores }}</p>
+                {% endfor %}
+
+                <h5>Dissociação dos Membros inferiores</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_dissociacao_membros_inferiores }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_dissociacao_membros_inferiores }}</p>
+                <h5>Observações:</h5>
+                {% for terceira in terceira_unidade %}
+                <p>{{ terceira.obs_dissociacao_membros_inferiores }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+
+
+            <div class="txt-relatorio">
+                <h5>Agilidade</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_agilidade }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_agilidade }}</p>
+            </div>
+        </div>
+
+        <h2>Aspectos da Praxia Fina</h2>
+        <div>
+
+
+            <div class="txt-relatorio">
+                <h5>Aspectos especificos manuais</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_pulseira_de_clipes }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_pulseira_de_clipes }}</p>
+                <h5>Observações:</h5>
+                {% for terceira in terceira_unidade %}
+                <p>{{ terceira.obs_pulseira_de_clipes }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+
+
+            <div class="txt-relatorio">
+                <h5>Tamborilar</h5>
+                <p><strong>Período das avaliações:</strong> {{ txt_tamborilar }}</p>
+                <p><strong>Relativo à última avaliação:</strong> {{ json_tamborilar }}</p>
+                <h5>Observações:</h5>
+                {% for terceira in terceira_unidade %}
+                <p>{{ terceira.obs_tamborilar }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <div class="txt-relatorio">
+            <h5>Velocidade e precisão</h5>
+            <p><strong>Período das avaliações:</strong> {{ txt_velocidade_precisao }}</p>
+            <p><strong>Relativo à última avaliação:</strong> {{ json_velocidade_precisao }}</p>
+        </div>
+
+
+        <h2>Aspectos da Grafomotricidade</h2>
+        <div>
+            <img src="media_graph/tracados.webp">
+
+
+        </div>
+
+        <div class="txt-relatorio">
+            <h5>Observações sobre à Grafomotricidade:</h5>
+            {% for terceira in terceira_unidade %}
+            <p>{{ terceira.obs_grafomotricidade }}</p>
+            {% endfor %}
+        </div>
+
+    </section>
+    {%endif%}
+
+    <!-- Conclusão -->
+    {%if conclusao%}
+    <section class="section-unidades-funcionais">
+        <hr>
+        <h2>Conclusão</h2>
+        <div class="txt-relatorio">
+            <h5>Aspectos Psico-Afetivos:</h5>
+            {% for conclusao in conclusao %}
+            <p>{{ conclusao.psico_afetivo }}</p>
+            {% endfor %}
+        </div>
+        <div class="txt-relatorio">
+            <h5>Aspectos Psico-Cognitivos:</h5>
+            {% for conclusao in conclusao %}
+            <p>{{ conclusao.psico_cognitivo }}</p>
+            {% endfor %}
+        </div>
+        <div class="txt-relatorio">
+            <h5>Aspectos sobre a tonicidade:</h5>
+            {% for conclusao in conclusao %}
+            <p>{{ conclusao.tonicidade }}</p>
+            {% endfor %}
+        </div>
+        <div class="txt-relatorio">
+            <h5>Aspectos sobre a Equilibração:</h5>
+            {% for conclusao in conclusao %}
+            <p>{{ conclusao.equilibracao }}</p>
+            {% endfor %}
+        </div>
+        <div class="txt-relatorio">
+            <h5>Aspectos sobre o Esquema e Imagem Corporal:</h5>
+            {% for conclusao in conclusao %}
+            <p>{{ conclusao.esquema_imagem_corporal }}</p>
+            {% endfor %}
+        </div>
+        <div class="txt-relatorio">
+            <h5>Aspectos sobre a Lateralizacao:</h5>
+            {% for conclusao in conclusao %}
+            <p>{{ conclusao.lateralizacao }}</p>
+            {% endfor %}
+        </div>
+        <div class="txt-relatorio">
+            <h5>Aspectos sobre a Estruturação Espaço-Temporal:</h5>
+            {% for conclusao in conclusao %}
+            <p>{{ conclusao.estruturacao_espaco_temporal }}</p>
+            {% endfor %}
+        </div>
+        <div class="txt-relatorio">
+            <h5>Aspectos sobre a Praxia Global:</h5>
+            {% for conclusao in conclusao %}
+            <p>{{ conclusao.praxia_global }}</p>
+            {% endfor %}
+        </div>
+        <div class="txt-relatorio">
+            <h5>Aspectos sobre a Praxia Fina:</h5>
+            {% for conclusao in conclusao %}
+            <p>{{ conclusao.praxia_fina }}</p>
+            {% endfor %}
+        </div>
+        <div class="txt-relatorio">
+            <h5>Aspectos sobre a Grafomotricidade:</h5>
+            {% for conclusao in conclusao %}
+            <p>{{ conclusao.grafomotricidade }}</p>
+            {% endfor %}
+        </div>
+        <hr>
+        <div class="txt-relatorio">
+            <strong><h5>Encaminhamento:</h5></strong>
+            {% for conclusao in conclusao %}
+            <p>{{ conclusao.encaminhamento }}</p>
+            {% endfor %}
+        </div>
+        <div class="txt-relatorio">
+            <strong><h5>Prognóstico:</h5></strong>
+            {% for conclusao in conclusao %}
+            <p>{{ conclusao.prognostico }}</p>
+            {% endfor %}
+        </div>
+    </section>
+    {%%endif}
+
+</main>
+</body>
+</html>

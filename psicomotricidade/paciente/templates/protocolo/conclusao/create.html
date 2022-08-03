@@ -1,0 +1,112 @@
+{% extends 'modelo/modelo.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block css %}
+<!-- css -->
+<link rel="stylesheet" href="{% static 'css/modelo/estilo.css' %}">
+<link rel="stylesheet" href="{% static 'css/protocolo/estilo.css' %}">
+{% endblock %}
+
+{% block titulo %}
+<title>Protocolo - Conclusão</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="alert alert-light">
+    <h3>Protocolo - Conclusão</h3>
+</div>
+
+<hr>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="form-row d-flex justify-content-center">
+        <div class="col-md-4">
+            {{ form.paciente|as_crispy_field }}
+        </div>
+
+        <div class="col-md-2">
+            {{ form.data_conclusao|as_crispy_field }}
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 class="mb-4">Conclusão</h2>
+
+    <div class="form-row mt-3">
+        <div class="col-md-3">
+            {{ form.psico_afetivo|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <div class="col-md-5">
+            {{ form.psico_cognitivo|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <div class="col-md-5">
+            {{ form.tonicidade|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <div class="col-md-5">
+            {{ form.equilibracao|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <div class="col-md-5">
+            {{ form.esquema_imagem_corporal|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <div class="col-md-5">
+            {{ form.lateralizacao|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <div class="col-md-5">
+            {{ form.estruturacao_espaco_temporal|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <div class="col-md-5">
+            {{ form.praxia_global|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <div class="col-md-5">
+            {{ form.praxia_fina|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <div class="col-md-5">
+            {{ form.grafomotricidade|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <div class="col-md-5">
+            {{ form.encaminhamento|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <div class="col-md-5">
+            {{ form.prognostico|as_crispy_field }}
+        </div>
+    </div>
+
+    <div class="form-row float-right">
+        <a class="btn btn-danger m-4" href="{% url 'pacientes' %}" title="Cancelar">
+            Cancelar
+        </a>
+
+        <button type="submit" class="btn btn-info m-4" title="Confirmar">
+            Confirmar
+        </button>
+    </div>
+</form>
+{% endblock %}

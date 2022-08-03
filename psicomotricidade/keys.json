@@ -1,0 +1,8 @@
+{
+  "driver": "postgresql",
+  "banco": "teste",
+  "usuario": "postgres",
+  "senha": "opentech",
+  "ip": "localhost",
+  "porta": "5433"
+}

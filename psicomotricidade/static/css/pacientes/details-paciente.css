@@ -1,0 +1,127 @@
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .results-desktop {
+        display: none;
+    }
+    .results-mobile {
+        color: rgba(0,0,0,.5);
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .results-desktop {
+        display: none;
+    }
+    .results-mobile {
+        color: rgba(0,0,0,.5);
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .results-desktop {
+        display: none;
+    }
+    .results-mobile {
+        color: rgba(0,0,0,.5);
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+     .results-mobile {
+        display: none;
+     }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .results-mobile {
+        display: none;
+    }
+}
+
+/* cards */
+.card {
+    margin-bottom: 1.5rem;
+    border: none;
+}
+.card-header {
+    background: rgba(0,0,0,.01);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* protocolo */
+dl dt {
+    margin-top: 0.8rem;
+}
+dt {
+    font-weight: 450;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background: #7D7D7DB0;
+}
+
+.nav-pills a {
+    color: #7D7D7D;
+}
+.nav-pills a:hover {
+    color: #000;
+}
+
+/* anamnese */
+.anamnese span {
+    font-weight: bold;
+}
+
+/* PRIMEIRA UNIDADE FUNCIONAL */
+.conceitos-filogeneticos {
+    margin-top: 3.1rem;
+    border-right: 1px solid #cccccc59;
+}
+.extensibilidade, .balanco-passivo, .paratonia, .diadococinesia, .sincinesia, .equilibrio {
+    margin-top: 1.3rem;
+    border-right: 1px solid #cccccc59;
+}
+.imobilidade {
+    margin-top: 1.6rem;
+    border-right: 1px solid #cccccc59;
+}
+
+/* SEGUNDA UNIDADE FUNCIONAL */
+.cinestesias {
+    margin-top: 3.1rem;
+    border-right: 1px solid #cccccc59;
+}
+.imitacao-de-gestos, .auto-imagem, .reconhecimento-d-e, .estruturacao, .representacao-topografica {
+    margin-top: 1.3rem;
+    border-right: 1px solid #cccccc59;
+}
+.lateralizacoes, .organizacao-perceptiva {
+    margin-top: 1.6rem;
+    border-right: 1px solid #cccccc59;
+}
+
+/* TERCEIRA UNIDADE FUNCIONAL */
+.oculo-manual {
+    margin-top: 3.1rem;
+    border-right: 1px solid #cccccc59;
+}
+.pulseira-clipes, .grafomotricidade, .quebra-cabeca {
+    margin-top: 1.6rem;
+    border-right: 1px solid #cccccc59;
+}
+.oculo-pedal, .dissociacao, .agilidade, .tamborilar, .velocidade-precisao {
+    margin-top: 1.3rem;
+    border-right: 1px solid #cccccc59;
+}
+
+/* DESENHO FIGURA HUMANA */
+.desenho-figura-humana {
+    margin-top: 0.8rem;
+    border-right: 1px solid #cccccc59;
+}

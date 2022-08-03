@@ -1,0 +1,15 @@
+html {
+    scroll-behavior: smooth;
+}
+#btn-topo {
+    float: right;
+    bottom: 15px;
+    right: 35px;
+    position: fixed;
+    color: #6c757d;
+}
+
+/* card */
+.card:hover {
+    box-shadow: 1px 1px 10px #00000050
+}

@@ -1,0 +1,622 @@
+{
+  "primeira_unidade": {
+    "tonicidade": {
+      "conceitos_filogeneticos": {
+        "rolar": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        },
+        "engatinhar": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        },
+        "rastejar": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        }
+      },
+      "extensibilidade": {
+        "extensibilidade_membros_superiores": {
+          "Reduzida": "Apresentou aproximação com tensão residual dos cotovelos, demonstrando aumento da tonicidade muscular com menor extensibilidade entre os membros, sendo estas características de hipertonicidade para membros superiores.",
+          "Normal": "Extensibilidade dentro da normalidade padrão.",
+          "Aumentada": "Apresentou aproximação com tensão residual dos cotovelos, demonstrando diminuição da tonicidade muscular com maior extensibilidade entre os membros, sendo estas características de hipotonicidade para membros superiores."
+        },
+        "extensibilidade_membros_inferiores": {
+          "Reduzida": "Diminuição da tonicidade muscular com maior extensibilidade apresentando caracteristicas de hipotonididade.",
+          "Normal": "Extensibilidade dentro da normalidade padrão.",
+          "Aumentada": "Aumento da tonididade muscular com maior extensibilidade apresentando caracteristicas de hipertonicidade."
+        }
+      },
+      "balanco_passivo": {
+        "balanco_membros_superiores": {
+          "Movimentos pendulares": "Aparecimento de soltura dos braços e cotovelos espontaneamente, mostrando movimentos passivos e relaxados.",
+          "Apresenta resistência": "Não apresentou balanceios, soltura dos braços e cotovelos."
+        }
+      },
+      "paratonia": {
+        "paratonia_membros_superiores": {
+          "Sem paratonia": "Não apresentou bloqueio dos movimentos ou precipitação de movimento.",
+          "Com paratonia": "Apresentou precipitação dos movimentos."
+        }
+      },
+      "diadococinesia": {
+        "pronacao": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        },
+        "supinacao": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        }
+      },
+      "sincinesia": {
+        "tonico": {
+          "Nível alto": "O paciente apresentou níveis altos de movimentos involuntários.",
+          "Nível médio": "O paciente apresentou níveis médios de movimentos involuntários.",
+          "Nível baixo": "O paciente apresentou níveis baixos de movimentos involuntários.",
+          "Não apresenta": "O paciente não apresentou movimentos involuntários."
+        },
+        "tonico_cinetico": {
+          "Nível alto": "O paciente apresentou níveis altos de movimentos e/ou expressões involuntárias.",
+          "Nível médio": "O paciente apresentou níveis médios de movimentos e/ou expressões involuntárias.",
+          "Nível baixo": "O paciente apresentou níveis baixos de movimentos e/ou expressões involuntárias.",
+          "Não apresenta": "Não apresentou movimentos e/ou expressões involuntárias manifestadas pelo paciente."
+        }
+      }
+    },
+    "equilibracao": {
+      "imobilidade": {
+        "imobilidade": {
+          "Sem imobilidade": "Apresentou baixo nível de imobilidade com os olhos fechados.",
+          "Imobilidade parcial": "Apresentou oscilação do controle de imobilidade.",
+          "Imobilidade integral": "Apresentou controle de suas mobilidades."
+        }
+      },
+      "equilibrio_estatico": {
+        "equilibrio_estatico": {
+          "Com dificuldade": "Apresentou dificuldade em seu controle postural.",
+          "3 segundos": "Manteve-se em equilíbrio estático durante 3 segundos.",
+          "5 segundos": "Manteve-se em equilíbrio estático durante 5 segundos."
+        }
+      },
+      "equilibrio_dinamico": {
+        "ponte_equilibrio_frente": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        },
+        "ponte_equilibrio_tras": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        },
+        "ponte_equilibrio_direita": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        },
+        "ponte_equilibrio_esquerda": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        },
+        "corda_olhos_abertos": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        },
+        "corda_olhos_fechados": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        }
+      }
+    }
+  },
+  "segunda_unidade": {
+    "nocao_corporal": {
+      "cinestesia": {
+        "nomeia_pontos_tateis": {
+          "0": "Ainda não possui percepção tátil.",
+          "1": "Ainda não possui percepção tátil.",
+          "2": "Ainda não possui percepção tátil.",
+          "3": "Ainda não possui percepção tátil.",
+          "4": "Ainda não possui percepção tátil.",
+          "5": "Ainda não possui percepção tátil.",
+          "6": "Ainda não possui percepção tátil.",
+          "7": "Possui nível reduzido percepção tátil.",
+          "8": "Possui nível reduzido percepção tátil.",
+          "9": "Possui nível reduzido percepção tátil.",
+          "10": "Possui nível reduzido percepção tátil.",
+          "11": "Possui nível reduzido percepção tátil.",
+          "12": "Possui nível reduzido percepção tatil.",
+          "13": "Possui certo nível de percepção tátil.",
+          "14": "Possui certo nível de percepção tátil.",
+          "15": "Possui certo nível de percepção tátil.",
+          "16": "Possui certo nível de percepção tátil.",
+          "17": "Possui certo nível de percepção tátil.",
+          "18": "Possui certo nível de percepção tátil.",
+          "19": "Possui certo nível de percepção tátil.",
+          "20": "Possui boa percepção tátil.",
+          "21": "Possui boa percepção tátil.",
+          "22": "Possui boa percepção tátil.",
+          "23": "Possui boa percepção tátil.",
+          "24": "Possui boa percepção tátil.",
+          "25": "Possui boa percepção tátil."
+        }
+      },
+      "imitacao_de_gestos": {
+        "imitacao_de_gestos": {
+          "0": "Ainda não possui repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "1": "Ainda não possui repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "2": "Ainda não possui repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "3": "Ainda não possui repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "4": "Ainda não possui repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "5": "Possui algum repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "6": "Possui algum repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "7": "Possui algum repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "8": "Possui algum repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "9": "Possui algum repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "10": "Possui amplo repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "11": "Possui amplo repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "12": "Possui amplo repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "13": "Possui amplo repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "14": "Possui amplo repertório para aquisição da gênese do esquema e imagem-corporal.",
+          "15": "Possui repertório completo para aquisição da gênese do esquema e imagem-corporal.",
+          "16": "Possui repertório completo para aquisição da gênese do esquema e imagem-corporal.",
+          "17": "Possui repertório completo para aquisição da gênese do esquema e imagem-corporal.",
+          "18": "Possui repertório completo para aquisição da gênese do esquema e imagem-corporal.",
+          "19": "Possui repertório completo para aquisição da gênese do esquema e imagem-corporal.",
+          "20": "Possui repertório completo para aquisição da gênese do esquema e imagem-corporal."
+        }
+      },
+      "auto_imagem": {
+        "no_avaliador": {
+          "Não possui repertório": "Não possui projeção de esquema e imagem no outro.",
+          "Realizou parcialmente": "Possui certo nível de projeção de esquema e imagem no outro.",
+          "Realizou integralmente": "Possui projeção de esquema e imagem no outro."
+        },
+        "no_mesmo": {
+          "Não possui repertório": "Não possui projeção de esquema e imagem em si.",
+          "Realizou parcialmente": "Possui certo nível de projeção de esquema e imagem em si.",
+          "Realizou integralmente": "Possui projeção de esquema e imagem em si."
+        },
+        "no_objeto": {
+          "Não possui repertório": "Não possui projeção de esquema e imagem no objeto.",
+          "Realizou parcialmente": "Possui certo nível de projeção de esquema e imagem no objeto.",
+          "Realizou integralmente": "Possui projeção de esquema e imagem no objeto."
+        }
+      }
+    },
+    "lateralizacao": {
+      "lateralizacoes": {
+        "lateralizacao_ocular": {
+          "Indefinida": "Ainda não apresenta especialização sensório-motora entre direita e esquerda.",
+          "Esquerda": "Apresenta especialização sensório-motora ocular para a esquerda.",
+          "Direita": "Apresenta especialização sensório-motora ocular para a direita."
+        },
+        "lateralizacao_manual": {
+          "Indefinida": "Ainda não apresenta especialização sensório-motora entre direita e esquerda.",
+          "Esquerda": "Apresenta especialização sensório-motora manual para a esquerda.",
+          "Direita": "Apresenta especialização sensório-motora manual para a direita."
+        },
+        "lateralizacao_pedal": {
+          "Indefinida": "Ainda não apresenta especialização sensório-motora entre direita e esquerda.",
+          "Esquerda": "Apresenta especialização sensório-motora pedal para a esquerda.",
+          "Direita": "Apresenta especialização sensório-motora pedal para a direita."
+        }
+      },
+      "reconhecimento_direita_esquerda": {
+        "reconhecimento_verbal": {
+          "Não reconheceu": "Necessita de estímulos para diferenciação do conceito de direita e esquerda.",
+          "Reconhecimento parcial": "Possui um certo nível diferenciação do conceito de direita e esquerda.",
+          "Reconhecimento integral": "Possui projeção completa do conceito de direita e esquerda."
+        },
+        "reconhecimento_gestual": {
+          "Não reconheceu": "Não possui projeção do conceito de direita e esquerda.",
+          "Reconhecimento parcial": "Possui certo nível de projeção do conceito de direita e esquerda.",
+          "Reconhecimento integral": "Possui projeção completa do conceito de direita e esquerda."
+        },
+        "reconhecimento_tatil": {
+          "Não reconheceu": "Não possui projeção do conceito de direita e esquerda.",
+          "Reconhecimento parcial": "Possui certo nível de projeção do conceito de direita e esquerda.",
+          "Reconhecimento integral": "Possui projeção completa do conceito de direita e esquerda."
+        }
+      }
+    },
+    "estruturacao_espaco_temporal": {
+      "organizacao_perceptiva": {
+        "organizacao_perceptiva": {
+          "Não realizou": "Necessita de aquisição para calcular distâncias e organizar ações motoras.",
+          "Realizou parcialmente": "Possui compreensão parcial de calcular distâncias e organizar ações motoras.",
+          "Realizou integralmente": "Possui compreensão completa de calcular distâncias e organizar ações motoras."
+        }
+      },
+      "estruturacao_dinamica_espacial": {
+        "estruturacao_dinamica_espacial": {
+          "Não estruturou": "Necessita de aquisição para compreender a orientação do corpo no espaço.",
+          "Estruturou parcialmente": "Possui compreensão parcial da orientação do corpo no espaço.",
+          "Estruturou integralmente": "Possui compreensão completa da orientação do corpo no espaço."
+        }
+      },
+      "representacao_topografica": {
+        "representacao_topografica": {
+          "Não localizou-se": "Necessita de estímulos para memorização e reprodução sequencial de trajetos representados em desenhos topográficos.",
+          "Localizou-se parcialmente": "Possui certo nível de memorização e reprodução sequencial de trajetos representados em desenhos topográficos.",
+          "Localizou-se integralmente": "Possui repertório de memória para reprodução sequencial de trajetos representados em desenhos topográficos."
+        }
+      },
+      "estruturacao_ritmica": {
+        "codificacao": {
+          "0": "Necessita de estímulos para codificar a cadência rítmica com atenção e concentração.",
+          "1": "Necessita de estímulos para codificar a cadência rítmica com atenção e concentração.",
+          "2": "Necessita de estímulos para codificar a cadência rítmica com atenção e concentração.",
+          "3": "Necessita de estímulos para codificar a cadência rítmica com atenção e concentração.",
+          "4": "Necessita de estímulos para codificar a cadência rítmica com atenção e concentração.",
+          "5": "Necessita de estímulos para codificar a cadência rítmica com atenção e concentração.",
+          "6": "Necessita de estímulos para codificar a cadência rítmica com atenção e concentração.",
+          "7": "Necessita de estímulos para codificar a cadência rítmica com atenção e concentração.",
+          "8": "Necessita de estímulos para codificar a cadência rítmica com atenção e concentração.",
+          "9": "Necessita de estímulos para codificar a cadência rítmica com atenção e concentração.",
+          "10": "Possui certo nível para codificar a cadência rítmica com atenção e concentração.",
+          "11": "Possui certo nível para codificar a cadência rítmica com atenção e concentração.",
+          "12": "Possui certo nível para codificar a cadência rítmica com atenção e concentração.",
+          "13": "Possui certo nível para codificar a cadência rítmica com atenção e concentração.",
+          "14": "Possui certo nível para codificar a cadência rítmica com atenção e concentração.",
+          "15": "Possui certo nível para codificar a cadência rítmica com atenção e concentração.",
+          "16": "Possui certo nível para codificar a cadência rítmica com atenção e concentração.",
+          "17": "Possiu compreensão completa para codificar a cadência rítmica com atenção e concentração.",
+          "18": "Possiu compreensão completa para codificar a cadência rítmica com atenção e concentração.",
+          "19": "Possiu compreensão completa para codificar a cadência rítmica com atenção e concentração.",
+          "20": "Possiu compreensão completa para codificar a cadência rítmica com atenção e concentração.",
+          "21": "Possiu compreensão completa para codificar a cadência rítmica com atenção e concentração."
+        },
+        "decodificacao": {
+          "0": "Necessita de estímulos para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "1": "Necessita de estímulos para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "2": "Necessita de estímulos para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "3": "Necessita de estímulos para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "4": "Necessita de estímulos para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "5": "Necessita de estímulos para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "6": "Necessita de estímulos para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "7": "Necessita de estímulos para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "8": "Necessita de estímulos para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "9": "Necessita de estímulos para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "10": "Possui certo nível para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "11": "Possui certo nível para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "12": "Possui certo nível para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "13": "Possui certo nível para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "14": "Possui certo nível para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "15": "Possui certo nível para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "16": "Possui certo nível para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "17": "Possiu compreensão completa para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "18": "Possiu compreensão completa para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "19": "Possiu compreensão completa para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "20": "Possiu compreensão completa para codificar e decodificar a cadência rítmica com atenção e concentração.",
+          "21": "Possiu compreensão completa para codificar e decodificar a cadência rítmica com atenção e concentração."
+        },
+        "transcodificacao_auditiva": {
+          "0": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "1": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "2": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "3": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "4": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "5": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "6": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "7": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "8": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "9": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "10": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "11": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "12": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "13": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "14": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "15": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "16": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "17": "Possui compreensão para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "18": "Possui compreensão para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "19": "Possui compreensão para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "20": "Possui compreensão para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "21": "Possui compreensão para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração."
+        },
+        "transcodificacao_visual": {
+          "0": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "1": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "2": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "3": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "4": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "5": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "6": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "7": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "8": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "9": "Necessita de estímulos para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "10": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "11": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "12": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "13": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "14": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "15": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "16": "Possui certo nível para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "17": "Possui compreensão para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "18": "Possui compreensão para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "19": "Possui compreensão para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "20": "Possui compreensão para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração.",
+          "21": "Possui compreensão para codificar, decodificar e transcodificar a cadência rítmica com atenção e concentração."
+        }
+      }
+    }
+  },
+  "terceira_unidade": {
+    "praxia_global": {
+      "coordenacao_oculo_manual": {
+        "jogar_quatro_bolas": {
+          "Não realizou": "Necessita de estímulos para obter capacidade perceptiva visual da precisão dos lançamentos, ou seja, ações psicomotoras (olho e mão).",
+          "Realizou parcialmente": "Possui certo nível de precisão dos lançamentos, ou seja, ações psicomotoras (olho e mão).",
+          "Realizou integralmente": "Possui habilidades de precisão dos lançamentos, ou seja, ações psicomotoras (olho e mão)."
+        },
+        "agarrar_bola_de_tenis": {
+          "Não realizou": "Necessita de estímulos para obter capacidade perceptiva visual da precisão dos lançamentos com objetos menores, ou seja, ações psicomotoras (olho e mão).",
+          "Realizou parcialmente": "Possui certo nível de precisão dos lançamentos com objetos menores, ou seja, ações psicomotoras (olho e mão).",
+          "Realizou integralmente": "Possui habilidades de precisão dos lançamentos com objetos menores, ou seja, ações psicomotoras (olho e mão)."
+        }
+      },
+      "coordenacao_oculo_pedal": {
+        "quatro_chutes_ao_gol": {
+          "": "",
+          "0": "Necessita de estímulos para fortalecimento em seu tonus de ação em seus membros inferiores.",
+          "1": "Necessita de estímulos para fortalecimento em seu tonus de ação em seus membros inferiores.",
+          "2": "Nota-se alguma força empregada em seu tonus de ação em seus membros inferiores.",
+          "3": "Possui força adequada em seu tonus de ação em seus membros inferiores.",
+          "4": "Possui força adequada em seu tonus de ação em seus membros inferiores."
+        }
+      },
+      "dissociacao": {
+        "dissociacao_membros_superiores": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        },
+        "dissociacao_membros_inferiores": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        }
+      },
+      "agilidade": {
+        "agilidade": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        }
+      }
+    },
+    "praxia_fina": {
+      "pulseira_de_clipes": {
+        "pulseira_de_clipes": {
+          "0": "Não possui maturidade, dissociação e organização das habilidades de destrezas manuais.",
+          "1": "Não possui maturidade, dissociação e organização das habilidades de destrezas manuais.",
+          "2": "Não possui maturidade, dissociação e organização das habilidades de destrezas manuais.",
+          "3": "Não possui maturidade, dissociação e organização das habilidades de destrezas manuais.",
+          "4": "Possui certo nível de maturidade, dissociação e organização das habilidades de destrezas manuais.",
+          "5": "Possui certo nível de maturidade, dissociação e organização das habilidades de destrezas manuais.",
+          "6": "Possui certo nível de maturidade, dissociação e organização das habilidades de destrezas manuais.",
+          "7": "Possui maturidade, dissociação e organização das habilidades de destrezas manuais.",
+          "8": "Possui maturidade, dissociação e organização das habilidades de destrezas manuais.",
+          "9": "Possui maturidade, dissociação e organização das habilidades de destrezas manuais.",
+          "10": "Possui maturidade, dissociação e organização das habilidades de destrezas manuais."
+        }
+      },
+      "tamborilar": {
+        "tamborilar": {
+          "Não realizou": "Não possui maturidade, dissociação e organização das habilidades de destrezas manuais.",
+          "Realizou parcialmente": "Possui certo nível de maturidade do ato, dissociação e organização das habilidades de destrezas manuais.",
+          "Realizou integralmente": "Possui maturidade do ato, dissociação e organização das habilidades de destrezas manuais."
+        }
+      },
+      "velocidade_precisao": {
+        "velocidade_precisao": {
+          "0": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "1": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "2": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "3": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "4": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "5": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "6": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "7": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "8": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "9": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "10": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "11": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "12": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "13": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "14": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "15": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "16": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "17": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "18": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "19": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "20": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "21": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "22": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "23": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "24": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "25": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "26": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "27": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "28": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "29": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "30": "Não possui agilidade motora, precisão nos traçados e atenção sustentada.",
+          "31": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "32": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "33": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "34": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "35": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "36": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "37": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "38": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "39": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "40": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "41": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "42": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "43": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "44": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "45": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "46": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "47": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "48": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "49": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "50": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "51": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "52": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "53": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "54": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "55": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "56": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "57": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "58": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "59": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "60": "Possui certo nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "61": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "62": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "63": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "64": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "65": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "66": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "67": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "68": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "69": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "70": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "71": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "72": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "73": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "74": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "75": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "76": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "77": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "78": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "79": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "80": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "81": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "82": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "83": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "84": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "85": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "86": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "87": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "88": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "89": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "90": "Possui um bom nível de agilidade motora, precisão nos traçados e atenção sustentada.",
+          "91": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "92": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "93": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "94": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "95": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "96": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "97": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "98": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "99": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "100": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "101": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "102": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "103": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "104": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "105": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "106": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "107": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "108": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "109": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "110": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "111": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "112": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "113": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "114": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados.",
+          "115": "Possui agilidade motora, precisão nos traçados e atenção sustentada em níveis adequados."
+        }
+      }
+    },
+    "grafomotricidade": {
+      "tracados": {
+        "tracado_vertical": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        },
+        "tracado_horizontal": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        },
+        "tracado_zig_zag": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        },
+        "tracado_curvo": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        }
+      },
+      "pontilhados": {
+        "pontilhados": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        }
+      },
+      "circulos": {
+        "circulos": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        }
+      },
+      "cruz": {
+        "cruz": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        }
+      },
+      "colorir": {
+        "colorir_graficamente": {
+          "1": "Realização imperfeita, incompleta e descoordenada.",
+          "2": "Realização com dificuldades de controle.",
+          "3": "Realização controlada e adequada.",
+          "4": "Realização perfeita, econômica, harmoniosa e bem controlada."
+        }
+      }
+    }
+  },
+  "figura_humana": {
+    "menor": "",
+    "igual": "",
+    "maior": ""
+  }
+}

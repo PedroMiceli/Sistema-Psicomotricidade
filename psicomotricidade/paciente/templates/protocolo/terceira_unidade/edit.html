@@ -1,0 +1,254 @@
+{% extends 'modelo/modelo.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block css %}
+<!-- css -->
+<link rel="stylesheet" href="{% static 'css/modelo/estilo.css' %}">
+<link rel="stylesheet" href="{% static 'css/protocolo/estilo.css' %}">
+{% endblock %}
+
+{% block titulo %}
+<title>Protocolo - Terceira Unidade Funcional</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="alert alert-light">
+    <h3>Protocolo - Terceira Unidade Funcional</h3>
+
+    <hr>
+
+    <div class="row ml-2">
+        <ul class="list-group list-unstyled">
+            <li>1 - Perfil Apráxico - Realização imperfeita, incompleta e descoordenada.</li>
+            <li>2 - Perfil Dispráxico - Realização com dificuldades de controle.</li>
+            <li>3 - Perfil Eupráxico - Realização controlada e adequada.</li>
+            <li>4 - Perfil Hiperpráxico - Realização perfeita, econômica, harmoniosa e bem controlada.</li>
+        </ul>
+    </div>
+</div>
+
+<hr>
+
+<form class="mt-5" method="post">
+    {% csrf_token %}
+
+    <div class="form-row d-flex justify-content-center">
+        <div class="col-md-4">
+            {{ form.paciente|as_crispy_field }}
+        </div>
+
+        <div class="col-md-2">
+            {{ form.data_avaliacao|as_crispy_field }}
+        </div>
+    </div>
+
+    <hr>
+
+    <ul class="nav nav-pills justify-content-center mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active font-weight-bold" id="pills-praxia-global-tab" data-toggle="pill" href="#pills-praxia-global"
+               role="tab"
+               aria-controls="pills-praxia-global" aria-selected="true">Praxia Global</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link font-weight-bold" id="pills-praxia-fina-tab" data-toggle="pill" href="#pills-praxia-fina" role="tab"
+               aria-controls="pills-praxia-fina" aria-selected="false">Praxia Fina</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link font-weight-bold" id="pills-grafomotricidade-tab" data-toggle="pill" href="#pills-grafomotricidade"
+               role="tab"
+               aria-controls="pills-grafomotricidade" aria-selected="false">Grafomotricidade</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link font-weight-bold" id="pills-quebra-cabeca-tab" data-toggle="pill" href="#pills-quebra-cabeca" role="tab"
+               aria-controls="pills-quebra-cabeca" aria-selected="false">Quebra-Cabeça</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-praxia-global" role="tabpanel"
+             aria-labelledby="pills-praxia-global-tab">
+            <h2 class="mb-4">Praxia Global</h2>
+
+            <h4>Coordenação Óculo-manual</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.jogar_quatro_bolas|as_crispy_field }}
+                </div>
+
+                <div class="col-md-3">
+                    {{ form.agarrar_bola_de_tenis|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_oculo_manual|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Coordenação Óculo-pedal</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.quatro_chutes_ao_gol|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_oculo_pedal|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Dissociação</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.dissociacao_membros_superiores|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_dissociacao_membros_superiores|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.dissociacao_membros_inferiores|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_dissociacao_membros_inferiores|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Agilidade</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.agilidade|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-praxia-fina" role="tabpanel" aria-labelledby="pills-praxia-fina-tab">
+            <h2 class="mb-4">Praxia Fina</h2>
+
+            <h4>Pulseira de Clipes</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.pulseira_de_clipes|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_pulseira_de_clipes|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4>Tamborilar</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.tamborilar|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_tamborilar|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4>Velocidade e Precisão</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.velocidade_precisao|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-grafomotricidade" role="tabpanel"
+             aria-labelledby="pills-grafomotricidade-tab">
+            <h2 class="mb-4">Grafomotricidade</h2>
+
+            <h4>Traçados</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.tracado_vertical|as_crispy_field }}
+                </div>
+
+                <div class="col-md-2">
+                    {{ form.tracado_horizontal|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.tracado_zig_zag|as_crispy_field }}
+                </div>
+
+                <div class="col-md-2">
+                    {{ form.tracado_curvo|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Pontilhados</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.pontilhados|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Circulos</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.circulos|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Cruz</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.cruz|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Colorir</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.colorir_graficamente|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-2">
+                <div class="col-md-5">
+                    {{ form.obs_grafomotricidade|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-quebra-cabeca" role="tabpanel" aria-labelledby="pills-quebra-cabeca-tab">
+            <h2 class="mb-4">Montar Quebra-Cabeça</h2>
+
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.montar_quebra_cabeca|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-2">
+                <div class="col-md-5">
+                    {{ form.obs_quebra_cabeca|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row float-right">
+        <a class="btn btn-danger m-4" href="{% url 'details-paciente' id_paciente %}" title="Cancelar">
+            Cancelar
+        </a>
+
+        <button type="submit" class="btn btn-info m-4" title="Confirmar">
+            Confirmar
+        </button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style type="text/css">
+        .info-paciente h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0;
+        }
+        .info-paciente h2 {
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+
+        .anamnese h4 {
+            margin-bottom: 0;
+            font-size: 1.8rem;
+        }
+        .anamnese h5 {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+        }
+        .anamnese h3 {
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        .anamnese p {
+            margin-top:0;
+            font-size: 1.2rem
+        }
+        .anamnese span {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .assinatura p {
+            margin-top: 70px;
+            padding-top: 2px;
+            font-size: 1.2rem;
+            font-style: italic;
+            border-top-width: 1px;
+            border-top-style: solid;
+        }
+    </style>
+
+    <title>Anamnese Paciente {{ nome }}</title>
+</head>
+<body>
+
+<div class="info-paciente">
+    <h1>{{ nome }}</h1>
+    <h2>{{ idade }}</h2>
+</div>
+<hr>
+
+<section class="anamnese">
+    {% for anamnese in anamnese_resultados %}
+
+    <div>
+        <h4>Data</h4>
+        <p>{{ anamnese.data_anamnese }}</p>
+    </div>
+
+    <!-- identificação -->
+    <h3 class="text-center mt-4">Identificação</h3>
+    <div>
+        <span>Nome do pai</span>
+        <p>{{ anamnese.nome_pai }}</p>
+
+        <span>Nome da mãe</span>
+        <p>{{ anamnese.nome_mae }}</p>
+
+        <span>Irmãos(idades)</span>
+        <p>{{ anamnese.irmaos }}</p>
+
+        <span>Motivos da consulta</span>
+        <p>{{ anamnese.motivos_da_consulta }}</p>
+    </div>
+    <hr>
+
+    <!-- dados da gestação -->
+    <h3 class="text-center mt-3">Dados da Gestação</h3>
+    <div>
+        <span>Idade da mãe</span>
+        <p>{{ anamnese.idade_mae }}</p>
+
+        <span>Profissão da mãe</span>
+        <p>{{ anamnese.profissao_mae }}</p>
+
+        <span>Idade do pai</span>
+        <p>{{ anamnese.idade_pai }}</p>
+
+        <span>Profissão do pai</span>
+        <p>{{ anamnese.profissao_pai }}</p>
+
+        <span>Houve planejamento familiar?</span>
+        <p>{{ anamnese.planejamento_familiar }}</p>
+
+        <span>Intercorrências na gestação?</span>
+        <p>{{ anamnese.intercorrencias_na_gestacao }}</p>
+
+        <span>Medicação na gravidez?</span>
+        <p>{{ anamnese.medicacao_na_gestacao }}</p>
+
+        <span>Traumas físicos?</span>
+        <p>{{ anamnese.traumas_fisicos }}</p>
+
+        <span>Traumas psíquicos?</span>
+        <p>{{ anamnese.traumas_psiquicos }}</p>
+
+        <span>Vícios ou dependência química?</span>
+        <p>{{ anamnese.dependencia_quimica }}</p>
+    </div>
+    <hr>
+
+    <!-- dados do parto -->
+    <h3 class="text-center mt-3">Dados do Parto</h3>
+    <div>
+        <span>Tipo de parto</span>
+        <p>{{ anamnese.tipo_de_parto }}</p>
+
+        <span>Duração do parto</span>
+        <p>{{ anamnese.duracao_parto }}</p>
+
+        <span>Posição de nascimento</span>
+        <p>{{ anamnese.posicao_nascimento }}</p>
+
+        <span>Nota APGAR</span>
+        <p>{{ anamnese.nota_apgar }}</p>
+
+        <span>Peso</span>
+        <p>{{ anamnese.peso }} Kg</p>
+
+        <span>Estatura</span>
+        <p>{{ anamnese.estatura }}</p>
+
+        <span>Chorou ao nascer, choro forte ou fraco?</span>
+        <p>{{ anamnese.chorou_ao_nascer }}</p>
+
+        <span>Aleitamento, até quando?</span>
+        <p>{{ anamnese.aleitamento }}</p>
+
+        <span>Histórico dos primeiros dias de vida</span>
+        <p>{{ anamnese.historico_primeiros_dias }}</p>
+    </div>
+    <hr>
+
+    <!-- antecedentes -->
+    <h3 class="text-center mt-4">Antecedentes</h3>
+    <div>
+        <span>Doenças familiares</span>
+        <p>{{ anamnese.doencas_familiares }}</p>
+
+        <span>Doenças e aciedentes graves</span>
+        <p>{{ anamnese.doencas_e_acidentes }}</p>
+
+        <h5>Sono</h5>
+        <span>Teve algum distúrbio do sono?</span>
+        <p>{{ anamnese.disturbio_do_sono }}</p>
+
+        <span>Qual rotina do sono?</span>
+        <p>{{ anamnese.rotina_do_sono }}</p>
+
+        <h5>Desenvolvimento Psicomotor</h5>
+        <span>Fixou a cabeça com que idade?</span>
+        <p>{{ anamnese.fixou_a_cabeca }}</p>
+
+        <span>Sorriu com que idade?</span>
+        <p>{{ anamnese.sorriu_com_que_idade }}</p>
+
+        <span>Sentou com que idade?</span>
+        <p>{{ anamnese.sentou_com_que_idade }}</p>
+
+        <span>Engatinhou?</span>
+        <p>{{ anamnese.engatinhou }}</p>
+
+        <span>Ficou em pé com apoio?</span>
+        <p>{{ anamnese.em_pe_com_apoio }}</p>
+
+        <span>Andou com que idade?</span>
+        <p>{{ anamnese.andou_com_que_idade }}</p>
+
+        <span>Falou com?</span>
+        <p>{{ anamnese.falou_com_que_idade }}</p>
+
+        <h5>Desenvolvimento Emocional</h5>
+        <span>Comportamento social</span>
+        <p>{{ anamnese.comportamento_social }}</p>
+
+        <span>Tiques</span>
+        <p>{{ anamnese.tiques }}</p>
+
+        <span>Sociabilidade</span>
+        <p>{{ anamnese.sociabilidade }}</p>
+
+        <h5>Controle Esfincteriano</h5>
+        <span>Desfraldou com?</span>
+        <p>{{ anamnese.desfraldou_com_que_idade }}</p>
+
+        <span>Usou o banheiro com independência com?</span>
+        <p>{{ anamnese.banheiro_com_independencia }}</p>
+
+        <span>Tem enurese noturna?</span>
+        <p>{{ anamnese.enurese_noturna }}</p>
+
+    </div>
+    <hr>
+
+    <!-- condições da vida diaria -->
+    <h3 class="text-center mt-4">Condições da Vida Diária</h3>
+    <div>
+        <span>Vida cotidiana</span>
+        <p>{{ anamnese.vida_cotidiana }}</p>
+
+        <span>Principais eventos da vida</span>
+        <p>{{ anamnese.eventos_da_vida }}</p>
+
+        <span>A escolaridade</span>
+        <p>{{ anamnese.escolaridade }}</p>
+
+        <span>Rendimento escolar</span>
+        <p>{{ anamnese.rendimento_escolar }}</p>
+
+        <span>Queixa escolar</span>
+        <p>{{ anamnese.queixa_escolar }}</p>
+
+        <span>Tem prontidão para A.V.D</span>
+        <p>{{ anamnese.protidao_para_avd }}</p>
+    </div>
+    <hr>
+
+    <!-- adaptação a situações -->
+    <h3 class="text-center mt-4">Adaptação a Situações</h3>
+    <div>
+        <span>Ansiedades</span>
+        <p>{{ anamnese.ansiedades }}</p>
+
+        <span>Inibições</span>
+        <p>{{ anamnese.inibicoes }}</p>
+    </div>
+    <hr>
+
+    <!-- antecedentes terapeuticos -->
+    <h3 class="text-center mt-4">Antecedentes Terapêuticos</h3>
+    <div>
+        <span>Ensaios terapêuticos já tentados</span>
+        <p>{{ anamnese.ensaios_terapeuticos }}</p>
+
+        <span>Conclusão de exames</span>
+        <p>{{ anamnese.conclusao_de_exames }}</p>
+
+        <span>Arquivo conclusão de exames</span>
+        <p>{{ anamnese.arquivos_conclusao_de_exames }}</p>
+
+        <span>Aspectos físicos e de desenvolvimento</span>
+        <p>{{ anamnese.aspectos_fisicos }}</p>
+
+        <span>Saúde aparente</span>
+        <p>{{ anamnese.saude_aparente }}</p>
+
+        <span>Convive em harmonia</span>
+        <p>{{ anamnese.harmonia }}</p>
+
+        <span>Convive em desarmonia</span>
+        <p>{{ anamnese.desarmonia }}</p>
+    </div>
+    <hr>
+    {% endfor %}
+</section>
+
+<section class="assinatura">
+    <div>
+        <p>Responsável legal (mãe) / (pai)</p>
+
+        <p>Denise Paranhos Wilhelm - Psicomotricista - CBO: 190104 - C Nº: 21465</p>
+    </div>
+</section>
+
+
+</body>
+</html>

@@ -1,0 +1,1803 @@
+{% extends 'modelo/modelo.html' %}
+
+{% load static %}
+
+{% block css %}
+<!-- css -->
+<link rel="stylesheet" href="{% static 'css/modelo/estilo.css' %}">
+<link rel="stylesheet" href="{% static 'css/pacientes/estilo.css' %}">
+<link rel="stylesheet" href="{% static 'css/pacientes/details-paciente.css' %}">
+{% endblock %}
+
+{% block titulo %}
+<title>Paciente</title>
+{% endblock %}
+
+{% block conteudo %}
+<div id="topo"></div>
+
+<div class="card mt-4">
+    <div class="card-header">
+
+        <!-- Button modal -->
+        <button type="button" class="btn btn-light ml-2 float-right text-black-50" data-toggle="modal"
+                data-target="#anamnese">
+            <strong>Anamnese</strong>
+        </button>
+
+        <a class="float-right btn btn-light ml-2 text-black-50" href="{% url 'relatorio' paciente.pk %}">
+            <strong>Relatório</strong>
+        </a>
+
+        <a class="float-right btn btn-light text-black-50" href="{% url 'update-paciente' paciente.pk %}"
+           title="Editar">
+            <i class="fas fa-user-edit mr-2"></i><strong>Editar</strong>
+        </a>
+        <h2>{{ object.nome }}</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <blockquote class="blockquote mb-0">
+                    <h4>Dados do Paciente</h4>
+                    <ul class="ml-3 list-unstyled">
+                        <li>
+                            <p title="Idade">Idade: {{ idade }}</p>
+                        </li>
+                        <li>
+                            <p title="Data de Nascimento">Nascimento: {{ object.data_nascimento }}</p>
+                        </li>
+                        <li>
+                            <p title="Status">
+                                {% if object.ativo %}
+                                Status: Ativo
+                                {% else %}
+                                Status: Inativo
+                                {% endif %}
+                            </p>
+                        </li>
+                    </ul>
+                </blockquote>
+            </div>
+            <div class="col-md-6">
+                <blockquote class="blockquote mb-0">
+                    <h4>Dados do Responsável</h4>
+                    <ul class="ml-3 list-unstyled">
+                        <li>
+                            <p title="Nome do Responsável">Nome: {{ object.responsavel }}</p>
+                        </li>
+                        <li>
+                            <p title="CPF do Responsável">CPF: {{ object.cpf_responsavel }}</p>
+                        </li>
+                    </ul>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+<h3 class="text-center">Protocolo</h3>
+
+<ul class="nav nav-pills justify-content-center mt-4 mb-3 font-weight-bold" id="pills-tab" role="tablist">
+
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="pills-figura-humana-tab" data-toggle="pill" href="#pills-figura-humana"
+           role="tab"
+           aria-controls="pills-figura-humana" aria-selected="true">Figura Humana</a>
+    </li>
+
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="pills-primeira-unidade-tab" data-toggle="pill" href="#pills-primeira-unidade"
+           role="tab"
+           aria-controls="pills-primeira-unidade" aria-selected="false">Primeira Unidade Funcional</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="pills-segunda-unidade-tab" data-toggle="pill" href="#pills-segunda-unidade" role="tab"
+           aria-controls="pills-segunda-unidade" aria-selected="false">Segunda Unidade Funcional</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="pills-terceira-unidade-tab" data-toggle="pill" href="#pills-terceira-unidade" role="tab"
+           aria-controls="pills-terceira-unidade" aria-selected="false">Terceira Unidade Funcional</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="pills-conclusao-tab" data-toggle="pill" href="#pills-conclusao" role="tab"
+           aria-controls="pills-conclusao" aria-selected="false">Conclusão</a>
+    </li>
+
+</ul>
+<div class="tab-content mt-5" id="pills-tabContent">
+
+    <!--  DESENHO FIGURA HUMANA  -->
+    <div class="tab-pane fade show active" id="pills-figura-humana" role="tabpanel"
+         aria-labelledby="pills-figura-humana-tab">
+
+        <h3 class="text-center">Figura Humana</h3>
+
+        <div class="row">
+            {% for figura_humana in desenho_figura_humana %}
+            <div class="col-md-4">
+                <div class="card w-100 mt-3">
+                    <h5 class="card-header font-weight-bold"
+                        title="Editar protocolo referente á {{ figura_humana.data_avaliacao }}">
+                        <a class="btn btn-primary" href="{% url 'update-figura-humana' figura_humana.pk %}">
+                            Editar: {{ figura_humana.data_avaliacao }}
+                        </a>
+                    </h5>
+                    <div class="card-body">
+                        <span class="font-weight-bold">Pontuação</span>
+                        <p class="card-text">{{ figura_humana.desenho_figura_humana }}</p>
+
+                        <span class="font-weight-bold">Observação</span>
+                        <p class="card-text">{{ figura_humana.obs_desenho_figura_humana }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <!--  PRIMEIRA UNIDADE FUNCIONAL  -->
+    <div class="tab-pane fade" id="pills-primeira-unidade" role="tabpanel"
+         aria-labelledby="pills-primeira-unidade-tab">
+
+        <h3 class="text-center">Primeira Unidade Funcional</h3>
+
+        <div class="row mt-4">
+
+            <dl class="col-md-3 text-justify text-nowrap bd-highlight">
+
+                <h4 class="font-weight-bold">Tonicidade</h4>
+
+                <!-- conceitos filogenéticos -->
+                <h5 class="mt-3">Conceitos Filogenéticos</h5>
+
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="btn btn-primary" href="{% url 'update-primeira-unidade' primeira.pk %}">
+                                {{ primeira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Rolar</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.rolar }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Engatinhar</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.engatinhar }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Rastejar</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.rastejar }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- extensibilidade -->
+                <h5 class="mt-3">Extensibilidade</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-primeira-unidade' primeira.pk %}">
+                                {{ primeira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Membros superiores</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            {{ primeira.extensibilidade_membros_superiores }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Membros inferiores</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            {{ primeira.extensibilidade_membros_inferiores }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- balanço passivo -->
+                <h5 class="mt-3">Balanço Passivo</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-primeira-unidade' primeira.pk %}">
+                                {{ primeira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Membros superiores</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.balanco_membros_superiores }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- paratonia -->
+                <h5 class="mt-3">Paratonia</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-primeira-unidade' primeira.pk %}">
+                                {{ primeira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Membros superiores</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.paratonia_membros_superiores }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- diadococinesia -->
+                <h5 class="mt-3">Diadococinesia</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-primeira-unidade' primeira.pk %}">
+                                {{ primeira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Pronação</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.pronacao }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Supinação</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.supinacao }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+
+                <hr>
+                <!-- sincinesia -->
+                <h5 class="mt-3">Sincinesia</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-primeira-unidade' primeira.pk %}">
+                                {{ primeira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Tônico</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.tonico }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Tônico-cinético</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.tonico_cinetico }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <h4 class="font-weight-bold">Equilibração</h4>
+
+                <!-- imobilidade -->
+                <h5 class="mt-3">Imobilidade</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-primeira-unidade' primeira.pk %}">
+                                {{ primeira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Imobilidade</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.imobilidade }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- equilibrio estatico -->
+                <h5 class="mt-3">Equilíbrio Estático</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-primeira-unidade' primeira.pk %}">
+                                {{ primeira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Equilíbrio estático</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.equilibrio_estatico }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- equilibrio dinamico -->
+                <h5 class="mt-3">Equilíbrio Dinâmico</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-primeira-unidade' primeira.pk %}">
+                                {{ primeira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Ponte de equilíbrio frente</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.ponte_equilibrio_frente }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Ponte de equilíbrio trás</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.ponte_equilibrio_tras }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Ponte de equilíbrio direita</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.ponte_equilibrio_direita }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Ponte de equilíbrio esquerda</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.ponte_equilibrio_esquerda }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Pular corda com olhos abertos</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.corda_olhos_abertos }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Pular corda com olhos fechados</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for primeira in primeira_unidade %}
+                        <li class="list-inline-item ml-2">{{ primeira.corda_olhos_fechados }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+            </dl>
+
+            {% for primeira in primeira_unidade %}
+            <dl class="col-md-3 text-justify text-nowrap bd-highlight results-desktop">
+
+                <div class="conceitos-filogeneticos">
+                    <a class="text-decoration-none text-body" href="{% url 'update-primeira-unidade' primeira.pk %}"
+                       title="Editar Protocolo Referente á {{ primeira.data_avaliacao }}">
+                        <h6>{{ primeira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- conceitos filogeneticos-->
+                    <dt>{{ primeira.rolar }}</dt>
+                    <dt>{{ primeira.engatinhar }}</dt>
+                    <dt>{{ primeira.rastejar }}</dt>
+                </div>
+                <hr>
+
+                <div class="extensibilidade">
+                    <a class="text-decoration-none text-body" href="{% url 'update-primeira-unidade' primeira.pk %}"
+                       title="Editar Protocolo Referente á {{ primeira.data_avaliacao }}">
+                        <h6>{{ primeira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- extensibilidade-->
+                    <dt>
+                        {{ primeira.extensibilidade_membros_superiores }}
+                    </dt>
+                    <dt>
+                        {{ primeira.extensibilidade_membros_inferiores }}
+                    </dt>
+                </div>
+                <hr>
+
+                <div class="balanco-passivo">
+                    <a class="text-decoration-none text-body" href="{% url 'update-primeira-unidade' primeira.pk %}"
+                       title="Editar Protocolo Referente á {{ primeira.data_avaliacao }}">
+                        <h6>{{ primeira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- balanço passivo -->
+                    <dt>{{ primeira.balanco_membros_superiores }}</dt>
+                </div>
+                <hr>
+
+                <div class="paratonia">
+                    <a class="text-decoration-none text-body" href="{% url 'update-primeira-unidade' primeira.pk %}"
+                       title="Editar Protocolo Referente á {{ primeira.data_avaliacao }}">
+                        <h6>{{ primeira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- paratonia -->
+                    <dt>{{ primeira.paratonia_membros_superiores }}</dt>
+                </div>
+                <hr>
+
+                <div class="diadococinesia">
+                    <a class="text-decoration-none text-body" href="{% url 'update-primeira-unidade' primeira.pk %}"
+                       title="Editar Protocolo Referente á {{ primeira.data_avaliacao }}">
+                        <h6>{{ primeira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- diadococinesia -->
+                    <dt>{{ primeira.pronacao }}</dt>
+                    <dt>{{ primeira.supinacao }}</dt>
+                </div>
+                <hr>
+
+                <div class="sincinesia">
+                    <a class="text-decoration-none text-body" href="{% url 'update-primeira-unidade' primeira.pk %}"
+                       title="Editar Protocolo Referente á {{ primeira.data_avaliacao }}">
+                        <h6>{{ primeira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- sincinesia -->
+                    <dt>{{ primeira.tonico }}</dt>
+                    <dt>{{ primeira.tonico_cinetico }}</dt>
+                </div>
+                <hr>
+
+                <br>
+                <div class="imobilidade">
+                    <a class="text-decoration-none text-body" href="{% url 'update-primeira-unidade' primeira.pk %}"
+                       title="Editar Protocolo Referente á {{ primeira.data_avaliacao }}">
+                        <h6>{{ primeira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- imobilidade -->
+                    <dt>{{ primeira.imobilidade }}</dt>
+                </div>
+                <hr>
+
+                <div class="equilibrio">
+                    <a class="text-decoration-none text-body" href="{% url 'update-primeira-unidade' primeira.pk %}"
+                       title="Editar Protocolo Referente á {{ primeira.data_avaliacao }}">
+                        <h6>{{ primeira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- equilibrio estatico -->
+                    <dt>{{ primeira.equilibrio_estatico }}</dt>
+                </div>
+                <hr>
+
+                <div class="equilibrio">
+                    <a class="text-decoration-none text-body" href="{% url 'update-primeira-unidade' primeira.pk %}"
+                       title="Editar Protocolo Referente á {{ primeira.data_avaliacao }}">
+                        <h6>{{ primeira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- equilibrio dinamico -->
+                    <dt>{{ primeira.ponte_equilibrio_frente }}</dt>
+                    <dt>{{ primeira.ponte_equilibrio_tras }}</dt>
+                    <dt>{{ primeira.ponte_equilibrio_direita }}</dt>
+                    <dt>{{ primeira.ponte_equilibrio_esquerda }}</dt>
+                    <dt>{{ primeira.corda_olhos_abertos }}</dt>
+                    <dt>{{ primeira.corda_olhos_fechados }}</dt>
+                </div>
+                <hr>
+            </dl>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <!--  SEGUNDA UNIDADE FUNCIONAL  -->
+    <div class="tab-pane fade" id="pills-segunda-unidade" role="tabpanel" aria-labelledby="pills-segunda-unidade-tab">
+
+        <h3 class="text-center">Segunda Unidade Funcional</h3>
+
+        <div class="row mt-4">
+            <dl class="col-md-3 text-justify text-nowrap bd-highlight">
+
+                <h4 class="font-weight-bold">Noção Corporal</h4>
+
+                <!-- cinestesia -->
+                <h5 class="mt-3">Cinestesia</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-segunda-unidade' segunda.pk %}">
+                                {{ segunda.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Nomeia pontos táteis do corpo</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.nomeia_pontos_tateis }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- imitação de gestos -->
+                <h5 class="mt-3">Imitação de Gestos</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-segunda-unidade' segunda.pk %}">
+                                {{ segunda.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Imitação de gestos</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.imitacao_de_gestos }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+
+                <!-- auto-imagem -->
+                <h5 class="mt-3">Auto-Imagem</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-segunda-unidade' segunda.pk %}">
+                                {{ segunda.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>No avaliador</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.no_avaliador }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>No mesmo</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.no_mesmo }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>No objeto</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.no_objeto }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <h4 class="font-weight-bold">Lateralização</h4>
+
+                <!-- lateralizações -->
+                <h5 class="mt-3">Lateralizações</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-segunda-unidade' segunda.pk %}">
+                                {{ segunda.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Lateralização ocular</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.lateralizacao_ocular }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Lateralização manual</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.lateralizacao_manual }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Lateralização pedal</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.lateralizacao_pedal }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- reconhecimento direita/esquerda -->
+                <h5 class="mt-3">Reconhecer Direita/Esquerda</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-segunda-unidade' segunda.pk %}">
+                                {{ segunda.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Verbal</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.reconhecimento_verbal }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Gestual</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.reconhecimento_gestual }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Tátil</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.reconhecimento_tatil }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <h4 class="font-weight-bold">Estruturação Espaço Temporal</h4>
+
+                <!-- organização perceptiva -->
+                <h5 class="mt-3">Organização Perceptiva</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-segunda-unidade' segunda.pk %}">
+                                {{ segunda.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Organização perceptiva</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.organizacao_perceptiva }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- estruturação dinâmica espacial -->
+                <h5 class="mt-3">Estruturação Dinâmica</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-segunda-unidade' segunda.pk %}">
+                                {{ segunda.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Estruturação dinâmica espacial</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.estruturacao_dinamica_espacial }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- representação topográfica -->
+                <h5 class="mt-3">Representação Topográfica</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-segunda-unidade' segunda.pk %}">
+                                {{ segunda.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Representação topográfica</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.representacao_topografica }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- estruturação ritmica -->
+                <h5 class="mt-3">Estruturação Rítmica</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-segunda-unidade' segunda.pk %}">
+                                {{ segunda.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Codificação</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.codificacao }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Decodificação</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.decodificacao }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Transcodificação auditiva</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.transcodificacao_auditiva }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Transcodificação visual</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for segunda in segunda_unidade %}
+                        <li class="list-inline-item ml-2">{{ segunda.transcodificacao_visual }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+            </dl>
+
+            {% for segunda in segunda_unidade %}
+            <dl class="col-md-3 text-justify text-nowrap bd-highlight results-desktop">
+
+                <div class="cinestesias">
+                    <a class="text-decoration-none text-body" href="{% url 'update-segunda-unidade' segunda.pk %}"
+                       title="Editar Protocolo Referente á {{ segunda.data_avaliacao }}">
+                        <h6>{{ segunda.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- cinestesias -->
+                    <dt>{{ segunda.nomeia_pontos_tateis }}</dt>
+                </div>
+                <hr>
+
+                <div class="imitacao-de-gestos">
+                    <a class="text-decoration-none text-body" href="{% url 'update-segunda-unidade' segunda.pk %}"
+                       title="Editar Protocolo Referente á {{ segunda.data_avaliacao }}">
+                        <h6>{{ segunda.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- imitação de gestos-->
+                    <dt>{{ segunda.imitacao_de_gestos }}</dt>
+                </div>
+                <hr>
+
+                <div class="auto-imagem">
+                    <a class="text-decoration-none text-body" href="{% url 'update-segunda-unidade' segunda.pk %}"
+                       title="Editar Protocolo Referente á {{ segunda.data_avaliacao }}">
+                        <h6>{{ segunda.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- auto-imagem-->
+                    <dt>{{ segunda.no_avaliador }}</dt>
+                    <dt>{{ segunda.no_mesmo }}</dt>
+                    <dt>{{ segunda.no_objeto }}</dt>
+                </div>
+                <hr>
+
+                <br>
+                <div class="lateralizacoes">
+                    <a class="text-decoration-none text-body" href="{% url 'update-segunda-unidade' segunda.pk %}"
+                       title="Editar Protocolo Referente á {{ segunda.data_avaliacao }}">
+                        <h6>{{ segunda.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- lateralizações-->
+                    <dt>{{ segunda.lateralizacao_ocular }}</dt>
+                    <dt>{{ segunda.lateralizacao_manual }}</dt>
+                    <dt>{{ segunda.lateralizacao_pedal }}</dt>
+                </div>
+                <hr>
+
+                <div class="reconhecimento-d-e">
+                    <a class="text-decoration-none text-body" href="{% url 'update-segunda-unidade' segunda.pk %}"
+                       title="Editar Protocolo Referente á {{ segunda.data_avaliacao }}">
+                        <h6>{{ segunda.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- reconhecimento direita/esquerda-->
+                    <dt>{{ segunda.reconhecimento_verbal }}</dt>
+                    <dt>{{ segunda.reconhecimento_gestual }}</dt>
+                    <dt>{{ segunda.reconhecimento_tatil }}</dt>
+                </div>
+                <hr>
+
+                <br>
+                <div class="organizacao-perceptiva">
+                    <a class="text-decoration-none text-body" href="{% url 'update-segunda-unidade' segunda.pk %}"
+                       title="Editar Protocolo Referente á {{ segunda.data_avaliacao }}">
+                        <h6>{{ segunda.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- organizacao_perceptiva -->
+                    <dt>{{ segunda.organizacao_perceptiva }}</dt>
+                </div>
+                <hr>
+
+                <div class="estruturacao">
+                    <a class="text-decoration-none text-body" href="{% url 'update-segunda-unidade' segunda.pk %}"
+                       title="Editar Protocolo Referente á {{ segunda.data_avaliacao }}">
+                        <h6>{{ segunda.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- estruturacao dinamica espacial -->
+                    <dt>{{ segunda.estruturacao_dinamica_espacial }}</dt>
+                </div>
+                <hr>
+
+                <div class="representacao-topografica">
+                    <a class="text-decoration-none text-body" href="{% url 'update-segunda-unidade' segunda.pk %}"
+                       title="Editar Protocolo Referente á {{ segunda.data_avaliacao }}">
+                        <h6>{{ segunda.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- representacao topografica -->
+                    <dt>{{ segunda.representacao_topografica }}</dt>
+                </div>
+                <hr>
+
+                <div class="estruturacao">
+                    <a class="text-decoration-none text-body" href="{% url 'update-segunda-unidade' segunda.pk %}"
+                       title="Editar Protocolo Referente á {{ segunda.data_avaliacao }}">
+                        <h6>{{ segunda.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- estruturação ritmica -->
+                    <dt>{{ segunda.codificacao }}</dt>
+                    <dt>{{ segunda.decodificacao }}</dt>
+                    <dt>{{ segunda.transcodificacao_auditiva }}</dt>
+                    <dt>{{ segunda.transcodificacao_visual }}</dt>
+                </div>
+                <hr>
+            </dl>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <!--  TERCEIRA UNIDADE FUNCIONAL  -->
+    <div class="tab-pane fade" id="pills-terceira-unidade" role="tabpanel" aria-labelledby="pills-terceira-unidade-tab">
+
+        <h3 class="text-center">Terceira Unidade Funcional</h3>
+
+        <div class="row mt-4">
+            <dl class="col-md-3 text-justify text-nowrap bd-highlight">
+
+                <h4 class="font-weight-bold">Praxia Global</h4>
+
+                <!-- coordenação oculo-manual -->
+                <h5 class="mt-3">Coordenação Óculo-manual</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-terceira-unidade' terceira.pk %}">
+                                {{ terceira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Jogar 4 bolas ao cesto</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.jogar_quatro_bolas }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Agarrar bola de tênis</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.agarrar_bola_de_tenis }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- coordenação oculo-pedal -->
+                <h5 class="mt-3">Coordenação Óculo-pedal</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-terceira-unidade' terceira.pk %}">
+                                {{ terceira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>4 chutes ao gol</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            {% if terceira.quatro_chutes_ao_gol == '0' %}
+                            Não acertou
+                            {% elif terceira.quatro_chutes_ao_gol == '1' %}
+                            1 chute
+                            {% elif terceira.quatro_chutes_ao_gol == '2' %}
+                            2 chutes
+                            {% elif terceira.quatro_chutes_ao_gol == '3' %}
+                            3 chutes
+                            {% elif terceira.quatro_chutes_ao_gol == '4' %}
+                            4 chutes
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- dissociação -->
+                <h5 class="mt-3">Dissociação</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-terceira-unidade' terceira.pk %}">
+                                {{ terceira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Membros superiores</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.dissociacao_membros_superiores }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Membros inferiores</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.dissociacao_membros_inferiores }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- agilidade -->
+                <h5 class="mt-3">Agilidade</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-terceira-unidade' terceira.pk %}">
+                                {{ terceira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Agilidade</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.agilidade }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <h4 class="font-weight-bold">Praxia Fina</h4>
+
+                <!-- pulseira de clipes -->
+                <h5 class="mt-3">Pulseira de Clipes</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-terceira-unidade' terceira.pk %}">
+                                {{ terceira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Pulseira de clipes</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.pulseira_de_clipes }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- tamborilar -->
+                <h5 class="mt-3">Tamborilar</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-terceira-unidade' terceira.pk %}">
+                                {{ terceira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Tamborilar</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.tamborilar }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <!-- velocidade e precisao -->
+                <h5 class="mt-3">Velocidade</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-terceira-unidade' terceira.pk %}">
+                                {{ terceira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Velocidade e precisão</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.velocidade_precisao }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+                <h4 class="font-weight-bold">Grafomotricidade</h4>
+
+                <!-- grafomotricidade -->
+                <h5 class="mt-3">Grafomotricidade</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-terceira-unidade' terceira.pk %}">
+                                {{ terceira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Traçados verticais</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.tracado_vertical }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Traçados horizontais</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.tracado_horizontal }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Traçados zig-zag</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.tracado_zig_zag }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Traçados curvos</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.tracado_curvo }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Pontilhados</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.pontilhados }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Círculos</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.circulos }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Cruz</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.cruz }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Colorir</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.colorir_graficamente }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+
+                <h4 class="font-weight-bold">Montar Quebra-Cabeça</h4>
+
+                <!-- quebra-cabeça -->
+                <h5 class="mt-3">Quebra-Cabeça</h5>
+                <div class="results-mobile">
+                    <ul class="ml-1 mt-3 font-weight-bold list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">
+                            <a class="text-black-50" href="{% url 'update-terceira-unidade' terceira.pk %}">
+                                {{ terceira.data_avaliacao }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <dt>Montar quebra-cabeça</dt>
+                <div class="results-mobile">
+                    <ul class="ml-1 list-inline">
+                        {% for terceira in terceira_unidade %}
+                        <li class="list-inline-item ml-2">{{ terceira.montar_quebra_cabeca }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <hr>
+            </dl>
+
+            {% for terceira in terceira_unidade %}
+            <dl class="col-md-3 text-justify text-nowrap bd-highlight results-desktop">
+
+                <div class="oculo-manual">
+                    <a class="text-decoration-none text-body" href="{% url 'update-terceira-unidade' terceira.pk %}"
+                       title="Editar Protocolo Referente á {{ terceira.data_avaliacao }}">
+                        <h6>{{ terceira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- coordenação oculo-manual-->
+                    <dt>{{ terceira.jogar_quatro_bolas }}</dt>
+                    <dt>{{ terceira.agarrar_bola_de_tenis }}</dt>
+                </div>
+
+                <hr>
+                <div class="oculo-pedal">
+                    <a class="text-decoration-none text-body" href="{% url 'update-terceira-unidade' terceira.pk %}"
+                       title="Editar Protocolo Referente á {{ terceira.data_avaliacao }}">
+                        <h6>{{ terceira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- coordenação oculo-pedal-->
+                    <dt>
+                        {% if terceira.quatro_chutes_ao_gol == '0' %}
+                        Não acertou
+                        {% elif terceira.quatro_chutes_ao_gol == '1' %}
+                        1 chute
+                        {% elif terceira.quatro_chutes_ao_gol == '2' %}
+                        2 chutes
+                        {% elif terceira.quatro_chutes_ao_gol == '3' %}
+                        3 chutes
+                        {% elif terceira.quatro_chutes_ao_gol == '4' %}
+                        4 chutes
+                        {% endif %}
+                    </dt>
+                </div>
+
+                <hr>
+                <div class="dissociacao">
+                    <a class="text-decoration-none text-body" href="{% url 'update-terceira-unidade' terceira.pk %}"
+                       title="Editar Protocolo Referente á {{ terceira.data_avaliacao }}">
+                        <h6>{{ terceira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- dissociação-->
+                    <dt>{{ terceira.dissociacao_membros_superiores }}</dt>
+                    <dt>{{ terceira.dissociacao_membros_inferiores }}</dt>
+                </div>
+
+                <hr>
+                <div class="agilidade">
+                    <a class="text-decoration-none text-body" href="{% url 'update-terceira-unidade' terceira.pk %}"
+                       title="Editar Protocolo Referente á {{ terceira.data_avaliacao }}">
+                        <h6>{{ terceira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- agilidade-->
+                    <dt>{{ terceira.agilidade }}</dt>
+                </div>
+                <hr>
+
+                <br>
+                <div class="pulseira-clipes">
+                    <a class="text-decoration-none text-body" href="{% url 'update-terceira-unidade' terceira.pk %}"
+                       title="Editar Protocolo Referente á {{ terceira.data_avaliacao }}">
+                        <h6>{{ terceira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- pulseira de clipes-->
+                    <dt>{{ terceira.pulseira_de_clipes }}</dt>
+                </div>
+                <hr>
+
+                <div class="tamborilar">
+                    <a class="text-decoration-none text-body" href="{% url 'update-terceira-unidade' terceira.pk %}"
+                       title="Editar Protocolo Referente á {{ terceira.data_avaliacao }}">
+                        <h6>{{ terceira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- tamborilar-->
+                    <dt>{{ terceira.tamborilar }}</dt>
+                </div>
+                <hr>
+
+                <div class="velocidade-precisao">
+                    <a class="text-decoration-none text-body" href="{% url 'update-terceira-unidade' terceira.pk %}"
+                       title="Editar Protocolo Referente á {{ terceira.data_avaliacao }}">
+                        <h6>{{ terceira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- velocidade_precisao-->
+                    <dt>{{ terceira.velocidade_precisao }}</dt>
+                </div>
+                <hr>
+
+                <br>
+                <div class="grafomotricidade">
+                    <a class="text-decoration-none text-body" href="{% url 'update-terceira-unidade' terceira.pk %}"
+                       title="Editar Protocolo Referente á {{ terceira.data_avaliacao }}">
+                        <h6>{{ terceira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- grafomotricidade-->
+                    <dt>{{ terceira.tracado_vertical }}</dt>
+                    <dt>{{ terceira.tracado_horizontal }}</dt>
+                    <dt>{{ terceira.tracado_zig_zag }}</dt>
+                    <dt>{{ terceira.tracado_curvo }}</dt>
+                    <dt>{{ terceira.pontilhados }}</dt>
+                    <dt>{{ terceira.circulos }}</dt>
+                    <dt>{{ terceira.cruz }}</dt>
+                    <dt>{{ terceira.colorir_graficamente }}</dt>
+                </div>
+                <hr>
+
+                <br>
+                <div class="quebra-cabeca">
+                    <a class="text-decoration-none text-body" href="{% url 'update-terceira-unidade' terceira.pk %}"
+                       title="Editar Protocolo Referente á {{ terceira.data_avaliacao }}">
+                        <h6>{{ terceira.data_avaliacao }}</h6>
+                    </a>
+
+                    <!-- montar quebra-cabeca-->
+                    <dt>{{ terceira.montar_quebra_cabeca }}</dt>
+                </div>
+                <hr>
+            </dl>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <!--  Conclusão -->
+    <div class="tab-pane fade" id="pills-conclusao" role="tabpanel"
+         aria-labelledby="pills-conclusao-tab">
+
+        <h3 class="text-center">conclusao</h3>
+        {% for conclusao in conclusao %}
+            {% if conclusao.data_conclusao %}
+                <div class="row mt-4">
+                <dl class="col-md-3 text-justify text-nowrap bd-highlight">
+
+                    <li class="list-inline-item ml-2">
+                                <a class="btn btn-primary" href="{% url 'update-conclusao' conclusao.pk %}">
+                                    Editar conclusao de: {{ conclusao.data_conclusao }}
+                                </a>
+                    </li>
+
+                    <h4 class="font-weight-bold mt-4">Aspectos Psico-Afetivos:</h4>
+
+                    <p>{{conclusao.psico_afetivo}}</p>
+
+                    <h4 class="font-weight-bold">Aspectos Psico-Cognitivos:</h4>
+
+                    <p>{{conclusao.psico_cognitivo}}</p>
+
+                    <h4 class="font-weight-bold">Tonicidade:</h4>
+
+                    <p>{{conclusao.tonicidade}}</p>
+
+                    <h4 class="font-weight-bold">Equilibração:</h4>
+
+                    <p>{{conclusao.equilibracao}}</p>
+
+                    <h4 class="font-weight-bold">Esquema e Imagem Corporal:</h4>
+
+                    <p>{{conclusao.esquema_imagem_corporal}}</p>
+
+                    <h4 class="font-weight-bold">Lateralização:</h4>
+
+                    <p>{{conclusao.lateralizacao}}</p>
+
+                    <h4 class="font-weight-bold">Estruturacao Espaco-Temporal:</h4>
+
+                    <p>{{conclusao.estruturacao_espaco_temporal}}</p>
+
+                    <h4 class="font-weight-bold">Praxia Global:</h4>
+
+                    <p>{{conclusao.praxia_global}}</p>
+
+                    <h4 class="font-weight-bold">Praxia Fina:</h4>
+
+                    <p>{{conclusao.praxia_fina}}</p>
+
+                    <h4 class="font-weight-bold">Grafomotricidade:</h4>
+
+                    <p>{{conclusao.grafomotricidade}}</p>
+
+                    <h4 class="font-weight-bold">Encaminhamento</h4>
+
+                    <p>{{conclusao.encaminhamento}}</p>
+
+                    <h4 class="font-weight-bold">Prognóstico</h4>
+
+                    <p>{{conclusao.prognostico}}</p>
+
+                </dl>
+
+            </div>
+            {% else %}
+                <p>Não há nenhuma conclusão adicionada para este paciente.</p>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+
+
+<!-- Modal Anamnese -->
+<div class="modal fade" id="anamnese" tabindex="-1" aria-labelledby="anamneseLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="anamneseLabel">Anamnese</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="anamnese">
+                    {% for anamnese in anamnese_resultados %}
+
+                    <h5 class="text-center">{{ anamnese.data_anamnese }}</h5>
+                    <hr>
+
+                    <!-- identificação -->
+                    <h5 class="text-center mt-4">Identificação</h5>
+                    <div>
+                        <span>Nome do pai</span>
+                        <p>{{ anamnese.nome_pai }}</p>
+
+                        <span>Nome da mãe</span>
+                        <p>{{ anamnese.nome_mae }}</p>
+
+                        <span>Irmãos(idades)</span>
+                        <p>{{ anamnese.irmaos }}</p>
+
+                        <span>Motivos da consulta</span>
+                        <p>{{ anamnese.motivos_da_consulta }}</p>
+                    </div>
+                    <hr>
+
+                    <!-- dados da gestação -->
+                    <h5 class="text-center mt-3">Dados da Gestação</h5>
+                    <div>
+                        <span>Idade da mãe</span>
+                        <p>{{ anamnese.idade_mae }}</p>
+
+                        <span>Profissão da mãe</span>
+                        <p>{{ anamnese.profissao_mae }}</p>
+
+                        <span>Idade do pai</span>
+                        <p>{{ anamnese.idade_pai }}</p>
+
+                        <span>Profissão do pai</span>
+                        <p>{{ anamnese.profissao_pai }}</p>
+
+                        <span>Houve planejamento familiar?</span>
+                        <p>{{ anamnese.planejamento_familiar }}</p>
+
+                        <span>Intercorrências na gestação?</span>
+                        <p>{{ anamnese.intercorrencias_na_gestacao }}</p>
+
+                        <span>Medicação na gravidez?</span>
+                        <p>{{ anamnese.medicacao_na_gestacao }}</p>
+
+                        <span>Traumas físicos?</span>
+                        <p>{{ anamnese.traumas_fisicos }}</p>
+
+                        <span>Traumas psíquicos?</span>
+                        <p>{{ anamnese.traumas_psiquicos }}</p>
+
+                        <span>Vícios ou dependência química?</span>
+                        <p>{{ anamnese.dependencia_quimica }}</p>
+                    </div>
+                    <hr>
+
+                    <!-- dados do parto -->
+                    <h5 class="text-center mt-3">Dados do Parto</h5>
+                    <div>
+                        <span>Tipo de parto</span>
+                        <p>{{ anamnese.tipo_de_parto }}</p>
+
+                        <span>Duração do parto</span>
+                        <p>{{ anamnese.duracao_parto }}</p>
+
+                        <span>Posição de nascimento</span>
+                        <p>{{ anamnese.posicao_nascimento }}</p>
+
+                        <span>Nota APGAR</span>
+                        <p>{{ anamnese.nota_apgar }}</p>
+
+                        <span>Peso</span>
+                        <p>{{ anamnese.peso }} Kg</p>
+
+                        <span>Estatura</span>
+                        <p>{{ anamnese.estatura }}</p>
+
+                        <span>Chorou ao nascer, choro forte ou fraco?</span>
+                        <p>{{ anamnese.chorou_ao_nascer }}</p>
+
+                        <span>Aleitamento, até quando?</span>
+                        <p>{{ anamnese.aleitamento }}</p>
+
+                        <span>Histórico dos primeiros dias</span>
+                        <p>{{ anamnese.historico_primeiros_dias }}</p>
+                    </div>
+                    <hr>
+
+                    <!-- antecedentes -->
+                    <h5 class="text-center mt-4">Antecedentes</h5>
+                    <div>
+                        <span>Doenças familiares</span>
+                        <p>{{ anamnese.doencas_familiares }}</p>
+
+                        <span>Doenças e aciedentes graves</span>
+                        <p>{{ anamnese.doencas_e_acidentes }}</p>
+
+                        <h5>Sono</h5>
+                        <span>Teve algum distúrbio do sono?</span>
+                        <p>{{ anamnese.disturbio_do_sono }}</p>
+
+                        <span>Qual rotina do sono?</span>
+                        <p>{{ anamnese.rotina_do_sono }}</p>
+
+                        <h5>Desenvolvimento Psicomotor</h5>
+                        <span>Fixou a cabeça com que idade?</span>
+                        <p>{{ anamnese.fixou_a_cabeca }}</p>
+
+                        <span>Sorriu com que idade?</span>
+                        <p>{{ anamnese.sorriu_com_que_idade }}</p>
+
+                        <span>Sentou com que idade?</span>
+                        <p>{{ anamnese.sentou_com_que_idade }}</p>
+
+                        <span>Engatinhou?</span>
+                        <p>{{ anamnese.engatinhou }}</p>
+
+                        <span>Ficou em pé com apoio?</span>
+                        <p>{{ anamnese.em_pe_com_apoio }}</p>
+
+                        <span>Andou com que idade?</span>
+                        <p>{{ anamnese.andou_com_que_idade }}</p>
+
+                        <span>Falou com?</span>
+                        <p>{{ anamnese.falou_com_que_idade }}</p>
+
+                        <h5>Desenvolvimento Emocional</h5>
+                        <span>Comportamento social</span>
+                        <p>{{ anamnese.comportamento_social }}</p>
+
+                        <span>Tiques</span>
+                        <p>{{ anamnese.tiques }}</p>
+
+                        <span>Sociabilidade</span>
+                        <p>{{ anamnese.sociabilidade }}</p>
+
+                        <h5>Controle Esfincteriano</h5>
+                        <span>Desfraldou com?</span>
+                        <p>{{ anamnese.desfraldou_com_que_idade }}</p>
+
+                        <span>Usou o banheiro com independência com?</span>
+                        <p>{{ anamnese.banheiro_com_independencia }}</p>
+
+                        <span>Tem enurese noturna?</span>
+                        <p>{{ anamnese.enurese_noturna }}</p>
+
+                    </div>
+                    <hr>
+
+                    <!-- condições da vida diaria -->
+                    <h5 class="text-center mt-4">Condições da Vida Diária</h5>
+                    <div>
+                        <span>Vida cotidiana</span>
+                        <p>{{ anamnese.vida_cotidiana }}</p>
+
+                        <span>Principais eventos da vida</span>
+                        <p>{{ anamnese.eventos_da_vida }}</p>
+
+                        <span>A escolaridade</span>
+                        <p>{{ anamnese.escolaridade }}</p>
+
+                        <span>Rendimento escolar</span>
+                        <p>{{ anamnese.rendimento_escolar }}</p>
+
+                        <span>Queixa escolar</span>
+                        <p>{{ anamnese.queixa_escolar }}</p>
+
+                        <span>Tem prontidão para A.V.D</span>
+                        <p>{{ anamnese.protidao_para_avd }}</p>
+                    </div>
+                    <hr>
+
+                    <!-- adaptação a situações -->
+                    <h5 class="text-center mt-4">Adaptação a Situações</h5>
+                    <div>
+                        <span>Ansiedades</span>
+                        <p>{{ anamnese.ansiedades }}</p>
+
+                        <span>Inibições</span>
+                        <p>{{ anamnese.inibicoes }}</p>
+                    </div>
+                    <hr>
+
+                    <!-- antecedentes terapeuticos -->
+                    <h5 class="text-center mt-4">Antecedentes Terapêuticos</h5>
+                    <div>
+                        <span>Ensaios terapêuticos já tentados</span>
+                        <p>{{ anamnese.ensaios_terapeuticos }}</p>
+
+                        <span>Conclusão de exames</span>
+                        <p>{{ anamnese.conclusao_de_exames }}</p>
+
+                        <span>Arquivo conclusão de exames</span><br>
+                        {%if anamnese.arquivos_conclusao_de_exames%}
+                        <p>
+                            <a href="{{ anamnese.arquivos_conclusao_de_exames.url }}" target="_blank">
+                                Visualizar arquivo
+                            </a>
+                        </p>
+                        {%else%}
+                        <p>Sem documentos anexados</p>
+                        {% endif %}
+
+                        <span>Aspectos físicos e de desenvolvimento</span>
+                        <p>{{ anamnese.aspectos_fisicos }}</p>
+
+                        <span>Saúde aparente</span>
+                        <p>{{ anamnese.saude_aparente }}</p>
+
+                        <span>Convive em harmonia</span>
+                        <p>{{ anamnese.harmonia }}</p>
+
+                        <span>Convive em desarmonia</span>
+                        <p>{{ anamnese.desarmonia }}</p>
+                    </div>
+                    <hr>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                <a href="{% url 'update-anamnese' anamnese.pk %}" class="btn btn-primary">Editar</a>
+                <a href="{% url 'anamnese-pdf' anamnese.paciente.pk %}" target="_blank" class="btn btn-secondary">Visualizar PDF</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- btn para ir ao topo da pag -->
+<a id="btn-topo" href="#topo" title="Ir ao Topo"><i class="fas fa-arrow-alt-circle-up fa-2x"></i></a>
+{% endblock %}
+</div>

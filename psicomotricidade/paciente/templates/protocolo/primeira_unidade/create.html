@@ -1,0 +1,221 @@
+{% extends 'modelo/modelo.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block css %}
+<!-- css -->
+<link rel="stylesheet" href="{% static 'css/modelo/estilo.css' %}">
+<link rel="stylesheet" href="{% static 'css/protocolo/estilo.css' %}">
+{% endblock %}
+
+{% block titulo %}
+<title>Protocolo - Primeira Unidade Funcional</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="alert alert-light">
+    <h3>Protocolo - Primeira Unidade Funcional</h3>
+
+    <hr>
+
+    <div class="row ml-2">
+        <ul class="list-group list-unstyled">
+            <li>1 - Perfil Apráxico - Realização imperfeita, incompleta e descoordenada.</li>
+            <li>2 - Perfil Dispráxico - Realização com dificuldades de controle.</li>
+            <li>3 - Perfil Eupráxico - Realização controlada e adequada.</li>
+            <li>4 - Perfil Hiperpráxico - Realização perfeita, econômica, harmoniosa e bem controlada.</li>
+        </ul>
+    </div>
+</div>
+
+<hr>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="form-row d-flex justify-content-center">
+        <div class="col-md-4">
+            {{ form.paciente|as_crispy_field }}
+        </div>
+
+        <div class="col-md-2">
+            {{ form.data_avaliacao|as_crispy_field }}
+        </div>
+    </div>
+
+    <hr>
+    <ul class="nav nav-pills justify-content-center mb-3 " id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active font-weight-bold" id="pills-tonicidade-tab" data-toggle="pill" href="#pills-tonicidade" role="tab"
+               aria-controls="pills-tonicidade" aria-selected="true">Tonicidade</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link font-weight-bold" id="pills-equilibracao-tab" data-toggle="pill" href="#pills-equilibracao" role="tab"
+               aria-controls="pills-equilibracao" aria-selected="false">Equilibração</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-tonicidade" role="tabpanel"
+             aria-labelledby="pills-tonicidade-tab">
+            <h2 class="mb-4">Tonicidade</h2>
+
+            <h4>Conceitos Filogenéticos</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.rolar|as_crispy_field }}
+                </div>
+
+                <div class="col-md-2">
+                    {{ form.engatinhar|as_crispy_field }}
+                </div>
+                <div class="col-md-2">
+                    {{ form.rastejar|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Extensibilidade</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.extensibilidade_membros_superiores|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_extensibilidade_membros_superiores|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.extensibilidade_membros_inferiores|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_extensibilidade_membros_inferiores|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Balanço Passivo</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.balanco_membros_superiores|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_balanco_membros_superiores|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Paratonia</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.paratonia_membros_superiores|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Diadococinesia</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.pronacao|as_crispy_field }}
+                </div>
+
+                <div class="col-md-2">
+                    {{ form.supinacao|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Sincinesia</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.tonico|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_tonico|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.tonico_cinetico|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_tonico_cinetico|as_crispy_field }}
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="pills-equilibracao" role="tabpanel" aria-labelledby="pills-equilibracao-tab">
+            <h2 class="mb-4">Equilibração</h2>
+
+            <h4>Imobilidade</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.imobilidade|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_imobilidade|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Equilíbrio Estático</h4>
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.equilibrio_estatico|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    {{ form.obs_equilibrio_estatico|as_crispy_field }}
+                </div>
+            </div>
+
+            <h4 class="mt-4">Equilíbrio Dinâmico</h4>
+            <h6 class="mt-3">1 - Ponte de equilíbrio</h6>
+            <div class="form-row m-3">
+                <div class="col-md-2">
+                    {{ form.ponte_equilibrio_frente|as_crispy_field }}
+                </div>
+                <div class="col-md-2">
+                    {{ form.ponte_equilibrio_tras|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row m-3">
+                <div class="col-md-2">
+                    {{ form.ponte_equilibrio_direita|as_crispy_field }}
+                </div>
+                <div class="col-md-2">
+                    {{ form.ponte_equilibrio_esquerda|as_crispy_field }}
+                </div>
+            </div>
+
+            <h6>2 - Pular corda</h6>
+            <div class="form-row m-3">
+                <div class="col-md-2">
+                    {{ form.corda_olhos_abertos|as_crispy_field }}
+                </div>
+                <div class="col-md-2">
+                    {{ form.corda_olhos_fechados|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row float-right">
+        <a class="btn btn-danger m-4" href="{% url 'pacientes' %}" title="Cancelar">
+            Cancelar
+        </a>
+
+        <button type="submit" class="btn btn-info m-4" title="Confirmar">
+            Confirmar
+        </button>
+    </div>
+</form>
+{% endblock %}

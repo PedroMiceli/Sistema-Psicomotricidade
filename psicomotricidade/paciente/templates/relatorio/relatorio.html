@@ -1,0 +1,1337 @@
+{% extends 'modelo/modelo.html' %}
+
+{% load static %}
+
+{% block css %}
+<!-- css -->
+<link rel="stylesheet" href="{% static 'css/modelo/estilo.css' %}">
+<link rel="stylesheet" href="{% static 'css/relatorio/estilo.css' %}">
+{% endblock %}
+
+{% block titulo %}
+<title>Relatório Paciente</title>
+{% endblock %}
+
+{% block conteudo %}
+<div id="topo"></div>
+
+<div class="alert alert-light">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>{{ nome }}</h2>
+            <h5>{{ idade }}</h5>
+        </div>
+        <div class="d-flex align-items-center">
+            <a class="btn btn-light text-black-50 float-right" href="{% url 'details-paciente' id_paciente %}"
+               title="Detalhes">
+                <i class="fas fa-info-circle mr-2"></i><strong>Detalhes do Paciente</strong>
+            </a>
+            <a class="btn btn-light text-black-50 float-right ml-1" href="{% url 'relatorio-pdf' id_paciente %}"
+               target="_blank"
+               title="Arquivo PDF">
+                <i class="fas fa-file-pdf mr-2"></i><strong>Visualizar PDF</strong>
+            </a>
+        </div>
+    </div>
+</div>
+
+<hr>
+<ul class="nav nav-pills justify-content-center mb-4" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active font-weight-bold" id="pills-figura-humana-tab" data-toggle="pill"
+           href="#pills-figura-humana"
+           role="tab"
+           aria-controls="pills-figura-humana" aria-selected="true">Figura Humana</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link font-weight-bold" id="pills-primeira-tab" data-toggle="pill"
+           href="#pills-primeira" role="tab"
+           aria-controls="pills-primeira" aria-selected="false">Primeira Unidade Funcional</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link font-weight-bold" id="pills-segunda-tab" data-toggle="pill" href="#pills-segunda"
+           role="tab"
+           aria-controls="pills-segunda" aria-selected="false">Segunda Unidade Funcional</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link font-weight-bold" id="pills-terceira-tab" data-toggle="pill" href="#pills-terceira"
+           role="tab"
+           aria-controls="pills-terceira" aria-selected="false">Terceira Unidade Funcional</a>
+    </li>
+</ul>
+<div class="tab-content mt-4" id="pills-tabContent">
+
+    <!-- ---------------------------- Figura Humana ---------------------------- -->
+    <div class="tab-pane fade show active" id="pills-figura-humana" role="tabpanel"
+         aria-labelledby="pills-figura-humana-tab">
+        <h3 class="text-center">Desenho da Figura Humana</h3>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Figura Humana</h3>
+            </div>
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+
+                    <!-- figura humana -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ figura_humana|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for figura in desenho_figura_humana %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ figura.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <hr>
+                            <div class="row mt-3 d-flex justify-content-center flex-nowrap">
+                                {{ goodnough|safe }}
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <h5>Observações</h5>
+                            {% for figura in desenho_figura_humana %}
+                            <p>{{ figura.obs_desenho_figura_humana }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--  ---------------------------- Primeira Unidade Funcional ----------------------  -->
+    <div class="tab-pane fade" id="pills-primeira" role="tabpanel"
+         aria-labelledby="pills-primeira-tab">
+
+        <h3 class="text-center">Primeira Unidade Funcional</h3>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Tonicidade</h3>
+            </div>
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ conceitos_filogeneticos|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for primeira in primeira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ primeira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Rolar</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_rolar }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_rolar }}</p>
+                                <hr>
+
+                                <h5>Engatinhar</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_engatinhar }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_engatinhar }}</p>
+                                <hr>
+
+                                <h5>Rastejar</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_rastejar }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_rastejar }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ extensibilidade|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for primeira in primeira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ primeira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Membros superiores</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_extensibilidade_membros_superiores }}
+                                </p>
+                                <p>
+                                    <strong>Relativo à última avaliação:</strong>
+                                    {{ json_extensibilidade_membros_superiores }}
+                                </p>
+                                <h5>Observações</h5>
+                                {% for primeira in primeira_unidade %}
+                                <p>{{ primeira.obs_extensibilidade_membros_superiores }}</p>
+                                {% endfor %}
+                                <hr>
+
+                                <h5>Membros inferiores</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_extensibilidade_membros_inferiores }}
+                                </p>
+                                <p>
+                                    <strong>Relativo à última avaliação:</strong>
+                                    {{ json_extensibilidade_membros_inferiores }}
+                                </p>
+                                <h5>Observações</h5>
+                                {% for primeira in primeira_unidade %}
+                                <p>{{ primeira.obs_extensibilidade_membros_inferiores }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                <h4>Balanço Passivo</h4>
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for primeira in primeira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ primeira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Membros superiores</h5>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_balanco_membros_superiores }}
+                                </p>
+                                <h5>Observações</h5>
+                                {% for primeira in primeira_unidade %}
+                                <p>{{ primeira.obs_balanco_membros_superiores }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                <h4>Paratonia</h4>
+                            </div>
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for primeira in primeira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ primeira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Membros superiores</h5>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_paratonia_membros_superiores }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ diadococinesia|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for primeira in primeira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ primeira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Pronação</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_pronacao }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_pronacao }}</p>
+                                <hr>
+
+                                <h5>Supinação</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_supinacao }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_supinacao }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ sincinesia|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for primeira in primeira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ primeira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Tônico</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_tonico }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_tonico }}</p>
+                                <h5>Observações</h5>
+                                {% for primeira in primeira_unidade %}
+                                <p>{{ primeira.obs_tonico }}</p>
+                                {% endfor %}
+                                <hr>
+
+                                <h5>Tônico-cinético</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_tonico_cinetico }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_tonico_cinetico }}</p>
+                                <h5>Observações</h5>
+                                {% for primeira in primeira_unidade %}
+                                <p>{{ primeira.obs_tonico_cinetico }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Equilibração</h3>
+            </div>
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ imobilidade|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for primeira in primeira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ primeira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Imobilidade</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_imobilidade }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_imobilidade }}</p>
+                                <h5>Observações</h5>
+                                {% for primeira in primeira_unidade %}
+                                <p>{{ primeira.obs_imobilidade }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ equilibrio_estatico|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for primeira in primeira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ primeira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Equilíbrio estático</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_equilibrio_estatico }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_equilibrio_estatico }}</p>
+                                <h5>Observações</h5>
+                                {% for primeira in primeira_unidade %}
+                                <p>{{ primeira.obs_equilibrio_estatico }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ equilibrio_dinamico_ponte|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for primeira in primeira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ primeira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Frente</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_ponte_equilibrio_frente }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_ponte_equilibrio_frente }}</p>
+                                <hr>
+
+                                <h5>Trás</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_ponte_equilibrio_tras }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_ponte_equilibrio_tras }}</p>
+                                <hr>
+
+                                <h5>Direita</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_ponte_equilibrio_direita }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_ponte_equilibrio_direita }}</p>
+                                <hr>
+
+                                <h5>Esquerda</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_ponte_equilibrio_esquerda }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_ponte_equilibrio_esquerda }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ equilibrio_dinamico_corda|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for primeira in primeira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ primeira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Olhos abertos</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_corda_olhos_abertos }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_corda_olhos_abertos }}</p>
+                                <hr>
+
+                                <h5>Olhos fechados</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_corda_olhos_fechados }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_corda_olhos_fechados }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--  ---------------------------- Segunda Unidade Funcional ----------------------  -->
+    <div class="tab-pane fade" id="pills-segunda" role="tabpanel"
+         aria-labelledby="pills-segunda-tab">
+        <h3 class="text-center">Segunda Unidade Funcional</h3>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Noção Corporal</h3>
+            </div>
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ cinestesia|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for segunda in segunda_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ segunda.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Nomeia pontos táteis</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_nomeia_pontos_tateis }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_nomeia_pontos_tateis }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ imitacao_de_gestos|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for segunda in segunda_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ segunda.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Imitação de gestos</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_imitacao_de_gestos }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_imitacao_de_gestos }}</p>
+
+                                <h5>Observações sobre a Imitação de Gestos acima</h5>
+                                {% for segunda in segunda_unidade %}
+                                <p>{{ segunda.obs_imitacao_de_gestos }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ auto_imagem|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for segunda in segunda_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ segunda.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>No avaliador</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_avaliador }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_avaliador }}</p>
+                                <hr>
+
+                                <h5>No mesmo</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_em_si }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_em_si }}</p>
+                                <hr>
+
+                                <h5>No objeto</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_objeto }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_objeto }}</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Lateralização</h3>
+            </div>
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-center">Lateralizações</h4>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for segunda in segunda_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ segunda.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Lateralização ocular</h5>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_lateralizacao_ocular }}</p>
+                                <hr>
+
+                                <h5>Lateralização manual</h5>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_lateralizacao_manual }}</p>
+                                <hr>
+
+                                <h5>Lateralização pedal</h5>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_lateralizacao_pedal }}</p>
+                                <hr>
+
+                                <h5>Observações sobre as Lateralizações acima</h5>
+                                {% for segunda in segunda_unidade %}
+                                <p>{{ segunda.obs_lateralizacoes }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-center">Reconhecimento Direita/Esquerda</h4>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for segunda in segunda_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ segunda.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Reconhecimento verbal</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_reconhecimento_verbal }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_reconhecimento_verbal }}</p>
+                                <hr>
+
+                                <h5>Reconhecimento gestual</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_reconhecimento_gestual }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_reconhecimento_gestual }}</p>
+                                <hr>
+
+                                <h5>Reconhecimento tátil</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_reconhecimento_tatil }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_reconhecimento_tatil }}</p>
+                                <h5>Observações</h5>
+                                {% for segunda in segunda_unidade %}
+                                <p>{{ segunda.obs_reconhecimento_tatil }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Estruturação Espaço Temporal</h3>
+            </div>
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ organizacao_perceptiva|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for segunda in segunda_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ segunda.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Organização perceptiva</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_organizacao_perceptiva }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_organizacao_perceptiva }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ estruturacao_dinamica_espacial|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for segunda in segunda_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ segunda.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Estruturação dinâmica espacial</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_estruturacao_dinamica }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_estruturacao_dinamica }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ representacao_topografica|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for segunda in segunda_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ segunda.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Representação topográfica</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_representacao_topografica }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_representacao_topografica }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ estruturacao_ritmica|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for segunda in segunda_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ segunda.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Codificação</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_codificacao }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_codificacao }}</p>
+                                <hr>
+
+                                <h5>Decodificação</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_decodificacao }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_decodificacao }}</p>
+                                <hr>
+
+                                <h5>Transcodificação auditiva</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_transcodificacao_auditiva }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_transcodificacao_auditiva }}
+                                </p>
+                                <hr>
+
+                                <h5>Transcodificação visual</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_transcodificacao_visual }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_transcodificacao_visual }}</p>
+                                <hr>
+
+                                <h5>Observações sobre à Estruturação Rítmica</h5>
+                                {% for segunda in segunda_unidade %}
+                                <p>{{ segunda.obs_estruturacao_ritmica }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ---------------------------- Terceira Unidade Funcional ---------------------------- -->
+    <div class="tab-pane fade" id="pills-terceira" role="tabpanel"
+         aria-labelledby="pills-terceira-tab">
+        <h3 class="text-center">Terceira Unidade Funcional</h3>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Praxia Global</h3>
+            </div>
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ oculo_manual|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Jogar 4 bolas ao cesto</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_jogar_quatro_bolas }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_jogar_quatro_bolas }}</p>
+                                <hr>
+
+                                <h5>Agarrar bola de tênis</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_agarrar_bola_de_tenis }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_agarrar_bola_de_tenis }}</p>
+                                <hr>
+
+                                <h5>Observações sobre à Coordenação Óculo-manual</h5>
+                                {% for terceira in terceira_unidade %}
+                                <p>{{ terceira.obs_oculo_manual }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ oculo_pedal|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>4 chutes ao gol</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_quatro_chutes_ao_gol }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_quatro_chutes_ao_gol }}</p>
+                                <h5>Observações</h5>
+                                {% for terceira in terceira_unidade %}
+                                <p>{{ terceira.obs_oculo_pedal }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ dissociacao|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Membros superiores</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_dissociacao_membros_superiores }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_dissociacao_membros_superiores }}</p>
+                                <h5>Observações</h5>
+                                {% for terceira in terceira_unidade %}
+                                <p>{{ terceira.obs_dissociacao_membros_superiores }}</p>
+                                {% endfor %}
+                                <hr>
+
+                                <h5>Membros inferiores</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_dissociacao_membros_inferiores }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_dissociacao_membros_inferiores }}</p>
+                                <h5>Observações</h5>
+                                {% for terceira in terceira_unidade %}
+                                <p>{{ terceira.obs_dissociacao_membros_inferiores }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ agilidade|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Agilidade</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_agilidade }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_agilidade }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Praxia Fina</h3>
+            </div>
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ pulseira_de_clipes|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Pulseira de clipes</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_pulseira_de_clipes }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_pulseira_de_clipes }}</p>
+                                <h5>Observações</h5>
+                                {% for terceira in terceira_unidade %}
+                                <p>{{ terceira.obs_pulseira_de_clipes }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ tamborilar|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Tamborilar</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_tamborilar }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_tamborilar }}</p>
+                                <h5>Observações</h5>
+                                {% for terceira in terceira_unidade %}
+                                <p>{{ terceira.obs_tamborilar }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ velocidade_precisao|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Velocidade e precisão</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_velocidade_precisao }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_velocidade_precisao }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Grafomotricidade</h3>
+            </div>
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ tracados|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Traçados verticais</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_tracado_vertical }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_tracado_vertical }}</p>
+                                <hr>
+
+                                <h5>Traçados horizontais</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_tracado_horizontal }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_tracado_horizontal }}</p>
+                                <hr>
+
+                                <h5>Traçados zig-zag</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_tracado_zig_zag }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_tracado_zig_zag }}</p>
+                                <hr>
+
+                                <h5>Traçados curvos</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_tracado_curvo }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_tracado_curvo }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ pontilhados|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Pontilhados</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_pontilhados }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_pontilhados }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ circulos|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Circulos</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_circulos }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_circulos }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ cruz|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Cruz</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_cruz }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_cruz }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ colorir|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h5>Colorir</h5>
+                                <p><strong>Período das avaliações:</strong> {{ txt_colorir_graficamente }}</p>
+                                <p><strong>Relativo à última avaliação:</strong> {{ json_colorir_graficamente }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <h5>Observações sobre à Grafomotricidade</h5>
+                {% for terceira in terceira_unidade %}
+                <p>{{ terceira.obs_grafomotricidade }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Montar Quebra-Cabeça</h3>
+            </div>
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                {{ quebra_cabeca|safe }}
+                            </div>
+
+                            <h5 class="text-center">Datas das Avaliações</h5>
+                            <div class="row d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    {% for terceira in terceira_unidade %}
+                                    <li class="list-inline-item ml-2 font-weight-lighter">
+                                        {{ terceira.data_avaliacao }}
+                                    </li>
+                                    <li class="list-inline-item ml-2"></li>
+                                    {% empty %}
+                                    --
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <h5>Observações</h5>
+                {% for terceira in terceira_unidade %}
+                <p>{{ terceira.obs_quebra_cabeca }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- btn para ir ao topo da pag -->
+<a id="btn-topo" href="#topo" title="Ir ao Topo"><i class="fas fa-arrow-alt-circle-up fa-2x"></i></a>
+{% endblock %}

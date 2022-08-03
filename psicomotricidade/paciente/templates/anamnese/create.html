@@ -1,0 +1,434 @@
+{% extends 'modelo/modelo.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block css %}
+<!-- css -->
+<link rel="stylesheet" href="{% static 'css/modelo/estilo.css' %}">
+<link rel="stylesheet" href="{% static 'css/protocolo/estilo.css' %}">
+{% endblock %}
+
+{% block titulo %}
+<title>Protocolo - Desenho da Figura Humana</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="alert alert-light">
+    <h3>Anamnese</h3>
+</div>
+
+<hr>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-row d-flex justify-content-center">
+        <div class="col-md-4">
+            {{ form.paciente|as_crispy_field }}
+        </div>
+
+        <div class="col-md-2">
+            {{ form.data_anamnese|as_crispy_field }}
+        </div>
+    </div>
+
+    <hr>
+
+    <ul class="nav nav-pills justify-content-center font-weight-bold mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="pills-identificacao-tab" data-toggle="pill" href="#pills-identificacao"
+               role="tab"
+               aria-controls="pills-identificacao" aria-selected="true">A Identificação</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="pills-gestacao-tab" data-toggle="pill" href="#pills-gestacao" role="tab"
+               aria-controls="pills-gestacao" aria-selected="false">Dados da Gestação</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="pills-parto-tab" data-toggle="pill" href="#pills-parto" role="tab"
+               aria-controls="pills-parto" aria-selected="false">Dados do Parto</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="pills-antecedentes-tab" data-toggle="pill" href="#pills-antecedentes" role="tab"
+               aria-controls="pills-antecedentes" aria-selected="false">Antecedentes</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="pills-vida-diaria-tab" data-toggle="pill" href="#pills-vida-diaria" role="tab"
+               aria-controls="pills-vida-diaria" aria-selected="false">Condições da Vida Diária</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="pills-adaptacao-tab" data-toggle="pill" href="#pills-adaptacao" role="tab"
+               aria-controls="pills-adaptacao" aria-selected="false">Adaptação a Situações</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="pills-antecedentes-terapeuticos-tab" data-toggle="pill"
+               href="#pills-antecedentes-terapeuticos" role="tab"
+               aria-controls="pills-antecedentes-terapeuticos" aria-selected="false">Os Antecedentes Terapêuticos</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+
+        <!-- identificacao -->
+        <div class="tab-pane fade show active" id="pills-identificacao" role="tabpanel"
+             aria-labelledby="pills-identificacao-tab">
+
+            <h4 class="text-center">A Identificação</h4>
+
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.nome_pai|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.nome_mae|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.irmaos|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.motivos_da_consulta|as_crispy_field }}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- dados da gestação -->
+        <div class="tab-pane fade" id="pills-gestacao" role="tabpanel" aria-labelledby="pills-gestacao-tab">
+
+            <h4 class="text-center">Dados da Gestação</h4>
+
+            <div class="form-row mt-3">
+                <div class="col-md-4">
+                    {{ form.idade_mae|as_crispy_field }}
+                </div>
+                <div class="col-md-5">
+                    {{ form.profissao_mae|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-4">
+                    {{ form.idade_pai|as_crispy_field }}
+                </div>
+                <div class="col-md-5">
+                    {{ form.profissao_pai|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-4">
+                    {{ form.planejamento_familiar|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-4">
+                    {{ form.intercorrencias_na_gestacao|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-4">
+                    {{ form.medicacao_na_gestacao|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-4">
+                    {{ form.traumas_fisicos|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-4">
+                    {{ form.traumas_psiquicos|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-4">
+                    {{ form.dependencia_quimica|as_crispy_field }}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- dados do parto -->
+        <div class="tab-pane fade" id="pills-parto" role="tabpanel" aria-labelledby="pills-parto-tab">
+
+            <h4 class="text-center">Dados do Parto</h4>
+
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.tipo_de_parto|as_crispy_field }}
+                </div>
+                <div class="col-md-3">
+                    {{ form.duracao_parto|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.posicao_nascimento|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.nota_apgar|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-2">
+                    {{ form.peso|as_crispy_field }}
+                </div>
+                <div class="col-md-2">
+                    {{ form.estatura|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.chorou_ao_nascer|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.aleitamento|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.historico_primeiros_dias|as_crispy_field }}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- antecedentes -->
+        <div class="tab-pane fade" id="pills-antecedentes" role="tabpanel" aria-labelledby="pills-antecedentes-tab">
+
+            <h4 class="text-center">Antecedentes</h4>
+
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.doencas_familiares|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.doencas_e_acidentes|as_crispy_field }}
+                </div>
+            </div>
+
+            <h5 class="mt-4">Sono</h5>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.disturbio_do_sono|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.rotina_do_sono|as_crispy_field }}
+                </div>
+            </div>
+
+            <h5 class="mt-4">Desenvolvimento Psicomotor</h5>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.fixou_a_cabeca|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.sorriu_com_que_idade|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.sentou_com_que_idade|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.engatinhou|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.em_pe_com_apoio|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.andou_com_que_idade|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.falou_com_que_idade|as_crispy_field }}
+                </div>
+            </div>
+
+
+            <h5 class="mt-4">Desenvolvimento Emocional</h5>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.comportamento_social|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.tiques|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.sociabilidade|as_crispy_field }}
+                </div>
+            </div>
+
+            <h5>Controle Esfincteriano</h5>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.desfraldou_com_que_idade|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.banheiro_com_independencia|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-3">
+                    {{ form.enurese_noturna|as_crispy_field }}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- vida diaria -->
+        <div class="tab-pane fade" id="pills-vida-diaria" role="tabpanel" aria-labelledby="pills-vida-diaria-tab">
+
+            <h4 class="text-center">Condições da Vida Diária</h4>
+
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.vida_cotidiana|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.eventos_da_vida|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.escolaridade|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.rendimento_escolar|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.queixa_escolar|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.protidao_para_avd|as_crispy_field }}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- adaptacao a situaçoes -->
+        <div class="tab-pane fade" id="pills-adaptacao" role="tabpanel" aria-labelledby="pills-adaptacao-tab">
+
+            <h4 class="text-center">Adaptação a Situações</h4>
+
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.ansiedades|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.inibicoes|as_crispy_field }}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- antecedentes-terapeuticos -->
+        <div class="tab-pane fade" id="pills-antecedentes-terapeuticos" role="tabpanel"
+             aria-labelledby="pills-antecedentes-terapeuticos-tab">
+
+            <h4 class="text-center">Os Antecedentes Terapêuticos</h4>
+
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.ensaios_terapeuticos|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.conclusao_de_exames|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-2">
+                <div class="col-md-5">
+                    {{ form.arquivos_conclusao_de_exames|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.aspectos_fisicos|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.saude_aparente|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.harmonia|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <div class="col-md-5">
+                    {{ form.desarmonia|as_crispy_field }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-row float-right">
+        <a class="btn btn-danger m-4" href="{% url 'pacientes' %}" title="Cancelar">
+            Cancelar
+        </a>
+
+        <button type="submit" class="btn btn-info m-4" title="Confirmar">
+            Confirmar
+        </button>
+    </div>
+</form>
+{% endblock %}

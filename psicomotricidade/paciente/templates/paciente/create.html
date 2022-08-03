@@ -1,0 +1,51 @@
+{% extends 'modelo/modelo.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+<title>Paciente</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="alert alert-light">
+    <h3>Paciente</h3>
+</div>
+<hr>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="form-row justify-content-md-center">
+        <div class="col-md-4">
+            {{ form.nome|as_crispy_field }}
+        </div>
+
+        <div class="col-md-2">
+            {{ form.data_nascimento|as_crispy_field }}
+        </div>
+    </div>
+
+    <div class="form-row justify-content-md-center">
+        <div class="col-md-4">
+            {{ form.responsavel|as_crispy_field }}
+        </div>
+
+        <div class="col-md-2">
+            {{ form.cpf_responsavel|as_crispy_field }}
+        </div>
+    </div>
+
+    <div class="form-row mx-auto float-right">
+        <a class="btn btn-danger m-4" href="{% url 'pacientes' %}" title="Cancelar">
+            Cancelar
+        </a>
+
+        <button type="submit" class="btn btn-info m-4" title="Confirmar">
+            Confirmar
+        </button>
+    </div>
+</form>
+
+{% endblock %}
