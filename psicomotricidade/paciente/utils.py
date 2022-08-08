@@ -92,12 +92,7 @@ def executa_dataframes_e_graficos(id_paciente):
         'extensibilidade': grafico_de_linha(relatorio2, 'Extensibilidade dos Membros',
                                             ['Reduzida', 'Aumentada', 'Normal'], 'extensibilidade'),
 
-        # 'balanco_passivo': grafico_de_linha(relatorio3, 'Balanço Passivo', ['Movimentos pendulares',
-        #                                                                     'Passivo e relaxado',
-        #                                                                     'Apresenta resistência'],
-        #                                     'balanco_passivo'),
 
-        # 'paratonia': grafico_de_linha(relatorio4, 'Paratonia', ['Com paratonia', 'Sem paratonia'], 'paratonia'),
         'diadococinesia': grafico_de_linha(relatorio5, 'Diadococinesia', [1, 2, 3, 4], 'diadococinesia'),
         'sincinesia': grafico_de_barra(relatorio6, 'Sincinesia',
                                        ['', 'Nível alto', 'Nível médio', 'Nível baixo', 'Não apresenta'], 'sincinesia'),
@@ -122,12 +117,7 @@ def executa_dataframes_e_graficos(id_paciente):
                                                                      'Realizou parcialmente',
                                                                      'Realizou integralmente'], 'auto_imagem'),
 
-        # 'lateralizacoes': grafico_de_linha(relatorio15, 'Lateralizações', ['Esquerda', 'Direita', 'Indefinida'],'lateralizacoes'),
-        # 'reconhecimento_direita_esquerda': grafico_de_linha(relatorio16, 'Reconhecimento Direita/Esquerda',
-        #     ['Não reconheceu',
-        #  'Reconhecimento parcial',
-        #  'Reconhecimento integral'],
-        # 'reconhecimento_direita_esquerda'),
+
 
         'organizacao_perceptiva': grafico_de_barra(relatorio17, 'Organização Perceptiva', ['', 'Não realizou',
                                                                                            'Realizou parcialmente',
@@ -168,7 +158,7 @@ def executa_dataframes_e_graficos(id_paciente):
                                           'quebra_cabeca'),
 
         # ---------------------------- Desenho da Figura Humana ----------------------
-        'figura_humana': grafico_de_barra_numeros_altos(relatorio13, 'Desenho da Figura Humana', 'figura_humana'),
+        'figura_humana': grafico_de_barra_numeros_altos_fig_humana(relatorio13, 'Desenho da Figura Humana', 'figura_humana'),
     }
 
     return graficos
@@ -182,10 +172,15 @@ def tabela_goodnough(data_nascimento, dataframe):
     lista_pontuacoes = []
     lista_datas_avaliacoes = []
     for i in dataframe.values:
-        pontuacoes = i[1]
+
+        pontuacoes = []
+        for booleano in i:
+            if booleano == True:
+                pontuacoes.append(booleano)
+
         datas_avaliacoes = i[0].strftime("%Y-%m-%d")
 
-        lista_pontuacoes.append(pontuacoes)
+        lista_pontuacoes.append(pontuacoes.__len__())
         lista_datas_avaliacoes.append(datas_avaliacoes)
 
     data_nascimento = data_nascimento

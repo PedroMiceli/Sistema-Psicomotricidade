@@ -242,15 +242,38 @@ class unidades_funcionais():
 
             # ---------------------------- Desenho Figura Humana ----------------------
             # ----------------- Figura Humana -------------------------------
-            df_desenho_figura_humana = unidades[3][['id', 'paciente_id', 'desenho_figura_humana']]
-            df_desenho_figura_humana.columns = ['id', 'paciente_id', 'Desenho da figura humana']
+            df_desenho_figura_humana = unidades[3][['id', 'paciente_id', 'cabeca_presente','pernas_presentes','bracos_presentes','tronco_presente',
+                                                    'comprimento_do_tronco_maior_que_largura','ombros_definidamente_indicados','bracos_pernas_ligados_ou_tronco',
+                                                    'bracos_pernas_ligados_ou_tronco_lugares_convenientes','pescoco_presente','contorno_do_pescoco_continuado',
+                                                    'olhos_presentes',
+                                                    'nariz_presente','boca_presente','nariz_boca_duas_dimensoes','narinas','cabelos',
+                                                    'cabelos_contorno_cabeca','roupa','duas_pecas_de_roupas','desenho_sem_transparencia','quatro_pecas_de_roupa',
+                                                    'traje_completo','dedos_da_mao','total_numero_de_dedos','dedos_corretos','oposicao_polegar',
+                                                    'maos_distinta_do_braco','juntas_membros_sup','juntas_membros_inf','cabeca_tamanho_correto',
+                                                    'bracos_extensao_correta','perna_extensao_correta','pes_proporcionais','bracos_e_pernas_proporcionais',
+                                                    'calcanhares','linhas_firmes','linhas_tracadas_e_firmes','contorno_cabeca',
+                                                    'contorno_tronco','contorno_bracos','tracos_fisionomicos','orelhas','orelhas_proporcionais','olhos_detalhados',
+                                                    'pupilas','olhos_proporcionais','olhar','queixo_e_testa','projecao_queixo','corpo_em_perfil_transparencia',
+                                                    'corpo_em_perfil_sem_transparencia',]]
+
+
             df_desenho_figura_humana = df_desenho_figura_humana[df_desenho_figura_humana['paciente_id'] == id_paciente]
             lista_todos_topicos.append(df_desenho_figura_humana)
 
-            df_desenho_figura_humana_goodnough = unidades[3][['id', 'paciente_id', 'data_avaliacao',
-                                                              'desenho_figura_humana']]
-            df_desenho_figura_humana_goodnough.columns = ['id', 'paciente_id', 'Data de Avaliação',
-                                                          'Pontuação Realizada']
+            df_desenho_figura_humana_goodnough = unidades[3][['id', 'paciente_id','data_avaliacao', 'cabeca_presente','pernas_presentes','bracos_presentes','tronco_presente',
+                                                    'comprimento_do_tronco_maior_que_largura','ombros_definidamente_indicados','bracos_pernas_ligados_ou_tronco',
+                                                    'bracos_pernas_ligados_ou_tronco_lugares_convenientes','pescoco_presente','contorno_do_pescoco_continuado',
+                                                    'olhos_presentes',
+                                                    'nariz_presente','boca_presente','nariz_boca_duas_dimensoes','narinas','cabelos',
+                                                    'cabelos_contorno_cabeca','roupa','duas_pecas_de_roupas','desenho_sem_transparencia','quatro_pecas_de_roupa',
+                                                    'traje_completo','dedos_da_mao','total_numero_de_dedos','dedos_corretos','oposicao_polegar',
+                                                    'maos_distinta_do_braco','juntas_membros_sup','juntas_membros_inf','cabeca_tamanho_correto',
+                                                    'bracos_extensao_correta','perna_extensao_correta','pes_proporcionais','bracos_e_pernas_proporcionais',
+                                                    'calcanhares','linhas_firmes','linhas_tracadas_e_firmes','contorno_cabeca',
+                                                    'contorno_tronco','contorno_bracos','tracos_fisionomicos','orelhas','orelhas_proporcionais','olhos_detalhados',
+                                                    'pupilas','olhos_proporcionais','olhar','queixo_e_testa','projecao_queixo','corpo_em_perfil_transparencia',
+                                                    'corpo_em_perfil_sem_transparencia',]]
+
             df_desenho_figura_humana_goodnough = df_desenho_figura_humana_goodnough[
                 df_desenho_figura_humana_goodnough['paciente_id'] == id_paciente]
             df_desenho_figura_humana_goodnough = df_desenho_figura_humana_goodnough.drop(columns=['id', 'paciente_id'])

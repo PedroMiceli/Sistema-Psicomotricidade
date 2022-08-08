@@ -470,7 +470,58 @@ class DesenhoFiguraHumanaCreate(CreateView):
             form_class = self.get_form_class()
         form = super(DesenhoFiguraHumanaCreate, self).get_form(form_class)
         form.fields['paciente'].queryset = Paciente.objects.filter(ativo=True)
-        form.fields['desenho_figura_humana'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 51}
+        form.fields['cabeca_presente']
+        form.fields['pernas_presentes']
+        form.fields['bracos_presentes']
+        form.fields['tronco_presente']
+        form.fields['comprimento_do_tronco_maior_que_largura']
+        form.fields['ombros_definidamente_indicados']
+        form.fields['bracos_pernas_ligados_ou_tronco']
+        form.fields['bracos_pernas_ligados_ou_tronco_lugares_convenientes']
+        form.fields['pescoco_presente']
+        form.fields['contorno_do_pescoco_continuado']
+        form.fields['olhos_presentes']
+        form.fields['nariz_presente']
+        form.fields['boca_presente']
+        form.fields['nariz_boca_duas_dimensoes']
+        form.fields['narinas']
+        form.fields['cabelos']
+        form.fields['cabelos_contorno_cabeca']
+        form.fields['roupa']
+        form.fields['duas_pecas_de_roupas']
+        form.fields['desenho_sem_transparencia']
+        form.fields['quatro_pecas_de_roupa']
+        form.fields['traje_completo']
+        form.fields['dedos_da_mao']
+        form.fields['total_numero_de_dedos']
+        form.fields['dedos_corretos']
+        form.fields['oposicao_polegar']
+        form.fields['maos_distinta_do_braco']
+        form.fields['juntas_membros_sup']
+        form.fields['juntas_membros_inf']
+        form.fields['cabeca_tamanho_correto']
+        form.fields['bracos_extensao_correta']
+        form.fields['perna_extensao_correta']
+        form.fields['pes_proporcionais']
+        form.fields['bracos_e_pernas_proporcionais']
+        form.fields['calcanhares']
+        form.fields['linhas_firmes']
+        form.fields['linhas_tracadas_e_firmes']
+        form.fields['contorno_cabeca']
+        form.fields['contorno_tronco']
+        form.fields['contorno_bracos']
+        form.fields['tracos_fisionomicos']
+        form.fields['orelhas']
+        form.fields['orelhas_proporcionais']
+        form.fields['olhos_detalhados']
+        form.fields['pupilas']
+        form.fields['olhos_proporcionais']
+        form.fields['olhar']
+        form.fields['queixo_e_testa']
+        form.fields['projecao_queixo']
+        form.fields['corpo_em_perfil_transparencia']
+        form.fields['corpo_em_perfil_sem_transparencia']
+
         form.fields['obs_desenho_figura_humana'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
         return form
 
@@ -596,7 +647,57 @@ class DesenhoFiguraHumanaUpdate(UpdateView):
             form_class = self.get_form_class()
         form = super(DesenhoFiguraHumanaUpdate, self).get_form(form_class)
         form.fields['paciente'].queryset = Paciente.objects.filter(ativo=True)
-        form.fields['desenho_figura_humana'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 43}
+        form.fields['cabeca_presente']
+        form.fields['pernas_presentes']
+        form.fields['bracos_presentes']
+        form.fields['tronco_presente']
+        form.fields['comprimento_do_tronco_maior_que_largura']
+        form.fields['ombros_definidamente_indicados']
+        form.fields['bracos_pernas_ligados_ou_tronco']
+        form.fields['bracos_pernas_ligados_ou_tronco_lugares_convenientes']
+        form.fields['pescoco_presente']
+        form.fields['contorno_do_pescoco_continuado']
+        form.fields['olhos_presentes']
+        form.fields['nariz_presente']
+        form.fields['boca_presente']
+        form.fields['nariz_boca_duas_dimensoes']
+        form.fields['narinas']
+        form.fields['cabelos']
+        form.fields['cabelos_contorno_cabeca']
+        form.fields['roupa']
+        form.fields['duas_pecas_de_roupas']
+        form.fields['desenho_sem_transparencia']
+        form.fields['quatro_pecas_de_roupa']
+        form.fields['traje_completo']
+        form.fields['dedos_da_mao']
+        form.fields['total_numero_de_dedos']
+        form.fields['dedos_corretos']
+        form.fields['oposicao_polegar']
+        form.fields['maos_distinta_do_braco']
+        form.fields['juntas_membros_sup']
+        form.fields['juntas_membros_inf']
+        form.fields['cabeca_tamanho_correto']
+        form.fields['bracos_extensao_correta']
+        form.fields['perna_extensao_correta']
+        form.fields['pes_proporcionais']
+        form.fields['bracos_e_pernas_proporcionais']
+        form.fields['calcanhares']
+        form.fields['linhas_firmes']
+        form.fields['linhas_tracadas_e_firmes']
+        form.fields['contorno_cabeca']
+        form.fields['contorno_tronco']
+        form.fields['contorno_bracos']
+        form.fields['tracos_fisionomicos']
+        form.fields['orelhas']
+        form.fields['orelhas_proporcionais']
+        form.fields['olhos_detalhados']
+        form.fields['pupilas']
+        form.fields['olhos_proporcionais']
+        form.fields['olhar']
+        form.fields['queixo_e_testa']
+        form.fields['projecao_queixo']
+        form.fields['corpo_em_perfil_transparencia']
+        form.fields['corpo_em_perfil_sem_transparencia']
         form.fields['obs_desenho_figura_humana'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
         return form
 
@@ -710,6 +811,7 @@ class RelatorioView(TemplateView):
             # ---------------------------- Segunda Unidade Funcional ----------------------
             'cinestesia': graficos['cinestesia'],
             'imitacao_de_gestos': graficos['imitacao_de_gestos'],
+            #------USADO PARA GOOD---------
             'figura_humana': graficos['figura_humana'],
             'auto_imagem': graficos['auto_imagem'],
             # 'lateralizacoes': graficos['lateralizacoes'],

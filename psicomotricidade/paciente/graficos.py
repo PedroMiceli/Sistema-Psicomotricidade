@@ -239,3 +239,69 @@ def grafico_de_barra_numeros_altos(dataframe, nome, nome_img):
         return fig.to_html(include_plotlyjs='cdn')
     except:
         return ""
+
+
+def grafico_de_barra_numeros_altos_fig_humana(dataframe, nome, nome_img):
+
+    try:
+        categorias = "Pontos"
+
+
+        fig = go.Figure()
+        conta = 0
+        for i in dataframe:
+
+
+            lista_de_booleanos = i.values
+            valores = lista_de_booleanos[0]
+
+            trues = []
+            for valor in i.values:
+
+                if valor == True:
+                    trues.append(valor)
+            numero_de_pontos = int(len(trues))
+
+
+
+            fig.add_trace(go.Bar(
+                x=categorias,
+                y=numero_de_pontos,
+                name=f'{conta + 1}ª avaliação',
+                marker={"line": {"width": 3, "color": "rgb(0,0,0)"}}
+            ))
+
+            conta += 1
+
+        fig.update_layout(
+            autosize=False,
+            width=800,
+            height=450,
+            template='xgridoff',
+            margin_l=170,
+            bargap=0.30,
+            bargroupgap=0.3,
+            legend=dict(
+                font_size=15,
+            ),
+            xaxis=dict(
+                showgrid=True,
+                showspikes=False,
+            ),
+            xaxis_tickfont=dict(size=18),
+            yaxis=dict(
+                showgrid=True,
+            ),
+            title=dict(
+                font=dict(
+                    size=26,
+                    color='black'
+                ),
+                text=f'{nome}'
+            )
+        )
+
+        fig.write_image(f"media_graph/{nome_img}.webp")
+        return fig.to_html(include_plotlyjs='cdn')
+    except:
+        return ""

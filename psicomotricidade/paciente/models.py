@@ -23,7 +23,7 @@ class Paciente(models.Model):
 
 # **** ANAMNESE ****
 class Anamnese(models.Model):
-    paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT, verbose_name="Paciente")
+    paciente = models.ForeignKey(Paciente,unique=True, on_delete=models.PROTECT, verbose_name="Paciente")
     data_anamnese = models.DateField(verbose_name="Data de Anamnese", default=datetime.date.today())
 
     # Identificação
@@ -478,9 +478,60 @@ class DesenhoFiguraHumana(models.Model):
     data_avaliacao = models.DateField(verbose_name="Data de Avaliação", default=datetime.date.today())
 
     # desenho da figura humana
-    desenho_figura_humana = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(51)],
-                                                verbose_name="Desenho da figura humana",
-                                                help_text="Pontuação de 0 á 51", null=True, blank=True)
+    #desenho_figura_humana = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(51)],verbose_name="Desenho da figura humana",help_text="Pontuação de 0 á 51", null=True, blank=True)
+
+    cabeca_presente = models.BooleanField(default=False, verbose_name="Se a cabeça está presente.")
+    pernas_presentes = models.BooleanField(default=False, verbose_name="Se as pernas estão presentes.")
+    bracos_presentes = models.BooleanField(default=False, verbose_name="Se os braços estão presentes.")
+    tronco_presente = models.BooleanField(default=False, verbose_name="Se o tronco está presente.")
+    comprimento_do_tronco_maior_que_largura = models.BooleanField(default=False, verbose_name="Comprimento do tronco maior que a largura.")
+    ombros_definidamente_indicados = models.BooleanField(default=False, verbose_name="Ombros definidamente indicados.")
+    bracos_pernas_ligados_ou_tronco = models.BooleanField(default=False, verbose_name="Braços e pernas ligados ao tronco, seja qual for o ponto de ligação")
+    bracos_pernas_ligados_ou_tronco_lugares_convenientes = models.BooleanField(default=False, verbose_name="Braços e pernas ligados ao tronco nos lugares convenientes.")
+    pescoco_presente = models.BooleanField(default=False, verbose_name="Se o pescoço está presente.")
+    contorno_do_pescoco_continuado = models.BooleanField(default=False, verbose_name="Contorno do pescoço continuado da cabeça ou do tronco, ou o de ambos.")
+    olhos_presentes = models.BooleanField(default=False, verbose_name="Se os olhos estão presentes.")
+    nariz_presente = models.BooleanField(default=False, verbose_name="Se o nariz esta presente.")
+    boca_presente = models.BooleanField(default=False, verbose_name="Se a boca está presente.")
+    nariz_boca_duas_dimensoes = models.BooleanField(default=False, verbose_name="Nariz e boca representados em duas dimensões, os dois lábios indicados.")
+    narinas = models.BooleanField(default=False, verbose_name="Se as narinas estão representadas.")
+    cabelos = models.BooleanField(default=False, verbose_name="Se os cabelos estão representados.")
+    cabelos_contorno_cabeca = models.BooleanField(default=False, verbose_name="Cabelos desenhados sem acompanharem o contorno da cabeça a qual deve transparecer entre os cabelos.")
+    roupa = models.BooleanField(default=False, verbose_name="Se as roupas esta representada.")
+    duas_pecas_de_roupas = models.BooleanField(default=False, verbose_name="Duas peças de roupa pelo menos representadas sem deixar transparecer partes que cobrem.")
+    desenho_sem_transparencia = models.BooleanField(default=False, verbose_name="Desenho sem nenhuma transparencia, além disso, representação das mangas e das calças.")
+    quatro_pecas_de_roupa = models.BooleanField(default=False, verbose_name="Quatro peças de roupa pelo menos, representadas de modo inequívoco.")
+    traje_completo = models.BooleanField(default=False, verbose_name="Traje comleto sem incongruência.")
+    dedos_da_mao = models.BooleanField(default=False, verbose_name="Se os dedos da mão estão representados.")
+    total_numero_de_dedos = models.BooleanField(default=False, verbose_name="Se o exato numero de dedos está representado.")
+    dedos_corretos = models.BooleanField(default=False, verbose_name="Dedos representados em duas dimensões, o comprimento maior que a largura e o ângulo entre os dedos não maior que 180º graus.")
+    oposicao_polegar = models.BooleanField(default=False, verbose_name="Oposição do polegar, palma da mão representada.")
+    maos_distinta_do_braco = models.BooleanField(default=False, verbose_name="Mão representada como parte distinta do braço e dos dedos.")
+    juntas_membros_sup = models.BooleanField(default=False, verbose_name="Representação de uma das juntas dos membros superiores.")
+    juntas_membros_inf = models.BooleanField(default=False, verbose_name="Representação de uma das juntas dos membros inferiores.")
+    cabeca_tamanho_correto = models.BooleanField(default=False, verbose_name="Tamanho da cabeça não maior que a metade, nem menor que um décimo do corpo.")
+    bracos_extensao_correta = models.BooleanField(default=False, verbose_name="Braços de extensão igual ao comprimento do tronco, ou puco maior que ele.")
+    perna_extensao_correta = models.BooleanField(default=False, verbose_name="Extensão das pernas não menor, nem duas vezes maior que o tronco.")
+    pes_proporcionais = models.BooleanField(default=False, verbose_name="Pés proporcionais em relação ao corpo.")
+    bracos_e_pernas_proporcionais = models.BooleanField(default=False, verbose_name="Braços e pernas proporcionais e representados em duas dimensões.")
+    calcanhares = models.BooleanField(default=False, verbose_name="Se os calcanhares estão representados.")
+    linhas_firmes = models.BooleanField(default=False, verbose_name="Todas as linhas firmes, encontrando-se sem se ultrapassarem mutuamente ou sem deixarem espaços.")
+    linhas_tracadas_e_firmes = models.BooleanField(default=False, verbose_name="Todas as linhas além de traçadas com firmeza,com seus pontos de união inteiramente exatos.")
+    contorno_cabeca = models.BooleanField(default=False, verbose_name="Contorno da cabeça, sem nehnuma irregularidade.")
+    contorno_tronco = models.BooleanField(default=False, verbose_name="Contorno do tronco, sem nenhuma irregularidade.")
+    contorno_bracos = models.BooleanField(default=False, verbose_name="Contorno dos braços e pernas sem nenhuma irregularidade.")
+    tracos_fisionomicos = models.BooleanField(default=False, verbose_name="Traços fisionõmicos sem nenhuma irregularidade.")
+    orelhas = models.BooleanField(default=False, verbose_name="Representação das orelhas.")
+    orelhas_proporcionais = models.BooleanField(default=False, verbose_name="Orelhas proporcionais e colocadas em posições exatas.")
+    olhos_detalhados = models.BooleanField(default=False, verbose_name="Representação das particularidades relativas dos olhos.")
+    pupilas = models.BooleanField(default=False, verbose_name="Representação das pupilas.")
+    olhos_proporcionais = models.BooleanField(default=False, verbose_name="Olhos proporcionais.")
+    olhar = models.BooleanField(default=False, verbose_name="Representação correta do olhar.")
+    queixo_e_testa = models.BooleanField(default=False, verbose_name="Representação do queixo e da testa.")
+    projecao_queixo = models.BooleanField(default=False, verbose_name="Projeção do queixo representada.")
+    corpo_em_perfil_transparencia = models.BooleanField(default=False, verbose_name="Representação de todo o corpo em perfil, embora com transparência.")
+    corpo_em_perfil_sem_transparencia = models.BooleanField(default=False, verbose_name="Representação de todo o corpo em perfil sem nenhum erro e sem transparência.")
+
     obs_desenho_figura_humana = models.TextField(max_length=1000, null=True, blank=True,
                                                  verbose_name="Observação referente à desenho da figura humana")
 
@@ -492,7 +543,7 @@ class DesenhoFiguraHumana(models.Model):
 
 
 class Conclusao(models.Model):
-    paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT, verbose_name="Paciente")
+    paciente = models.ForeignKey(Paciente,unique=True, on_delete=models.PROTECT, verbose_name="Paciente")
     data_conclusao = models.DateField(verbose_name="Data da Conclusão", default=datetime.date.today())
     # -------------------- Aspectos psico cognitivos e afetivos ----------
     psico_afetivo = models.TextField(max_length=500, verbose_name="Aspectos Psico-Afetivos", null=True, blank=True)
