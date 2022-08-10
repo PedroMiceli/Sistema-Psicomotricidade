@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
 from django.views.generic import CreateView, UpdateView, ListView, DetailView, TemplateView
 from django.urls import reverse_lazy
@@ -7,6 +8,9 @@ from .utils import *
 from .relatorio import relatorio as relatorio_textos
 from .dataframes import unidades_funcionais as unidades
 from xhtml2pdf import pisa
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
 
 
 # ------------------------- PACIENTE -------------------------
@@ -55,7 +59,7 @@ class PacienteUpdate(UpdateView):
         return reverse_lazy('details-paciente', kwargs={'pk': paciente_id})
 
 
-class PacientesList(ListView):
+class PacientesList( ListView):
     model = Paciente
     template_name = 'paciente/list.html'
     paginate_by = 12

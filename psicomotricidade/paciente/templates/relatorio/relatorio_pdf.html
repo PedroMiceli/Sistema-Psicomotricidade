@@ -135,7 +135,7 @@
 
                 <h5>Observações:</h5>
                 {% for primeira in primeira_unidade %}
-                <p>{{ primeira.obs_extensibilidade_membros_superiores }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ primeira.obs_extensibilidade_membros_superiores }}</p>
                 {% endfor %}
 
                 <h5>Extensibilidade dos membros inferiores</h5>
@@ -144,7 +144,7 @@
 
                 <h5>Observações:</h5>
                 {% for primeira in primeira_unidade %}
-                <p>{{ primeira.obs_extensibilidade_membros_inferiores }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ primeira.obs_extensibilidade_membros_inferiores }}</p>
                 {% endfor %}
 
             </div>
@@ -177,7 +177,7 @@
 
                 <h5>Observações:</h5>
                 {% for primeira in primeira_unidade %}
-                <p>{{ primeira.obs_tonico }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ primeira.obs_tonico }}</p>
                 {% endfor %}
 
                 <h5>Sincinesia em Movimento Tônico-cinético</h5>
@@ -186,7 +186,7 @@
 
                 <h5>Observações:</h5>
                 {% for primeira in primeira_unidade %}
-                <p>{{ primeira.obs_tonico_cinetico }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ primeira.obs_tonico_cinetico }}</p>
                 {% endfor %}
             </div>
         </div>
@@ -199,7 +199,7 @@
 
                 <h5>Observações:</h5>
                 {% for primeira in primeira_unidade %}
-                <p>{{ primeira.obs_imobilidade }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ primeira.obs_imobilidade }}</p>
                 {% endfor %}
             </div>
         </div>
@@ -234,7 +234,7 @@
 
                 <h5>Observações:</h5>
                 {% for segunda in segunda_unidade %}
-                <p>{{ segunda.obs_imitacao_de_gestos }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ segunda.obs_imitacao_de_gestos }}</p>
                 {% endfor %}
             </div>
 
@@ -253,12 +253,12 @@
                 <!--    Fim tabela Tablea goodenough -------------------  -->
 
                 <!-- Fig Humana ------------------- -->
-                <img src="media_graph/figura_humana.webp">
+                <!--<img src="media_graph/figura_humana.webp">-->
                 <div class="txt-relatorio">
                     {% if figura.obs_desenho_figura_humana %}
                         <h5>Observações:</h5>
                         {% for figura in desenho_figura_humana %}
-                        <p>{{ figura.obs_desenho_figura_humana }}</p>
+                        <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ figura.obs_desenho_figura_humana }}</p>
                         {% endfor %}
                     {% else %}
                     {% endif %}
@@ -285,7 +285,7 @@
 
                 <h5>Observações:</h5>
                 {% for segunda in segunda_unidade %}
-                <p>{{ segunda.obs_lateralizacoes }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ segunda.obs_lateralizacoes }}</p>
                 {% endfor %}
             </div>
         </div>
@@ -367,7 +367,7 @@
 
                 <h5>Observações sobre à Estruturação Rítmica</h5>
                 {% for segunda in segunda_unidade %}
-                <p>{{ segunda.obs_estruturacao_ritmica }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ segunda.obs_estruturacao_ritmica }}</p>
                 {% endfor %}
             </div>
         </div>
@@ -393,7 +393,7 @@
 
                 <h5>Observações sobre à Coordenação Óculo-manual:</h5>
                 {% for terceira in terceira_unidade %}
-                <p>{{ terceira.obs_oculo_manual }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ terceira.obs_oculo_manual }}</p>
                 {% endfor %}
             </div>
         </div>
@@ -408,7 +408,7 @@
                 <p><strong>Relativo à última avaliação:</strong> {{ json_quatro_chutes_ao_gol }}</p>
                 <h5>Observações:</h5>
                 {% for terceira in terceira_unidade %}
-                <p>{{ terceira.obs_oculo_pedal }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ terceira.obs_oculo_pedal }}</p>
                 {% endfor %}
             </div>
         </div>
@@ -423,7 +423,7 @@
                 <p><strong>Relativo à última avaliação:</strong> {{ json_dissociacao_membros_superiores }}</p>
                 <h5>Observações:</h5>
                 {% for terceira in terceira_unidade %}
-                <p>{{ terceira.obs_dissociacao_membros_superiores }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ terceira.obs_dissociacao_membros_superiores }}</p>
                 {% endfor %}
 
                 <h5>Dissociação dos Membros inferiores</h5>
@@ -431,7 +431,7 @@
                 <p><strong>Relativo à última avaliação:</strong> {{ json_dissociacao_membros_inferiores }}</p>
                 <h5>Observações:</h5>
                 {% for terceira in terceira_unidade %}
-                <p>{{ terceira.obs_dissociacao_membros_inferiores }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ terceira.obs_dissociacao_membros_inferiores }}</p>
                 {% endfor %}
             </div>
         </div>
@@ -456,7 +456,7 @@
                 <p><strong>Relativo à última avaliação:</strong> {{ json_pulseira_de_clipes }}</p>
                 <h5>Observações:</h5>
                 {% for terceira in terceira_unidade %}
-                <p>{{ terceira.obs_pulseira_de_clipes }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ terceira.obs_pulseira_de_clipes }}</p>
                 {% endfor %}
             </div>
         </div>
@@ -470,7 +470,7 @@
                 <p><strong>Relativo à última avaliação:</strong> {{ json_tamborilar }}</p>
                 <h5>Observações:</h5>
                 {% for terceira in terceira_unidade %}
-                <p>{{ terceira.obs_tamborilar }}</p>
+                <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ terceira.obs_tamborilar }}</p>
                 {% endfor %}
             </div>
         </div>
@@ -493,7 +493,7 @@
         <div class="txt-relatorio">
             <h5>Observações sobre à Grafomotricidade:</h5>
             {% for terceira in terceira_unidade %}
-            <p>{{ terceira.obs_grafomotricidade }}</p>
+            <p><strong>{{ forloop.counter }}ª Observação: </strong>{{ terceira.obs_grafomotricidade }}</p>
             {% endfor %}
         </div>
 
@@ -580,7 +580,6 @@
         </div>
     </section>
     {%endif%}
-
 </main>
 </body>
 </html>

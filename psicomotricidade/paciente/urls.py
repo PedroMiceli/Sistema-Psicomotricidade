@@ -1,12 +1,16 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
+
 
 urlpatterns = [
     # Paciente
+
     path('paciente/create', PacienteCreate.as_view(), name='create-paciente'),
     path('paciente/update/<int:pk>', PacienteUpdate.as_view(), name='update-paciente'),
     path('paciente/details/<int:pk>', PacienteDetails.as_view(), name='details-paciente'),
     path('', PacientesList.as_view(), name='pacientes'),
+    #path('/pacientes', PacientesList.as_view(), name='pacientes'),
+
     path('paciente-inativos/', PacientesInativosList.as_view(), name='pacientes-inativos'),
 
     # Anamnese
