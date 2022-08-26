@@ -1,16 +1,38 @@
-from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView, ListView, DetailView, TemplateView
 from django.urls import reverse_lazy
-from django.http import HttpResponse
 from .models import *
 from .utils import *
 from .relatorio import relatorio as relatorio_textos
 from .dataframes import unidades_funcionais as unidades
 from xhtml2pdf import pisa
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
+#-------------------------Autenticação------------------------
+
+def login_usuario(request):
+    if request.method == 'GET':
+        return render(request, 'autentica/login.html')
+    else:
+        username = request.POST.get('username')
+        senha = request.POST.get('senha')
+
+        user = authenticate(username=username, password=senha)
+
+        if user:
+            login(request, user)
+            return redirect('pacientes')
+        else:
+            messages.success(request,'Usuario ou senha invalida!!!')
+            return redirect('/paciente')
 
 
 # ------------------------- PACIENTE -------------------------

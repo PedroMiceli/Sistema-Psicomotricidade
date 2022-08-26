@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'paginas/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'paginas/css/cadastro.css' %}">
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+</head>
+<body>
+
+    <div class="conteudo">
+        <h1 class="h1">Cadastro no sistema</h1>
+        <form class="form" action="{% url 'cadastro'%}" method="POST">{% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">Nome de usuario</label>
+            <input type="text" class="form-control" aria-describedby="emailHelp" name="username">
+          </div>
+          <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" aria-describedby="emailHelp" name="email">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="senha">
+          </div>
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+
+</body>
+</html>
