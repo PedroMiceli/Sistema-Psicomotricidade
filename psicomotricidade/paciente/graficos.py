@@ -1,5 +1,6 @@
 import plotly.graph_objects as go
 
+
 def grafico_de_linha(dataframe, nome, ordem, nome_img):
     try:
         categorias = dataframe[0].columns.values
@@ -242,35 +243,40 @@ def grafico_de_barra_numeros_altos(dataframe, nome, nome_img):
 
 
 def grafico_de_barra_numeros_altos_fig_humana(dataframe, nome, nome_img):
-
     try:
-        categorias = "Pontos"
+
+        v = []
+
+
+        for frame in dataframe:
+
+            frame = frame.values
+
+            for i in frame:
+
+                trues = []
+
+                for valor in i:
+                    if valor == True:
+                        trues.append(valor)
+
+                inteiro = [int(trues.__len__())]
+                v.append(inteiro)
+
+
+        c = [["1ª Passagem"],["2ª Passagem"],["3ª Passagem"],["4ª Passagem"],["5ª Passagem"],["6ª Passagem"],["7ª Passagem"],["8ª Passagem"],["9ª Passagem"],]
 
 
         fig = go.Figure()
         conta = 0
-        for i in dataframe:
-
-
-            lista_de_booleanos = i.values
-            valores = lista_de_booleanos[0]
-
-            trues = []
-            for valor in i.values:
-
-                if valor == True:
-                    trues.append(valor)
-            numero_de_pontos = int(len(trues))
-
-
+        for i in v:
 
             fig.add_trace(go.Bar(
-                x=categorias,
-                y=numero_de_pontos,
+                x=c[conta],
+                y=v[conta],
                 name=f'{conta + 1}ª avaliação',
                 marker={"line": {"width": 3, "color": "rgb(0,0,0)"}}
             ))
-
             conta += 1
 
         fig.update_layout(
@@ -281,12 +287,15 @@ def grafico_de_barra_numeros_altos_fig_humana(dataframe, nome, nome_img):
             margin_l=170,
             bargap=0.30,
             bargroupgap=0.3,
+
             legend=dict(
                 font_size=15,
             ),
+
             xaxis=dict(
                 showgrid=True,
                 showspikes=False,
+
             ),
             xaxis_tickfont=dict(size=18),
             yaxis=dict(
@@ -305,3 +314,4 @@ def grafico_de_barra_numeros_altos_fig_humana(dataframe, nome, nome_img):
         return fig.to_html(include_plotlyjs='cdn')
     except:
         return ""
+

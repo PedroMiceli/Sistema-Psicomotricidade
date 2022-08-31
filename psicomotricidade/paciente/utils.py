@@ -117,8 +117,6 @@ def executa_dataframes_e_graficos(id_paciente):
                                                                      'Realizou parcialmente',
                                                                      'Realizou integralmente'], 'auto_imagem'),
 
-
-
         'organizacao_perceptiva': grafico_de_barra(relatorio17, 'Organização Perceptiva', ['', 'Não realizou',
                                                                                            'Realizou parcialmente',
                                                                                            'Realizou integralmente'],
@@ -156,11 +154,9 @@ def executa_dataframes_e_graficos(id_paciente):
         'quebra_cabeca': grafico_de_barra(relatorio33, 'Montar Quebra-Cabeça', ['', 'Não realizou',
                                                                                 '4 peças', '8 peças', '10 peças'],
                                           'quebra_cabeca'),
-
         # ---------------------------- Desenho da Figura Humana ----------------------
         'figura_humana': grafico_de_barra_numeros_altos_fig_humana(relatorio13, 'Desenho da Figura Humana', 'figura_humana'),
     }
-
     return graficos
 
 

@@ -38,7 +38,7 @@ def df_unidades():
     return lista
 
 
-class unidades_funcionais():
+class  unidades_funcionais():
 
     def topicos(self, id_paciente):
         while True:

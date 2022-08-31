@@ -825,8 +825,6 @@ class RelatorioView(TemplateView):
             # ---------------------------- Primeira Unidade Funcional ----------------------
             'conceitos_filogeneticos': graficos['conceitos_filogeneticos'],
             'extensibilidade': graficos['extensibilidade'],
-            # 'balanco_passivo': graficos['balanco_passivo'],
-            # 'paratonia': graficos['paratonia'],
             'diadococinesia': graficos['diadococinesia'],
             'sincinesia': graficos['sincinesia'],
             'imobilidade': graficos['imobilidade'],
@@ -840,13 +838,10 @@ class RelatorioView(TemplateView):
             #------USADO PARA GOOD---------
             'figura_humana': graficos['figura_humana'],
             'auto_imagem': graficos['auto_imagem'],
-            # 'lateralizacoes': graficos['lateralizacoes'],
-            # 'reconhecimento_direita_esquerda': graficos['reconhecimento_direita_esquerda'],
             'organizacao_perceptiva': graficos['organizacao_perceptiva'],
             'estruturacao_dinamica_espacial': graficos['estruturacao_dinamica_espacial'],
             'representacao_topografica': graficos['representacao_topografica'],
             'estruturacao_ritmica': graficos['estruturacao_ritmica'],
-
             # ---------------------------- Terceira Unidade Funcional ----------------------
             'oculo_manual': graficos['oculo_manual'],
             'oculo_pedal': graficos['oculo_pedal'],

@@ -1,4 +1,3 @@
-import datetime
 import json
 from .dataframes import df_unidades
 import statistics
@@ -1348,6 +1347,6 @@ class relatorio():
                                                          'colorir_graficamente'),
 
                 # ---------- Figura Humana ----------
-                # 'desenho_figura_humana': figura_humana(paciente_id),
+                 #'desenho_figura_humana': figura_humana(paciente_id),
             }
             return resultados
