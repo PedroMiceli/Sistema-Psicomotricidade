@@ -246,31 +246,29 @@ def grafico_de_barra_numeros_altos_fig_humana(dataframe, nome, nome_img):
     try:
 
         v = []
+        c = []
 
-
+        contador = 0
         for frame in dataframe:
-
             frame = frame.values
+            c.append([f"{contador + 1}ª passagem"])
 
             for i in frame:
 
                 trues = []
-
                 for valor in i:
                     if valor == True:
                         trues.append(valor)
 
                 inteiro = [int(trues.__len__())]
                 v.append(inteiro)
-
-
-        c = [["1ª Passagem"],["2ª Passagem"],["3ª Passagem"],["4ª Passagem"],["5ª Passagem"],["6ª Passagem"],["7ª Passagem"],["8ª Passagem"],["9ª Passagem"],]
-
+            contador = contador + 1
 
         fig = go.Figure()
+
         conta = 0
         for i in v:
-
+            print(conta)
             fig.add_trace(go.Bar(
                 x=c[conta],
                 y=v[conta],
