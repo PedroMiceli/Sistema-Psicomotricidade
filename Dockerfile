@@ -1,5 +1,14 @@
-FROM python
+FROM python:3
 
-RUN mkdir -p app/psicomotricidade
+WORKDIR /usr/src/app
 
-ENV
+COPY requirements.txt ./
+RUN apt-get unzip
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["./psicomotricidade/psicomotricidade/python manage.py runserver"]
+
+
+EXPOSE 8080
