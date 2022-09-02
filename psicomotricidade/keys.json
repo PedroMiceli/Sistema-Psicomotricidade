@@ -3,6 +3,6 @@
   "banco": "teste",
   "usuario": "postgres",
   "senha": "opentech",
-  "ip": "localhost",
+  "ip": "172.16.4.102",
   "porta": "5433"
 }
