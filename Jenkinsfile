@@ -1,14 +1,20 @@
 pipeline {
-    agent any
+    agent {label "linux"}
 
     stages{
         stage ('Build Image'){
             steps {
-                script {
-                    dockerapp = docker.build("psicomotricidade", 'dockerfile .')
-                    
-                }
+                sh """
+                    docker build -t psicomotricidade .
+                """
             }
+        }
+        stage("run"){
+        steps{
+        sh """
+            docker run --rm psicomotricidade
+        """
+        }
         }
     }
 }
