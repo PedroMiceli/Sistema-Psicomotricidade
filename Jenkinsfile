@@ -1,20 +1,44 @@
 pipeline {
-    agent {label "linux"}
+    agent any
 
     stages{
-        stage ('Build Image'){
+        stage("Stopping old container"){
+            steps{
+                sh """
+                    docker stop psicomotricidade
+                """
+            }
+        }
+        stage("Removing old container"){
+            steps{
+                sh """
+                    docker rm psicomotricidade
+                """
+            }
+        }
+        stage("deleting old image"){
+            steps{
+                sh """
+                    docker rmi psicomotricidade -f
+                """
+            }
+        }
+        stage("Build new Image"){
             steps {
                 sh """
                     docker build -t psicomotricidade .
                 """
             }
         }
-        stage("run"){
+        stage("run container"){
         steps{
         sh """
-            docker run --rm psicomotricidade
+            docker run -d --name psicomotricidade -p 8000:8000 psicomotricidade
         """
         }
         }
     }
 }
+
+
+
