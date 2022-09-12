@@ -7,7 +7,7 @@ import json
 def df_unidades():
 
     def ler_json():
-        with open("keys.json", 'r', encoding='utf8') as f:
+        with open("psicomotricidade/keys.json", 'r', encoding='utf8') as f:
             return json.load(f)
 
     chaves = ler_json()
