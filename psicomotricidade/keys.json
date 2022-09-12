@@ -2,7 +2,7 @@
   "driver": "postgresql",
   "banco": "psicomotricidade",
   "usuario": "postgres",
-  "senha": "Post@!125",
+  "senha": "Post!125XCv",
   "ip": "172.16.5.101",
   "porta": "5432"
 }
