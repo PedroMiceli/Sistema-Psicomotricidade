@@ -16,7 +16,11 @@ import json
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -25,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-0z5a$f3ghf*u%uc3fn9^zqk2c#l!@q(aa4gci1hxk3sxegapbu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -81,7 +85,7 @@ WSGI_APPLICATION = 'psicomotricidade.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-senhas = open('psicomotricidade/keys.json')
+senhas = open('keys.json')
 chaves = json.load(senhas)
 
 driver = chaves["driver"]
@@ -138,15 +142,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 MEDIA_ROOT = BASE_DIR / "media"
-
 STATIC_URL = 'static/'
-
 MEDIA_URL = 'media/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    BASE_DIR / "media_graph",
-]
+if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+        BASE_DIR / "media_graph",
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
