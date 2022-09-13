@@ -121,7 +121,7 @@ def grafico_de_barra(dataframe, nome, ordem, nome_img):
             )
         )
 
-        fig.write_image(f"media_graph/{nome_img}.webp")
+        fig.write_image(f"psicomotricidade/media_graph/{nome_img}.webp")
         return fig.to_html(include_plotlyjs='cdn')
     except:
         return ""
@@ -179,7 +179,7 @@ def grafico_de_barra_numeros_baixos(dataframe, nome, nome_img):
             )
         )
 
-        fig.write_image(f"media_graph/{nome_img}.webp")
+        fig.write_image(f"psicomotricidade/media_graph/{nome_img}.webp")
         return fig.to_html(include_plotlyjs='cdn')
     except:
         return ""
@@ -236,7 +236,7 @@ def grafico_de_barra_numeros_altos(dataframe, nome, nome_img):
             )
         )
 
-        fig.write_image(f"media_graph/{nome_img}.webp")
+        fig.write_image(f"psicomotricidade/media_graph/{nome_img}.webp")
         return fig.to_html(include_plotlyjs='cdn')
     except:
         return ""
