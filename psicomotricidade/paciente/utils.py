@@ -28,8 +28,8 @@ def separa_por_passagens(df):
 
 def executa_dataframes_e_graficos(id_paciente):
     # excluir e criar a pasta 'media' para alocar as imagens dos graficos
-    shutil.rmtree('media_graph')
-    os.mkdir('media_graph')
+    shutil.rmtree('psicomotricidade/media_graph')
+    os.mkdir('psicomotricidade/media_graph')
 
     # --------------- Gera os Dataframes já filtrados -----------------------
     lista_todos_topicos = unidades_funcionais().topicos(id_paciente)
