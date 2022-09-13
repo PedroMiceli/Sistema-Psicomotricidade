@@ -7,7 +7,7 @@ class relatorio():
     # ---------------------- JSON ----------------------
     def ler_json(self):
         try:
-            with open("paciente/textos_relatorio.json", 'r', encoding="utf-8") as f:
+            with open("psicomotricidade/paciente/textos_relatorio.json", 'r', encoding="utf-8") as f:
                 return json.load(f)
         except:
             return ""
