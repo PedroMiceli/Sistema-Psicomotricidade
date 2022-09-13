@@ -162,8 +162,8 @@ def executa_dataframes_e_graficos(id_paciente):
 
 # tabela goodnough
 def tabela_goodnough(data_nascimento, dataframe):
-    shutil.rmtree('media_goodnough')
-    os.mkdir('media_goodnough')
+    shutil.rmtree('psicomotricidade/media_goodnough')
+    os.mkdir('psicomotricidade/media_goodnough')
 
     lista_pontuacoes = []
     lista_datas_avaliacoes = []
