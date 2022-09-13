@@ -339,5 +339,5 @@ def tabela_goodnough(data_nascimento, dataframe):
             b=0
         ),
     )
-    fig.write_image("media_goodnough/goodnough.webp")
+    fig.write_image("psicomotricidade/media_goodnough/goodnough.webp")
     return fig.to_html(include_plotlyjs='cdn')
