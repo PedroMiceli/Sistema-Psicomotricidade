@@ -33,7 +33,7 @@ pipeline {
         stage("run container"){
         steps{
         sh """
-            docker run -d --name psicomotricidade ––restart always -p 8000:8000 psicomotricidade
+            docker run -d --name psicomotricidade -p 8000:8000 psicomotricidade
         """
         }
         }
