@@ -32,7 +32,7 @@ def login_usuario(request):
             return redirect('pacientes')
         else:
             messages.success(request,'Usuario ou senha invalida!!!')
-            return redirect('/paciente')
+            return redirect('/')
 
 
 # ------------------------- PACIENTE -------------------------
