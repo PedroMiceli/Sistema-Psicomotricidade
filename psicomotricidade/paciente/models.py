@@ -10,7 +10,7 @@ class Paciente(models.Model):
     data_nascimento = models.DateField(verbose_name='Data de Nascimento')
     responsavel = models.CharField(max_length=50, verbose_name='Responsável', null=True, blank=True)
     cpf_responsavel = models.CharField(max_length=14,
-                                       verbose_name='CPF do Responsável', null=True, blank=True)
+                                       verbose_name='Telefone do Responsável', null=True, blank=True)
     ativo = models.BooleanField(default=True)
 
     def __str__(self):
