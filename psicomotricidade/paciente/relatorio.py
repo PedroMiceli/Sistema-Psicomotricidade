@@ -1,13 +1,14 @@
 import json
 from .dataframes import df_unidades
 import statistics
+import numpy as np
 
 
 class relatorio():
     # ---------------------- JSON ----------------------
     def ler_json(self):
         try:
-            with open("psicomotricidade/paciente/textos_relatorio.json", 'r', encoding="utf-8") as f:
+            with open("paciente/textos_relatorio.json", 'r', encoding="utf-8") as f:
                 return json.load(f)
         except:
             return ""
@@ -22,6 +23,8 @@ class relatorio():
                 df = unidades[0][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
+
 
                 media = None
                 ultimo_resultado = None
@@ -59,6 +62,7 @@ class relatorio():
                 df = unidades[0][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -107,6 +111,7 @@ class relatorio():
                 df = unidades[0][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -153,6 +158,7 @@ class relatorio():
                 df = unidades[0][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -199,6 +205,7 @@ class relatorio():
                 df = unidades[0][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 media = None
                 ultimo_resultado = None
@@ -236,6 +243,7 @@ class relatorio():
                 df = unidades[0][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -287,6 +295,7 @@ class relatorio():
                 df = unidades[0][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -335,6 +344,7 @@ class relatorio():
                 df = unidades[0][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -383,6 +393,7 @@ class relatorio():
                 df = unidades[0][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 media = None
                 ultimo_resultado = None
@@ -422,6 +433,7 @@ class relatorio():
                 df = unidades[1][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 media = None
                 ultimo_resultado = None
@@ -459,6 +471,7 @@ class relatorio():
                 df = unidades[1][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 media = None
                 ultimo_resultado = None
@@ -496,6 +509,7 @@ class relatorio():
                 df = unidades[1][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -545,6 +559,7 @@ class relatorio():
                 df = unidades[1][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -593,6 +608,7 @@ class relatorio():
                 df = unidades[1][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -642,6 +658,7 @@ class relatorio():
                 df = unidades[1][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -690,6 +707,7 @@ class relatorio():
                 df = unidades[1][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -738,6 +756,7 @@ class relatorio():
                 df = unidades[1][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -786,6 +805,7 @@ class relatorio():
                 df = unidades[1][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 media = None
                 ultimo_resultado = None
@@ -825,6 +845,7 @@ class relatorio():
                 df = unidades[2][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -873,6 +894,7 @@ class relatorio():
                 df = unidades[2][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 media = None
                 ultimo_resultado = None
@@ -910,6 +932,7 @@ class relatorio():
                 df = unidades[2][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 media = None
                 ultimo_resultado = None
@@ -947,6 +970,7 @@ class relatorio():
                 df = unidades[2][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 media = None
                 ultimo_resultado = None
@@ -985,6 +1009,7 @@ class relatorio():
                 df = unidades[2][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 media = None
                 ultimo_resultado = None
@@ -1022,6 +1047,7 @@ class relatorio():
                 df = unidades[2][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 # resultados do banco
                 lista_resultados = []
@@ -1070,6 +1096,7 @@ class relatorio():
                 df = unidades[2][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 media = None
                 ultimo_resultado = None
@@ -1108,6 +1135,7 @@ class relatorio():
                 df = unidades[2][['id', 'paciente_id', 'data_avaliacao', f'{campo}']]
                 df = df[df['paciente_id'] == id_paciente]
                 df = df.sort_values(by='data_avaliacao', ascending=False)
+                df = df.replace(to_replace='None', value=np.nan).dropna()
 
                 media = None
                 ultimo_resultado = None

@@ -1,13 +1,14 @@
 import pandas as pd
 from sqlalchemy import create_engine
 import json
+import numpy as np
 
 
 
 def df_unidades():
 
     def ler_json():
-        with open("psicomotricidade/keys.json", 'r', encoding='utf8') as f:
+        with open("keys.json", 'r', encoding='utf8') as f:
             return json.load(f)
 
     chaves = ler_json()
@@ -51,43 +52,51 @@ class  unidades_funcionais():
             df_conceitos_filogeneticos.columns = ['id', 'paciente_id', 'Rolar', 'Engatinhar', 'Rastejar']
             df_conceitos_filogeneticos = df_conceitos_filogeneticos[
                 df_conceitos_filogeneticos['paciente_id'] == id_paciente]
+            df_conceitos_filogeneticos = df_conceitos_filogeneticos.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_conceitos_filogeneticos)
 
             df_extensibilidade = unidades[0][['id', 'paciente_id', 'extensibilidade_membros_superiores',
                                               'extensibilidade_membros_inferiores']]
             df_extensibilidade.columns = ['id', 'paciente_id', 'Membros superiores', 'Membros inferiores']
             df_extensibilidade = df_extensibilidade[df_extensibilidade['paciente_id'] == id_paciente]
+            df_extensibilidade = df_extensibilidade.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_extensibilidade)
 
             df_balanco_passivo = unidades[0][['id', 'paciente_id', 'balanco_membros_superiores']]
             df_balanco_passivo.columns = ['id', 'paciente_id', 'Membros superiores']
             df_balanco_passivo = df_balanco_passivo[df_balanco_passivo['paciente_id'] == id_paciente]
+            df_balanco_passivo = df_balanco_passivo.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_balanco_passivo)
 
             df_paratonia = unidades[0][['id', 'paciente_id', 'paratonia_membros_superiores']]
             df_paratonia.columns = ['id', 'paciente_id', 'Membros superiores']
             df_paratonia = df_paratonia[df_paratonia['paciente_id'] == id_paciente]
+            df_paratonia = df_paratonia.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_paratonia)
 
             df_diadococinesia = unidades[0][['id', 'paciente_id', 'pronacao', 'supinacao']]
             df_diadococinesia.columns = ['id', 'paciente_id', 'Pronação', 'Supinação']
             df_diadococinesia = df_diadococinesia[df_diadococinesia['paciente_id'] == id_paciente]
+            df_diadococinesia = df_diadococinesia.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_diadococinesia)
 
             df_sincinesia = unidades[0][['id', 'paciente_id', 'tonico', 'tonico_cinetico']]
             df_sincinesia.columns = ['id', 'paciente_id', 'Tônico', 'Tônico-cinético']
             df_sincinesia = df_sincinesia[df_sincinesia['paciente_id'] == id_paciente]
+            df_sincinesia = df_sincinesia.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_sincinesia)
 
             # ----------------- Equilibração -------------------------------
             df_imobilidade = unidades[0][['id', 'paciente_id', 'imobilidade']]
             df_imobilidade.columns = ['id', 'paciente_id', 'Imobilidade']
             df_imobilidade = df_imobilidade[df_imobilidade['paciente_id'] == id_paciente]
+            df_imobilidade = df_imobilidade.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_imobilidade)
 
             df_equilibrio_estatico = unidades[0][['id', 'paciente_id', 'equilibrio_estatico']]
             df_equilibrio_estatico.columns = ['id', 'paciente_id', 'Equilibrio estático']
             df_equilibrio_estatico = df_equilibrio_estatico[df_equilibrio_estatico['paciente_id'] == id_paciente]
+            df_equilibrio_estatico = df_equilibrio_estatico.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_equilibrio_estatico)
 
             df_equilibrio_dinamico_ponte = unidades[0][['id', 'paciente_id', 'ponte_equilibrio_frente',
@@ -96,6 +105,7 @@ class  unidades_funcionais():
             df_equilibrio_dinamico_ponte.columns = ['id', 'paciente_id', 'Frente', 'Trás', 'Direita', 'Esquerda']
             df_equilibrio_dinamico_ponte = df_equilibrio_dinamico_ponte[
                 df_equilibrio_dinamico_ponte['paciente_id'] == id_paciente]
+            df_equilibrio_dinamico_ponte = df_equilibrio_dinamico_ponte.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_equilibrio_dinamico_ponte)
 
             df_equilibrio_dinamico_corda = unidades[0][
@@ -103,6 +113,7 @@ class  unidades_funcionais():
             df_equilibrio_dinamico_corda.columns = ['id', 'paciente_id', 'Olhos abertos', 'Olhos fechados']
             df_equilibrio_dinamico_corda = df_equilibrio_dinamico_corda[
                 df_equilibrio_dinamico_corda['paciente_id'] == id_paciente]
+            df_equilibrio_dinamico_corda = df_equilibrio_dinamico_corda.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_equilibrio_dinamico_corda)
 
             # -----------------Segunda Unidade Funcional------------------
@@ -111,16 +122,20 @@ class  unidades_funcionais():
             df_cinestesia = unidades[1][['id', 'paciente_id', 'nomeia_pontos_tateis']]
             df_cinestesia.columns = ['id', 'paciente_id', 'Nomeia pontos táteis do corpo']
             df_cinestesia = df_cinestesia[df_cinestesia['paciente_id'] == id_paciente]
+            df_cinestesia = df_cinestesia.replace(to_replace='None', value=np.nan).dropna()
+
             lista_todos_topicos.append(df_cinestesia)
 
             df_imitacao_de_gestos = unidades[1][['id', 'paciente_id', 'imitacao_de_gestos']]
             df_imitacao_de_gestos.columns = ['id', 'paciente_id', 'Imitação de gestos']
             df_imitacao_de_gestos = df_imitacao_de_gestos[df_imitacao_de_gestos['paciente_id'] == id_paciente]
+            df_imitacao_de_gestos = df_imitacao_de_gestos.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_imitacao_de_gestos)
 
             df_auto_imagem = unidades[1][['id', 'paciente_id', 'no_avaliador', 'no_mesmo', 'no_objeto']]
             df_auto_imagem.columns = ['id', 'paciente_id', 'No avaliador', 'No mesmo', 'No objeto']
             df_auto_imagem = df_auto_imagem[df_auto_imagem['paciente_id'] == id_paciente]
+            df_auto_imagem = df_auto_imagem.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_auto_imagem)
 
             # ----------------- Lateralização ----------------------
@@ -129,6 +144,7 @@ class  unidades_funcionais():
             df_lateralizacoes.columns = ['id', 'paciente_id', 'Lateralização ocular', 'Lateralização manual',
                                          'Lateralização pedal']
             df_lateralizacoes = df_lateralizacoes[df_lateralizacoes['paciente_id'] == id_paciente]
+            df_lateralizacoes = df_lateralizacoes.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_lateralizacoes)
 
             df_reconhecimento_direita_esquerda = unidades[1][['id', 'paciente_id', 'reconhecimento_verbal',
@@ -137,6 +153,7 @@ class  unidades_funcionais():
                                                           'Reconhecimento gestual', 'Reconhecimento tátil']
             df_reconhecimento_direita_esquerda = df_reconhecimento_direita_esquerda[
                 df_reconhecimento_direita_esquerda['paciente_id'] == id_paciente]
+            df_reconhecimento_direita_esquerda = df_reconhecimento_direita_esquerda.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_reconhecimento_direita_esquerda)
 
             # ----------------- Estruturação Espaço Temporal ----------------------
@@ -144,18 +161,21 @@ class  unidades_funcionais():
             df_organizacao_perceptiva.columns = ['id', 'paciente_id', 'Organização perceptiva']
             df_organizacao_perceptiva = df_organizacao_perceptiva[
                 df_organizacao_perceptiva['paciente_id'] == id_paciente]
+            df_organizacao_perceptiva = df_organizacao_perceptiva.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_organizacao_perceptiva)
 
             df_estruturacao_dinamica_espacial = unidades[1][['id', 'paciente_id', 'estruturacao_dinamica_espacial']]
             df_estruturacao_dinamica_espacial.columns = ['id', 'paciente_id', 'Estruturação dinâmica espacial']
             df_estruturacao_dinamica_espacial = df_estruturacao_dinamica_espacial[
                 df_estruturacao_dinamica_espacial['paciente_id'] == id_paciente]
+            df_estruturacao_dinamica_espacial = df_estruturacao_dinamica_espacial.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_estruturacao_dinamica_espacial)
 
             df_representacao_topografica = unidades[1][['id', 'paciente_id', 'representacao_topografica']]
             df_representacao_topografica.columns = ['id', 'paciente_id', 'Representação topográfica']
             df_representacao_topografica = df_representacao_topografica[
                 df_representacao_topografica['paciente_id'] == id_paciente]
+            df_representacao_topografica = df_representacao_topografica.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_representacao_topografica)
 
             df_estruturacao_ritmica = unidades[1][
@@ -163,6 +183,7 @@ class  unidades_funcionais():
                  'transcodificacao_visual']]
             df_estruturacao_ritmica.columns = ['id', 'paciente_id', 'Codificar', 'Decodificar', 'Auditiva', 'Visual']
             df_estruturacao_ritmica = df_estruturacao_ritmica[df_estruturacao_ritmica['paciente_id'] == id_paciente]
+            df_estruturacao_ritmica = df_estruturacao_ritmica.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_estruturacao_ritmica)
 
             # ---------------------------- Terceira Unidade Funcional ----------------------
@@ -172,39 +193,46 @@ class  unidades_funcionais():
             df_coordenacao_oculo_manual.columns = ['id', 'paciente_id', 'Jogar 4 bolas', 'Agarrar bola de tênis']
             df_coordenacao_oculo_manual = df_coordenacao_oculo_manual[
                 df_coordenacao_oculo_manual['paciente_id'] == id_paciente]
+            df_coordenacao_oculo_manual = df_coordenacao_oculo_manual.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_coordenacao_oculo_manual)
 
             df_coordenacao_oculo_pedal = unidades[2][['id', 'paciente_id', 'quatro_chutes_ao_gol']]
             df_coordenacao_oculo_pedal.columns = ['id', 'paciente_id', '4 chutes ao gol']
             df_coordenacao_oculo_pedal = df_coordenacao_oculo_pedal[
                 df_coordenacao_oculo_pedal['paciente_id'] == id_paciente]
+            df_coordenacao_oculo_pedal = df_coordenacao_oculo_pedal.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_coordenacao_oculo_pedal)
 
             df_dissociacao = unidades[2][['id', 'paciente_id', 'dissociacao_membros_superiores',
                                           'dissociacao_membros_inferiores']]
             df_dissociacao.columns = ['id', 'paciente_id', 'Membros superiores', 'Membros inferiores']
             df_dissociacao = df_dissociacao[df_dissociacao['paciente_id'] == id_paciente]
+            df_dissociacao = df_dissociacao.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_dissociacao)
 
             df_agilidade = unidades[2][['id', 'paciente_id', 'agilidade']]
             df_agilidade.columns = ['id', 'paciente_id', 'Agilidade']
             df_agilidade = df_agilidade[df_agilidade['paciente_id'] == id_paciente]
+            df_agilidade = df_agilidade.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_agilidade)
 
             # ----------------- Praxia Fina ----------------------
             df_pulseira_de_clipes = unidades[2][['id', 'paciente_id', 'pulseira_de_clipes']]
             df_pulseira_de_clipes.columns = ['id', 'paciente_id', 'Pulseira de clipes']
             df_pulseira_de_clipes = df_pulseira_de_clipes[df_pulseira_de_clipes['paciente_id'] == id_paciente]
+            df_pulseira_de_clipes = df_pulseira_de_clipes.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_pulseira_de_clipes)
 
             df_tamborilar = unidades[2][['id', 'paciente_id', 'tamborilar']]
             df_tamborilar.columns = ['id', 'paciente_id', 'Tamborilar']
             df_tamborilar = df_tamborilar[df_tamborilar['paciente_id'] == id_paciente]
+            df_tamborilar = df_tamborilar.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_tamborilar)
 
             df_velocidade_precisao = unidades[2][['id', 'paciente_id', 'velocidade_precisao']]
             df_velocidade_precisao.columns = ['id', 'paciente_id', 'Velocidade e Precisão']
             df_velocidade_precisao = df_velocidade_precisao[df_velocidade_precisao['paciente_id'] == id_paciente]
+            df_velocidade_precisao = df_velocidade_precisao.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_velocidade_precisao)
 
             # ----------------- Grafomotricidade ----------------------
@@ -212,32 +240,38 @@ class  unidades_funcionais():
                                        'tracado_zig_zag', 'tracado_curvo']]
             df_tracados.columns = ['id', 'paciente_id', 'Vertical', 'Horizontal', 'Zig-zag', 'Curvo']
             df_tracados = df_tracados[df_tracados['paciente_id'] == id_paciente]
+            df_tracados = df_tracados.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_tracados)
 
             df_pontilhados = unidades[2][['id', 'paciente_id', 'pontilhados']]
             df_pontilhados.columns = ['id', 'paciente_id', 'Pontilhados']
             df_pontilhados = df_pontilhados[df_pontilhados['paciente_id'] == id_paciente]
+            df_pontilhados = df_pontilhados.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_pontilhados)
 
             df_circulos = unidades[2][['id', 'paciente_id', 'circulos']]
             df_circulos.columns = ['id', 'paciente_id', 'Círculos']
             df_circulos = df_circulos[df_circulos['paciente_id'] == id_paciente]
+            df_circulos = df_circulos.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_circulos)
 
             df_cruz = unidades[2][['id', 'paciente_id', 'cruz']]
             df_cruz.columns = ['id', 'paciente_id', 'Cruz']
             df_cruz = df_cruz[df_cruz['paciente_id'] == id_paciente]
+            df_cruz = df_cruz.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_cruz)
 
             df_colorir = unidades[2][['id', 'paciente_id', 'colorir_graficamente']]
             df_colorir.columns = ['id', 'paciente_id', 'Colorir graficamente']
             df_colorir = df_colorir[df_colorir['paciente_id'] == id_paciente]
+            df_colorir = df_colorir.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_colorir)
 
             # ----------------- Montar Quebra-Cabeça ----------------------
             df_montar_quebra_cabeca = unidades[2][['id', 'paciente_id', 'montar_quebra_cabeca']]
             df_montar_quebra_cabeca.columns = ['id', 'paciente_id', 'Montar quebra-cabeça']
             df_montar_quebra_cabeca = df_montar_quebra_cabeca[df_montar_quebra_cabeca['paciente_id'] == id_paciente]
+            df_montar_quebra_cabeca = df_montar_quebra_cabeca.replace(to_replace='None', value=np.nan).dropna()
             lista_todos_topicos.append(df_montar_quebra_cabeca)
 
             # ---------------------------- Desenho Figura Humana ----------------------
@@ -255,8 +289,6 @@ class  unidades_funcionais():
                                                     'contorno_tronco','contorno_bracos','tracos_fisionomicos','orelhas','orelhas_proporcionais','olhos_detalhados',
                                                     'pupilas','olhos_proporcionais','olhar','queixo_e_testa','projecao_queixo','corpo_em_perfil_transparencia',
                                                     'corpo_em_perfil_sem_transparencia',]]
-
-
             df_desenho_figura_humana = df_desenho_figura_humana[df_desenho_figura_humana['paciente_id'] == id_paciente]
             lista_todos_topicos.append(df_desenho_figura_humana)
 

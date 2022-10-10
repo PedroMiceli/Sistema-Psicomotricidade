@@ -36,6 +36,12 @@
             {{ form.cpf_responsavel|as_crispy_field }}
         </div>
     </div>
+    <div class="form-row justify-content-md-center">
+        <div class="col-md-6">
+            {{ form.endereco|as_crispy_field }}
+        </div>
+
+    </div>
 
     <div class="form-row mx-auto float-right">
         <a class="btn btn-danger m-4" href="{% url 'pacientes' %}" title="Cancelar">

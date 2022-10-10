@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'psicomotricidade.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-senhas = open('psicomotricidade/keys.json')
+senhas = open('keys.json')
 chaves = json.load(senhas)
 
 driver = chaves["driver"]

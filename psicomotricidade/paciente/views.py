@@ -1,18 +1,14 @@
 from django.template.loader import get_template
-from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, UpdateView, ListView, DetailView, TemplateView
+from django.views.generic import CreateView, UpdateView, ListView, DetailView, TemplateView, DeleteView
 from django.urls import reverse_lazy
 from .models import *
 from .utils import *
 from .relatorio import relatorio as relatorio_textos
 from .dataframes import unidades_funcionais as unidades
 from xhtml2pdf import pisa
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
@@ -38,7 +34,7 @@ def login_usuario(request):
 # ------------------------- PACIENTE -------------------------
 class PacienteCreate(CreateView):
     model = Paciente
-    fields = ['nome', 'data_nascimento', 'responsavel', 'cpf_responsavel']
+    fields = ['nome', 'data_nascimento', 'responsavel', 'cpf_responsavel','endereco']
     template_name = 'paciente/create.html'
     success_url = reverse_lazy('pacientes')
 
@@ -56,15 +52,14 @@ class PacienteCreate(CreateView):
         form.fields['responsavel'].widget.attrs = {'placeholder': 'Nome do Responsável pelo Paciente',
                                                    'maxlength': 50,
                                                    'autocomplete': 'off'}
-        form.fields['cpf_responsavel'].widget.attrs = {'placeholder': '000.000.000-00',
+        form.fields['cpf_responsavel'].widget.attrs = {'placeholder': '(xx) xxxxx-xxxx',
                                                        'maxlength': 14,
                                                        'autocomplete': 'off'}
+        form.fields['endereco'].widget.attrs = {'autocomplete': 'off', 'rows': 6}
         return form
-
-
 class PacienteUpdate(UpdateView):
     model = Paciente
-    fields = ['nome', 'data_nascimento', 'responsavel', 'cpf_responsavel', 'ativo']
+    fields = ['nome', 'data_nascimento', 'responsavel', 'cpf_responsavel', 'ativo', 'endereco']
     template_name = 'paciente/edit.html'
 
     def get_context_data(self, **kwargs):
@@ -79,9 +74,12 @@ class PacienteUpdate(UpdateView):
     def get_success_url(self):
         paciente_id = self.kwargs['pk']
         return reverse_lazy('details-paciente', kwargs={'pk': paciente_id})
+class PacienteDeletar(DeleteView):
+    template_name = 'paciente/deletar.html'
+    model = Paciente
+    success_url = '/paciente'
 
-
-class PacientesList( ListView):
+class PacientesList(ListView):
     model = Paciente
     template_name = 'paciente/list.html'
     paginate_by = 12
@@ -94,8 +92,6 @@ class PacientesList( ListView):
         else:
             pacientes = Paciente.objects.filter(ativo=True).order_by('nome', 'data_nascimento')
         return pacientes
-
-
 class PacienteDetails(DetailView):
     queryset = Paciente.objects.all()
     template_name = 'paciente/details.html'
@@ -152,8 +148,6 @@ class PacienteDetails(DetailView):
         context['idade'] = idade
 
         return context
-
-
 class PacientesInativosList(ListView):
     model = Paciente
     template_name = 'paciente/list-inativos.html'
@@ -167,7 +161,6 @@ class PacientesInativosList(ListView):
         else:
             pacientes = Paciente.objects.filter(ativo=False).order_by('nome', 'data_nascimento')
         return pacientes
-
 
 # ------------------------- ANAMNESE -------------------------
 class AnamneseCreate(CreateView):
@@ -224,8 +217,6 @@ class AnamneseCreate(CreateView):
         form.fields['desarmonia'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
 
         return form
-
-
 class AnamneseUpdate(UpdateView):
     model = Anamnese
     fields = '__all__'
@@ -292,8 +283,6 @@ class AnamneseUpdate(UpdateView):
         anamnese = Anamnese.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
         paciente = anamnese[0][0]
         return reverse_lazy('details-paciente', kwargs={'pk': paciente})
-
-
 def render_pdf_anamnese(request, pk):
     template_path = 'anamnese/anamnese_pdf.html'
 
@@ -361,7 +350,6 @@ def render_pdf_anamnese(request, pk):
         return HttpResponse('Errors <pre>' + html + '</pre>')
     return response
 
-
 # ------------------------- PROTOCOLO -------------------------
 class PrimeiraUnidadeFuncionalCreate(CreateView):
     model = PrimeiraUnidadeFuncional
@@ -383,7 +371,46 @@ class PrimeiraUnidadeFuncionalCreate(CreateView):
         form.fields['obs_imobilidade'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
         form.fields['obs_equilibrio_estatico'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
         return form
+class PrimeiraUnidadeFuncionalUpdate(UpdateView):
+    model = PrimeiraUnidadeFuncional
+    fields = '__all__'
+    template_name = 'protocolo/primeira_unidade/edit.html'
 
+    # formatar inputs do formulario
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.get_form_class()
+        form = super(PrimeiraUnidadeFuncionalUpdate, self).get_form(form_class)
+
+        form.fields['paciente'].queryset = Paciente.objects.filter(ativo=True)
+        form.fields['obs_extensibilidade_membros_superiores'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_extensibilidade_membros_inferiores'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_balanco_membros_superiores'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_tonico'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_tonico_cinetico'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_imobilidade'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_equilibrio_estatico'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super(PrimeiraUnidadeFuncionalUpdate, self).get_context_data(**kwargs)
+
+        # recuperar id do paciente, se o usuário optar por cancelar a edição, será redirecionado para a página de detalhes do paciente
+        paciente = PrimeiraUnidadeFuncional.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
+        id = PrimeiraUnidadeFuncional.objects.values_list('id').filter(pk=self.kwargs['pk'])
+        context['id_paciente'] = paciente[0][0]
+        context['id_protocolo'] = id[0][0]
+        return context
+
+    # redirecionar para a pagina de detalhes do paciente editado
+    def get_success_url(self):
+        protocolo = PrimeiraUnidadeFuncional.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
+        paciente = protocolo[0][0]
+        return reverse_lazy('details-paciente', kwargs={'pk': paciente})
+class PrimeiraUnidadeFuncionalDelete(DeleteView):
+    template_name = 'protocolo/primeira_unidade/deletar.html'
+    model = PrimeiraUnidadeFuncional
+    success_url = '/paciente'
 
 class SegundaUnidadeFuncionalCreate(CreateView):
     model = SegundaUnidadeFuncional
@@ -408,7 +435,48 @@ class SegundaUnidadeFuncionalCreate(CreateView):
         form.fields['transcodificacao_visual'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 21}
         form.fields['obs_estruturacao_ritmica'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
         return form
+class SegundaUnidadeFuncionalUpdate(UpdateView):
+    model = SegundaUnidadeFuncional
+    fields = '__all__'
+    template_name = 'protocolo/segunda_unidade/edit.html'
 
+    # formatar inputs do formulario
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.get_form_class()
+        form = super(SegundaUnidadeFuncionalUpdate, self).get_form(form_class)
+        form.fields['paciente'].queryset = Paciente.objects.filter(ativo=True)
+        form.fields['nomeia_pontos_tateis'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 25}
+        form.fields['imitacao_de_gestos'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 20}
+        form.fields['obs_imitacao_de_gestos'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_lateralizacoes'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_reconhecimento_tatil'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['codificacao'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 21}
+        form.fields['decodificacao'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 21}
+        form.fields['transcodificacao_auditiva'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 21}
+        form.fields['transcodificacao_visual'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 21}
+        form.fields['obs_estruturacao_ritmica'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super(SegundaUnidadeFuncionalUpdate, self).get_context_data(**kwargs)
+
+        # recuperar id do paciente, se o usuário optar por cancelar a edição, será redirecionado para a página de detalhes do paciente
+        paciente = SegundaUnidadeFuncional.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
+        id = SegundaUnidadeFuncional.objects.values_list('id').filter(pk=self.kwargs['pk'])
+        context['id_paciente'] = paciente[0][0]
+        context['id_protocolo'] = id[0][0]
+        return context
+
+    # redirecionar para a pagina de detalhes do paciente editado
+    def get_success_url(self):
+        protocolo = SegundaUnidadeFuncional.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
+        paciente = protocolo[0][0]
+        return reverse_lazy('details-paciente', kwargs={'pk': paciente})
+class SegundaUnidadeFuncionalDelete(DeleteView):
+    template_name = 'protocolo/segunda_unidade/deletar.html'
+    model = SegundaUnidadeFuncional
+    success_url = '/paciente'
 
 class TerceiraUnidadeFuncionalCreate(CreateView):
     model = TerceiraUnidadeFuncional
@@ -432,6 +500,50 @@ class TerceiraUnidadeFuncionalCreate(CreateView):
         form.fields['obs_quebra_cabeca'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
         form.fields['velocidade_precisao'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 115}
         return form
+class TerceiraUnidadeFuncionalUpdate(UpdateView):
+    model = TerceiraUnidadeFuncional
+    fields = '__all__'
+    template_name = 'protocolo/terceira_unidade/edit.html'
+
+    # formatar inputs do formulario
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.get_form_class()
+        form = super(TerceiraUnidadeFuncionalUpdate, self).get_form(form_class)
+        form.fields['paciente'].queryset = Paciente.objects.filter(ativo=True)
+        form.fields['obs_oculo_manual'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_oculo_pedal'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_dissociacao_membros_superiores'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_dissociacao_membros_inferiores'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_pulseira_de_clipes'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_tamborilar'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_grafomotricidade'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['obs_quebra_cabeca'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
+        form.fields['velocidade_precisao'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 115}
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super(TerceiraUnidadeFuncionalUpdate, self).get_context_data(**kwargs)
+
+        # recuperar id do paciente, se o usuário optar por cancelar a edição, será redirecionado para a página de detalhes do paciente
+        paciente = TerceiraUnidadeFuncional.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
+        id = TerceiraUnidadeFuncional.objects.values_list('id').filter(pk=self.kwargs['pk'])
+        context['id_paciente'] = paciente[0][0]
+        context['id_protocolo'] = id[0][0]
+        return context
+
+    # redirecionar para a pagina de detalhes do paciente editado
+    def get_success_url(self):
+        protocolo = TerceiraUnidadeFuncional.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
+        paciente = protocolo[0][0]
+        return reverse_lazy('details-paciente', kwargs={'pk': paciente})
+
+class TerceiraUnidadeFuncionalDelete(DeleteView):
+    template_name = 'protocolo/terceira_unidade/deletar.html'
+    model = TerceiraUnidadeFuncional
+    success_url = '/paciente'
+
+
 
 class ConclusaoCreate(CreateView):
     model = Conclusao
@@ -456,8 +568,6 @@ class ConclusaoCreate(CreateView):
         form.fields['encaminhamento'].widget.attrs = {'autocomplete': 'off', 'rows': 6}
         form.fields['prognostico'].widget.attrs = {'autocomplete': 'off', 'rows': 10}
         return form
-
-
 class ConclusaoUpdate(UpdateView):
     model = Conclusao
     fields = '__all__'
@@ -483,6 +593,19 @@ class ConclusaoUpdate(UpdateView):
         form.fields['prognostico'].widget.attrs = {'autocomplete': 'off', 'rows': 10}
         return form
 
+    def get_context_data(self, **kwargs):
+        context = super(ConclusaoUpdate, self).get_context_data(**kwargs)
+
+        # recuperar id do paciente, se o usuário optar por cancelar a edição, será redirecionado para a página de detalhes do paciente
+        conclusao = Conclusao.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
+        id = Conclusao.objects.values_list('id').filter(pk=self.kwargs['pk'])
+        context['id_paciente'] = conclusao[0][0]
+        context['id_protocolo'] = id[0][0]
+        return context
+class ConclusaoDelete(DeleteView):
+    template_name = 'protocolo/conclusao/deletar.html'
+    model = Conclusao
+    success_url = '/paciente'
 
 class DesenhoFiguraHumanaCreate(CreateView):
     model = DesenhoFiguraHumana
@@ -550,118 +673,6 @@ class DesenhoFiguraHumanaCreate(CreateView):
 
         form.fields['obs_desenho_figura_humana'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
         return form
-
-
-class PrimeiraUnidadeFuncionalUpdate(UpdateView):
-    model = PrimeiraUnidadeFuncional
-    fields = '__all__'
-    template_name = 'protocolo/primeira_unidade/edit.html'
-
-    # formatar inputs do formulario
-    def get_form(self, form_class=None):
-        if form_class is None:
-            form_class = self.get_form_class()
-        form = super(PrimeiraUnidadeFuncionalUpdate, self).get_form(form_class)
-        form.fields['paciente'].queryset = Paciente.objects.filter(ativo=True)
-        form.fields['obs_extensibilidade_membros_superiores'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_extensibilidade_membros_inferiores'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_balanco_membros_superiores'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_tonico'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_tonico_cinetico'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_imobilidade'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_equilibrio_estatico'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        return form
-
-    def get_context_data(self, **kwargs):
-        context = super(PrimeiraUnidadeFuncionalUpdate, self).get_context_data(**kwargs)
-
-        # recuperar id do paciente, se o usuário optar por cancelar a edição, será redirecionado para a página de detalhes do paciente
-        paciente = PrimeiraUnidadeFuncional.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
-        context['id_paciente'] = paciente[0][0]
-        return context
-
-    # redirecionar para a pagina de detalhes do paciente editado
-    def get_success_url(self):
-        protocolo = PrimeiraUnidadeFuncional.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
-        paciente = protocolo[0][0]
-        return reverse_lazy('details-paciente', kwargs={'pk': paciente})
-
-
-class SegundaUnidadeFuncionalUpdate(UpdateView):
-    model = SegundaUnidadeFuncional
-    fields = '__all__'
-    template_name = 'protocolo/segunda_unidade/edit.html'
-
-    # formatar inputs do formulario
-    def get_form(self, form_class=None):
-        if form_class is None:
-            form_class = self.get_form_class()
-        form = super(SegundaUnidadeFuncionalUpdate, self).get_form(form_class)
-        form.fields['paciente'].queryset = Paciente.objects.filter(ativo=True)
-        form.fields['nomeia_pontos_tateis'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 25}
-        form.fields['imitacao_de_gestos'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 20}
-        form.fields['obs_imitacao_de_gestos'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_lateralizacoes'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_reconhecimento_tatil'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['codificacao'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 21}
-        form.fields['decodificacao'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 21}
-        form.fields['transcodificacao_auditiva'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 21}
-        form.fields['transcodificacao_visual'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 21}
-        form.fields['obs_estruturacao_ritmica'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        return form
-
-    def get_context_data(self, **kwargs):
-        context = super(SegundaUnidadeFuncionalUpdate, self).get_context_data(**kwargs)
-
-        # recuperar id do paciente, se o usuário optar por cancelar a edição, será redirecionado para a página de detalhes do paciente
-        paciente = SegundaUnidadeFuncional.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
-        context['id_paciente'] = paciente[0][0]
-        return context
-
-    # redirecionar para a pagina de detalhes do paciente editado
-    def get_success_url(self):
-        protocolo = SegundaUnidadeFuncional.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
-        paciente = protocolo[0][0]
-        return reverse_lazy('details-paciente', kwargs={'pk': paciente})
-
-
-class TerceiraUnidadeFuncionalUpdate(UpdateView):
-    model = TerceiraUnidadeFuncional
-    fields = '__all__'
-    template_name = 'protocolo/terceira_unidade/edit.html'
-
-    # formatar inputs do formulario
-    def get_form(self, form_class=None):
-        if form_class is None:
-            form_class = self.get_form_class()
-        form = super(TerceiraUnidadeFuncionalUpdate, self).get_form(form_class)
-        form.fields['paciente'].queryset = Paciente.objects.filter(ativo=True)
-        form.fields['obs_oculo_manual'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_oculo_pedal'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_dissociacao_membros_superiores'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_dissociacao_membros_inferiores'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_pulseira_de_clipes'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_tamborilar'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_grafomotricidade'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['obs_quebra_cabeca'].widget.attrs = {'autocomplete': 'off', 'rows': 3}
-        form.fields['velocidade_precisao'].widget.attrs = {'autocomplete': 'off', 'min': 0, 'max': 115}
-        return form
-
-    def get_context_data(self, **kwargs):
-        context = super(TerceiraUnidadeFuncionalUpdate, self).get_context_data(**kwargs)
-
-        # recuperar id do paciente, se o usuário optar por cancelar a edição, será redirecionado para a página de detalhes do paciente
-        paciente = TerceiraUnidadeFuncional.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
-        context['id_paciente'] = paciente[0][0]
-        return context
-
-    # redirecionar para a pagina de detalhes do paciente editado
-    def get_success_url(self):
-        protocolo = TerceiraUnidadeFuncional.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
-        paciente = protocolo[0][0]
-        return reverse_lazy('details-paciente', kwargs={'pk': paciente})
-
-
 class DesenhoFiguraHumanaUpdate(UpdateView):
     model = DesenhoFiguraHumana
     fields = '__all__'
@@ -732,7 +743,9 @@ class DesenhoFiguraHumanaUpdate(UpdateView):
 
         # recuperar id do paciente, se o usuário optar por cancelar a edição, será redirecionado para a página de detalhes do paciente
         paciente = DesenhoFiguraHumana.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
+        id = DesenhoFiguraHumana.objects.values_list('id').filter(pk=self.kwargs['pk'])
         context['id_paciente'] = paciente[0][0]
+        context['id_protocolo'] = id[0][0]
         return context
 
     # redirecionar para a pagina de detalhes do paciente editado
@@ -740,7 +753,10 @@ class DesenhoFiguraHumanaUpdate(UpdateView):
         protocolo = DesenhoFiguraHumana.objects.values_list('paciente').filter(pk=self.kwargs['pk'])
         paciente = protocolo[0][0]
         return reverse_lazy('details-paciente', kwargs={'pk': paciente})
-
+class DesenhoFiguraHumanaDelete(DeleteView):
+    template_name = 'protocolo/figura_humana/deletar.html'
+    model = DesenhoFiguraHumana
+    success_url = '/paciente'
 
 # ------------------------- RELATÓRIO -------------------------
 class RelatorioView(TemplateView):

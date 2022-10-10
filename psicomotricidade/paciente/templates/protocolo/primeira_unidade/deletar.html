@@ -10,12 +10,11 @@
 </head>
 
 <body>
-    <p style="text-align: center;font-size: 28px;background: var(--bs-red);box-shadow: 7px 7px 8px;border: 1px solid rgb(0,0,0);">Tem certeza que deseja deletar este paciente?</p>
+    <p style="text-align: center;font-size: 28px;background: var(--bs-red);box-shadow: 7px 7px 8px;border: 1px solid rgb(0,0,0);">Tem certeza que deseja deletar esta passagem?</p>
     <figure>
         <blockquote class="blockquote">
-            <p class="mb-0" style="text-align: center;">O paciente será deletado e qualquer passagem ou dado sobre ele será excluído permanentemente.</p>
+            <p class="mb-0" style="text-align: center;">a passagem será deletada e qualquer dado sobre ela será excluído permanentemente.</p>
         </blockquote>
-        <figcaption class="blockquote-footer" style="text-align: center;font-size:30px;font-weight: bold;">Paciente:{{object.nome}}</figcaption>
     </figure>
     <form style="text-align: center;" method="post">{% csrf_token %}
         <button class="btn btn-primary" type="submit" style="background: rgb(255,42,42);border-color: rgb(0,0,0);box-shadow: 2px 3px 3px rgb(0,0,0);">Deletar</button>

@@ -3,6 +3,6 @@
   "banco": "psicomotricidade",
   "usuario": "postgres",
   "senha": "Post!125XCv",
-  "ip": "172.16.5.250",
-  "porta": "5432"
+  "ip": "localhost",
+  "porta": "5433"
 }

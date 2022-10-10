@@ -28,8 +28,8 @@ def separa_por_passagens(df):
 
 def executa_dataframes_e_graficos(id_paciente):
     # excluir e criar a pasta 'media' para alocar as imagens dos graficos
-    shutil.rmtree('psicomotricidade/media_graph')
-    os.mkdir('psicomotricidade/media_graph')
+    shutil.rmtree('media_graph')
+    os.mkdir('media_graph')
 
     # --------------- Gera os Dataframes já filtrados -----------------------
     lista_todos_topicos = unidades_funcionais().topicos(id_paciente)
@@ -162,8 +162,8 @@ def executa_dataframes_e_graficos(id_paciente):
 
 # tabela goodnough
 def tabela_goodnough(data_nascimento, dataframe):
-    shutil.rmtree('psicomotricidade/media_goodnough')
-    os.mkdir('psicomotricidade/media_goodnough')
+    shutil.rmtree('media_goodnough')
+    os.mkdir('media_goodnough')
 
     lista_pontuacoes = []
     lista_datas_avaliacoes = []
@@ -339,5 +339,5 @@ def tabela_goodnough(data_nascimento, dataframe):
             b=0
         ),
     )
-    fig.write_image("psicomotricidade/media_goodnough/goodnough.webp")
+    fig.write_image("media_goodnough/goodnough.webp")
     return fig.to_html(include_plotlyjs='cdn')

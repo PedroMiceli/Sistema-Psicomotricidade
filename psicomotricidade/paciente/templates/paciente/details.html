@@ -33,6 +33,11 @@
            title="Editar">
             <i class="fas fa-user-edit mr-2"></i><strong>Editar</strong>
         </a>
+        <a class="float-right btn btn-light text-black-50" href="{% url 'delete-paciente' paciente.pk %}"
+           title="Deletar">
+            <i class="fa fa-trash mr-2"></i><strong>Deletar</strong>
+        </a>
+
         <h2>{{ object.nome }}</h2>
     </div>
     <div class="card-body">
@@ -55,6 +60,9 @@
                                 Status: Inativo
                                 {% endif %}
                             </p>
+                        </li>
+                        <li>
+                            <p title="Endereço">Endereço: {{ object.endereco }}</p>
                         </li>
                     </ul>
                 </blockquote>

@@ -3,6 +3,8 @@ import plotly.graph_objects as go
 
 def grafico_de_linha(dataframe, nome, ordem, nome_img):
     try:
+
+
         categorias = dataframe[0].columns.values
 
         ordem = ordem
@@ -66,69 +68,73 @@ def grafico_de_linha(dataframe, nome, ordem, nome_img):
 
 def grafico_de_barra(dataframe, nome, ordem, nome_img):
     try:
-        categorias = dataframe[0].columns.values
+        if dataframe.empty:
+            print('Vaziiioooooooooooooooooooo')
+        else:
+            categorias = dataframe[0].columns.values
 
-        fig = go.Figure()
-        conta = 0
-        for i in dataframe:
+            fig = go.Figure()
+            conta = 0
+            for i in dataframe:
 
-            valores = None
-            for itens in i.values:
-                valores = itens
+                valores = None
+                for itens in i.values:
+                    valores = itens
 
-            fig.add_trace(go.Bar(
-                x=categorias,
-                y=valores,
-                name=f'{conta + 1}ª avaliação',
-                marker={"line": {"width": 3, "color": "rgb(0,0,0)"}}
-            ))
-            conta += 1
+                fig.add_trace(go.Bar(
+                    x=categorias,
+                    y=valores,
+                    name=f'{conta + 1}ª avaliação',
+                    marker={"line": {"width": 3, "color": "rgb(0,0,0)"}}
+                ))
+                conta += 1
 
-        fig.update_layout(
-            autosize=False,
-            width=800,
-            height=450,
-            template='xgridoff',
-            margin_l=170,
-            bargap=0.30,
-            bargroupgap=0.3,
+            fig.update_layout(
+                autosize=False,
+                width=800,
+                height=450,
+                template='xgridoff',
+                margin_l=170,
+                bargap=0.30,
+                bargroupgap=0.3,
 
-            legend=dict(
-                font_size=15,
-            ),
-
-            xaxis=dict(
-                showgrid=True,
-                showspikes=False,
-
-            ),
-            xaxis_tickfont=dict(size=18),
-
-            yaxis=dict(
-                showgrid=True,
-                tickmode='linear',
-                autorange=False,
-                zeroline=True,
-                categoryorder='array',
-                categoryarray=ordem,
-            ),
-            title=dict(
-                font=dict(
-                    size=26,
-                    color='black'
+                legend=dict(
+                    font_size=15,
                 ),
-                text=f'{nome}'
-            )
-        )
 
-        fig.write_image(f"psicomotricidade/media_graph/{nome_img}.webp")
-        return fig.to_html(include_plotlyjs='cdn')
+                xaxis=dict(
+                    showgrid=True,
+                    showspikes=False,
+
+                ),
+                xaxis_tickfont=dict(size=18),
+
+                yaxis=dict(
+                    showgrid=True,
+                    tickmode='linear',
+                    autorange=False,
+                    zeroline=True,
+                    categoryorder='array',
+                    categoryarray=ordem,
+                ),
+                title=dict(
+                    font=dict(
+                        size=26,
+                        color='black'
+                    ),
+                    text=f'{nome}'
+                )
+            )
+
+            fig.write_image(f"media_graph/{nome_img}.webp")
+            return fig.to_html(include_plotlyjs='cdn')
     except:
         return ""
 
 
 def grafico_de_barra_numeros_baixos(dataframe, nome, nome_img):
     try:
+
         categorias = dataframe[0].columns.values
 
         fig = go.Figure()
@@ -179,7 +185,7 @@ def grafico_de_barra_numeros_baixos(dataframe, nome, nome_img):
             )
         )
 
-        fig.write_image(f"psicomotricidade/media_graph/{nome_img}.webp")
+        fig.write_image(f"media_graph/{nome_img}.webp")
         return fig.to_html(include_plotlyjs='cdn')
     except:
         return ""
@@ -187,57 +193,59 @@ def grafico_de_barra_numeros_baixos(dataframe, nome, nome_img):
 
 def grafico_de_barra_numeros_altos(dataframe, nome, nome_img):
     try:
-        categorias = dataframe[0].columns.values
 
-        fig = go.Figure()
-        conta = 0
-        for i in dataframe:
 
-            valores = None
-            for itens in i.values:
-                valores = itens
+            categorias = dataframe[0].columns.values
 
-            fig.add_trace(go.Bar(
-                x=categorias,
-                y=valores,
-                name=f'{conta + 1}ª avaliação',
-                marker={"line": {"width": 3, "color": "rgb(0,0,0)"}}
-            ))
-            conta += 1
+            fig = go.Figure()
+            conta = 0
+            for i in dataframe:
 
-        fig.update_layout(
-            autosize=False,
-            width=800,
-            height=450,
-            template='xgridoff',
-            margin_l=170,
-            bargap=0.30,
-            bargroupgap=0.3,
+                valores = None
+                for itens in i.values:
+                    valores = itens
 
-            legend=dict(
-                font_size=15,
-            ),
+                fig.add_trace(go.Bar(
+                    x=categorias,
+                    y=valores,
+                    name=f'{conta + 1}ª avaliação',
+                    marker={"line": {"width": 3, "color": "rgb(0,0,0)"}}
+                ))
+                conta += 1
 
-            xaxis=dict(
-                showgrid=True,
-                showspikes=False,
+            fig.update_layout(
+                autosize=False,
+                width=800,
+                height=450,
+                template='xgridoff',
+                margin_l=170,
+                bargap=0.30,
+                bargroupgap=0.3,
 
-            ),
-            xaxis_tickfont=dict(size=18),
-            yaxis=dict(
-                showgrid=True,
-            ),
-            title=dict(
-                font=dict(
-                    size=26,
-                    color='black'
+                legend=dict(
+                    font_size=15,
                 ),
-                text=f'{nome}'
-            )
-        )
 
-        fig.write_image(f"psicomotricidade/media_graph/{nome_img}.webp")
-        return fig.to_html(include_plotlyjs='cdn')
+                xaxis=dict(
+                    showgrid=True,
+                    showspikes=False,
+
+                ),
+                xaxis_tickfont=dict(size=18),
+                yaxis=dict(
+                    showgrid=True,
+                ),
+                title=dict(
+                    font=dict(
+                        size=26,
+                        color='black'
+                    ),
+                    text=f'{nome}'
+                )
+            )
+
+            fig.write_image(f"media_graph/{nome_img}.webp")
+            return fig.to_html(include_plotlyjs='cdn')
     except:
         return ""
 
@@ -268,7 +276,7 @@ def grafico_de_barra_numeros_altos_fig_humana(dataframe, nome, nome_img):
 
         conta = 0
         for i in v:
-            print(conta)
+
             fig.add_trace(go.Bar(
                 x=c[conta],
                 y=v[conta],
@@ -308,7 +316,7 @@ def grafico_de_barra_numeros_altos_fig_humana(dataframe, nome, nome_img):
             )
         )
 
-        fig.write_image(f"psicomotricidade/media_graph/{nome_img}.webp")
+        fig.write_image(f"media_graph/{nome_img}.webp")
         return fig.to_html(include_plotlyjs='cdn')
     except:
         return ""

@@ -9,9 +9,10 @@ class Paciente(models.Model):
     nome = models.CharField(max_length=50, verbose_name='Nome')
     data_nascimento = models.DateField(verbose_name='Data de Nascimento')
     responsavel = models.CharField(max_length=50, verbose_name='Responsável', null=True, blank=True)
-    cpf_responsavel = models.CharField(max_length=14,
+    cpf_responsavel = models.CharField(max_length=15,
                                        verbose_name='Telefone do Responsável', null=True, blank=True)
     ativo = models.BooleanField(default=True)
+    endereco = models.CharField(max_length=100,verbose_name='endereço do paciente', null=True, blank=True)
 
     def __str__(self):
         return f"{self.nome} | {self.data_nascimento.strftime('%d/%m/%Y')}"
@@ -20,10 +21,9 @@ class Paciente(models.Model):
         db_table = 'pacientes'
         ordering = ['nome', 'data_nascimento']
 
-
 # **** ANAMNESE ****
 class Anamnese(models.Model):
-    paciente = models.ForeignKey(Paciente,unique=True, on_delete=models.PROTECT, verbose_name="Paciente")
+    paciente = models.ForeignKey(Paciente,unique=True, on_delete=models.CASCADE, verbose_name="Paciente")
     data_anamnese = models.DateField(verbose_name="Data de Anamnese", default=datetime.date.today())
 
     # Identificação
@@ -239,7 +239,8 @@ OPTIONS_QUEBRA_CABECA = (
 
 
 class PrimeiraUnidadeFuncional(models.Model):
-    paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT, verbose_name="Paciente")
+    id = models.AutoField(primary_key=True)
+    paciente = models.ForeignKey(Paciente, models.CASCADE, verbose_name="Paciente")
     data_avaliacao = models.DateField(verbose_name="Data de Avaliação", default=datetime.date.today())
 
     # TONICIDADE
@@ -263,23 +264,14 @@ class PrimeiraUnidadeFuncional(models.Model):
                                                   verbose_name="Membros superiores", null=True, blank=True)
     obs_balanco_membros_superiores = models.TextField(max_length=1000, null=True, blank=True,
                                                       verbose_name="Observações referente aos membros inferiores")
-    # balanco_membros_inferiores = models.CharField(max_length=21, choices=OPTIONS_BALANCO_PASSIVO,
-    #                                               verbose_name="Membros inferiores", null=True, blank=True)
-    # obs_balanco_membros_inferiores = models.TextField(max_length=1000, null=True, blank=True,
-    #                                                   verbose_name="Observações referente aos membros inferiores")
-
     # paratonia
     paratonia_membros_superiores = models.CharField(max_length=13, choices=OPTIONS_PARATONIA,
                                                     verbose_name="Membros superiores", null=True, blank=True)
-    # paratonia_membros_inferiores = models.CharField(max_length=13, choices=OPTIONS_PARATONIA,
-    #                                                 verbose_name="Membros inferiores", null=True, blank=True)
-
     # diadococinesia
     pronacao = models.CharField(max_length=1, choices=OPTIONS_PERFIL_CHOICES, verbose_name="Pronação", null=True,
                                 blank=True)
     supinacao = models.CharField(max_length=1, choices=OPTIONS_PERFIL_CHOICES, verbose_name="Supinação", null=True,
                                  blank=True)
-
     # sincinesia
     tonico = models.CharField(max_length=13, choices=OPTIONS_SINCINESIA, verbose_name="Tônico", null=True, blank=True)
     obs_tonico = models.TextField(max_length=1000, null=True, blank=True,
@@ -324,7 +316,8 @@ class PrimeiraUnidadeFuncional(models.Model):
 
 
 class SegundaUnidadeFuncional(models.Model):
-    paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT, verbose_name="Paciente")
+    id = models.AutoField(primary_key=True)
+    paciente = models.ForeignKey(Paciente, models.CASCADE, verbose_name="Paciente")
     data_avaliacao = models.DateField(verbose_name="Data de Avaliação", default=datetime.date.today())
 
     # NOÇÃO CORPORAL
@@ -399,7 +392,8 @@ class SegundaUnidadeFuncional(models.Model):
 
 
 class TerceiraUnidadeFuncional(models.Model):
-    paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT, verbose_name="Paciente")
+    id = models.AutoField(primary_key=True)
+    paciente = models.ForeignKey(Paciente, models.CASCADE, verbose_name="Paciente")
     data_avaliacao = models.DateField(verbose_name="Data de Avaliação", default=datetime.date.today())
 
     # PRAXIA GLOBAL
@@ -474,7 +468,8 @@ class TerceiraUnidadeFuncional(models.Model):
 
 
 class DesenhoFiguraHumana(models.Model):
-    paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT, verbose_name="Paciente")
+    id = models.AutoField(primary_key=True)
+    paciente = models.ForeignKey(Paciente, models.CASCADE, verbose_name="Paciente")
     data_avaliacao = models.DateField(verbose_name="Data de Avaliação", default=datetime.date.today())
 
     # desenho da figura humana
@@ -543,7 +538,8 @@ class DesenhoFiguraHumana(models.Model):
 
 
 class Conclusao(models.Model):
-    paciente = models.ForeignKey(Paciente,unique=True, on_delete=models.PROTECT, verbose_name="Paciente")
+    id = models.AutoField(primary_key=True)
+    paciente = models.ForeignKey(Paciente,unique=True, on_delete=models.CASCADE, verbose_name="Paciente")
     data_conclusao = models.DateField(verbose_name="Data da Conclusão", default=datetime.date.today())
     # -------------------- Aspectos psico cognitivos e afetivos ----------
     psico_afetivo = models.TextField(max_length=500, verbose_name="Aspectos Psico-Afetivos", null=True, blank=True)
