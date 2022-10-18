@@ -1067,6 +1067,8 @@ def render_pdf_view(request, pk):
     # textos do relatório
     relatorio = relatorio_textos().df_unidade_relatorio(pk)
 
+
+
     context = {
         # ---------------------------- Informações do Paciente ----------------------
         'nome': paciente_nome[0][0],
@@ -1078,6 +1080,10 @@ def render_pdf_view(request, pk):
         'terceira_unidade': terceira_unidade,
         'desenho_figura_humana': desenhos_figura_humana,
         'conclusao': conclusao,
+        #---------------------------
+
+
+
 
         # ---------------------------- Relatório ----------------------
         # ---------------------------- Primeira Unidade Funcional ----------------------
@@ -1219,6 +1225,79 @@ def render_pdf_view(request, pk):
         'txt_colorir_graficamente': relatorio['colorir_graficamente'][1],
         'json_colorir_graficamente': relatorio['colorir_graficamente'][0],
     }
+
+
+    #-------------Confirmação dos itens das passagens para adicionar caso tenha ou nao --------
+
+    for passagem in primeira_unidade:
+        if passagem.extensibilidade_membros_superiores:
+            context.update({'extensibilidade_membros_superiores':passagem.extensibilidade_membros_superiores})
+        if passagem.extensibilidade_membros_inferiores:
+            context.update({'extensibilidade_membros_inferiores': passagem.extensibilidade_membros_inferiores})
+        if passagem.paratonia_membros_superiores:
+            context.update({'paratonia_membros_superiores': passagem.paratonia_membros_superiores})
+        if passagem.pronacao:
+            context.update({'pronacao': passagem.pronacao})
+        if passagem.supinacao:
+            context.update({'supinacao': passagem.supinacao})
+        if passagem.tonico:
+            context.update({'tonico': passagem.tonico})
+        if passagem.tonico_cinetico:
+            context.update({'tonico_cinetico': passagem.tonico_cinetico})
+        if passagem.imobilidade:
+            context.update({'imobilidade': passagem.imobilidade})
+
+    for passagem in segunda_unidade:
+        if passagem.nomeia_pontos_tateis:
+            context.update({'nomeia_pontos_tateis':passagem.nomeia_pontos_tateis})
+        if passagem.imitacao_de_gestos:
+            context.update({'imitacao_de_gestos': passagem.imitacao_de_gestos})
+        if passagem.organizacao_perceptiva:
+            context.update({'organizacao_perceptiva': passagem.organizacao_perceptiva})
+        if passagem.lateralizacao_ocular:
+            context.update({'lateralizacao_ocular': passagem.lateralizacao_ocular})
+        if passagem.lateralizacao_manual:
+            context.update({'lateralizacao_manual': passagem.lateralizacao_manual})
+        if passagem.lateralizacao_pedal:
+            context.update({'lateralizacao_pedal': passagem.lateralizacao_pedal})
+        if passagem.estruturacao_dinamica_espacial:
+            context.update({'estruturacao_dinamica_espacial': passagem.estruturacao_dinamica_espacial})
+        if passagem.representacao_topografica:
+            context.update({'representacao_topografica': passagem.representacao_topografica})
+        if passagem.codificacao:
+            context.update({'codificacao': passagem.codificacao})
+        if passagem.decodificacao:
+            context.update({'decodificacao': passagem.decodificacao})
+        if passagem.transcodificacao_auditiva:
+            context.update({'transcodificacao_auditiva': passagem.transcodificacao_auditiva})
+        if passagem.transcodificacao_visual:
+            context.update({'transcodificacao_visual': passagem.transcodificacao_visual})
+
+    for passagem in terceira_unidade:
+        if passagem.jogar_quatro_bolas:
+            context.update({'jogar_quatro_bolas':passagem.jogar_quatro_bolas})
+        if passagem.agarrar_bola_de_tenis:
+            context.update({'agarrar_bola_de_tenis': passagem.agarrar_bola_de_tenis})
+        if passagem.quatro_chutes_ao_gol:
+            context.update({'quatro_chutes_ao_gol': passagem.quatro_chutes_ao_gol})
+        if passagem.dissociacao_membros_superiores:
+            context.update({'dissociacao_membros_superiores': passagem.dissociacao_membros_superiores})
+        if passagem.dissociacao_membros_inferiores:
+            context.update({'dissociacao_membros_inferiores': passagem.dissociacao_membros_inferiores})
+        if passagem.agilidade:
+            context.update({'agilidade': passagem.agilidade})
+        if passagem.pulseira_de_clipes:
+            context.update({'pulseira_de_clipes': passagem.pulseira_de_clipes})
+        if passagem.tamborilar:
+            context.update({'tamborilar': passagem.tamborilar})
+        if passagem.velocidade_precisao:
+            context.update({'velocidade_precisao': passagem.velocidade_precisao})
+        if passagem.tracado_vertical:
+            context.update({'tracado_vertical': passagem.tracado_vertical})
+
+
+
+
 
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')

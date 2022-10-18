@@ -89,9 +89,9 @@
 <body>
 
 <div class="info-paciente">
-    <h1>Paciente: {{ nome }}</h1>
-    <h2>{{ idade }}</h2>
+    <h1>Paciente: {{ nome }}  | Idade:  {{ idade }}</h1>
 </div>
+{% if primeira_unidade %}
 <div class="datas-avaliacoes">
     <span>
         <strong>Avaliações Referentes á primeira Unidade Funcional:</strong>
@@ -103,16 +103,20 @@
     --
     {% endfor %}
 </div>
+{% endif %}
+{% if segunda_unidade %}
 <div class="datas-avaliacoes">
                 <span>
                     <strong>Avaliações Referentes á Segunda Unidade Funcional:</strong>
                 {% for segunda in segunda_unidade %}
                     {{ segunda.data_avaliacao }};
                 </span>
-    {% empty %}
-    --
-    {% endfor %}
+                {% empty %}
+                    --
+                {% endfor %}
 </div>
+{% endif %}
+{% if terceira_unidade %}
 <div class="datas-avaliacoes">
                 <span>
                     <strong>Avaliações Referentes á Terceira Unidade Funcional:</strong>
@@ -123,6 +127,7 @@
     --
     {% endfor %}
 </div>
+{% endif %}
 
 <main class="main">
 
@@ -130,11 +135,9 @@
     {%if primeira_unidade%}
     <section class="section-unidades-funcionais">
         <hr>
-        <h2>Aspectos da Tonicidade</h2>
-        <div>
-
-            <div class="txt-relatorio">
-
+        {% if extensibilidade_membros_superiores %}
+        <div class="txt-relatorio">
+            <h2>Aspectos da Extensibilidade dos membros superiores</h2>
                 <h5>Extensibilidade dos membros superiores</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_extensibilidade_membros_superiores }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_extensibilidade_membros_superiores }}</p>
@@ -142,229 +145,258 @@
 
 
                 {% for primeira in primeira_unidade %}
-                {% if primeira.obs_extensibilidade_membros_superiores %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ primeira.obs_extensibilidade_membros_superiores }}</p>{% endif %}
+                {% if primeira.obs_extensibilidade_membros_superiores %}
+                <p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ primeira.obs_extensibilidade_membros_superiores }}</p>
+                {% endif %}
                 {% endfor %}
-
-
+            </div>
+        {%endif%}
+        {%if extensibilidade_membros_inferiores%}
+        <div class="txt-relatorio">
+            <h2>Aspectos da Extensibilidade dos membros inferiores</h2>
                 <h5>Extensibilidade dos membros inferiores</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_extensibilidade_membros_inferiores }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_extensibilidade_membros_inferiores }}</p>
 
 
                 {% for primeira in primeira_unidade %}
-                {% if primeira.obs_extensibilidade_membros_inferiores %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ primeira.obs_extensibilidade_membros_inferiores }}</p>{% endif %}
+                {% if primeira.obs_extensibilidade_membros_inferiores %}
+                <p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ primeira.obs_extensibilidade_membros_inferiores }}</p>
+                {% endif %}
                 {% endfor %}
 
             </div>
+        {%endif%}
+        {% if paratonia_membros_superiores %}
+        <div class="txt-relatorio">
+            <h5>Paratonia nos membros superiores</h5>
+            <p><strong>Relativo à última avaliação:</strong> {{ json_paratonia_membros_superiores }}</p>
         </div>
-        <div>
-
-            <div class="txt-relatorio">
-                <h5>Paratonia nos membros superiores</h5>
-                <p><strong>Relativo à última avaliação:</strong> {{ json_paratonia_membros_superiores }}</p>
-            </div>
-        </div>
-
-        <div>
-
-            <div class="txt-relatorio">
+        {%endif%}
+        {%if pronacao%}
+        <div class="txt-relatorio">
                 <h5>Diadococinesia na Pronação</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_pronacao }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_pronacao }}</p>
-
+            </div>
+        {%endif%}
+        {% if supinacao%}
+        <div class="txt-relatorio">
                 <h5>Diadococinesia na Supinação</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_supinacao }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_supinacao }}</p>
             </div>
-        </div>
-        <div>
-            <div class="txt-relatorio">
+        {%endif%}
+        {% if tonico %}
+        <div class="txt-relatorio">
                 <h5>Sincinesia em Movimento Tônico</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_tonico }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_tonico }}</p>
 
 
                 {% for primeira in primeira_unidade %}
-                {% if primeira.obs_tonico %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ primeira.obs_tonico }}</p>{% endif %}
+                {% if primeira.obs_tonico %}
+                <p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ primeira.obs_tonico }}</p>
+                {% endif %}
                 {% endfor %}
-
+            </div>
+        {%endif%}
+        {% if tonico_cinetico %}
+        <div class="txt-relatorio">
                 <h5>Sincinesia em Movimento Tônico-cinético</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_tonico_cinetico }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_tonico_cinetico }}</p>
 
 
                 {% for primeira in primeira_unidade %}
-                {% if primeira.obs_tonico_cinetico %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ primeira.obs_tonico_cinetico }}</p>{% endif %}
+                {% if primeira.obs_tonico_cinetico %}
+                <p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ primeira.obs_tonico_cinetico }}</p>
+                {% endif %}
                 {% endfor %}
-            </div>
+
         </div>
-        <h2>Aspectos da Equilibração</h2>
-        <div>
-            <div class="txt-relatorio">
+        {%endif%}
+        {% if imobilidade%}
+        <div class="txt-relatorio">
+            <h2>Aspectos da Equilibração</h2>
                 <h5>Imobilidade</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_imobilidade }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_imobilidade }}</p>
 
-
                 {% for primeira in primeira_unidade %}
-                {% if primeira.obs_imobilidade %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ primeira.obs_imobilidade }}</p>{% endif %}
+                {% if primeira.obs_imobilidade %}
+                <p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ primeira.obs_imobilidade }}
+                </p>{% endif %}
                 {% endfor %}
-            </div>
         </div>
+        {%endif%}
     </section>
     {%endif%}
 
     <!-- Segunda unidade -->
-    {%if segunda_unidade%}
+    {% if segunda_unidade %}
     <section class="section-unidades-funcionais">
-
-        <h2>Aspectos da Noção Corporal</h2>
+        {% if nomeia_pontos_tateis %}
         <div>
-            <img src="media_graph/cinestesia.webp">
-
-            <div class="txt-relatorio">
-                <h5>Nomeação de pontos táteis</h5>
-                <p><strong>Período das avaliações:</strong> {{ txt_nomeia_pontos_tateis }}</p>
-                <p><strong>Relativo à última avaliação:</strong> {{ json_nomeia_pontos_tateis }}</p>
-            </div>
-        </div>
-
-        <div>
-            <img src="media_graph/imitacao_de_gestos.webp">
-            <div class="txt-relatorio">
-            Bergès & Lézine, 1978 - imitação de gestos tabela base quantitativa
-            </div>
-
-            <div class="txt-relatorio">
-                <h5>Imitação de gestos</h5>
-                <p><strong>Período das avaliações:</strong> {{ txt_imitacao_de_gestos }}</p>
-                <p><strong>Relativo à última avaliação:</strong> {{ json_imitacao_de_gestos }}</p>
-
-
-                {% for segunda in segunda_unidade %}
-                {% if segunda.obs_imitacao_de_gestos %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ segunda.obs_imitacao_de_gestos }}</p>{% endif %}
-                {% endfor %}
-            </div>
-
-        </div>
-
-        <div>
-            <div>
-
-                <!-- Tablea goodenough -------------------  -->
-                <h4>Tabela montada baseada nos exercicios da figura humana:</h4>
-                                <div class="table-goodnough">
-                                    <img src="media_goodnough/goodnough.webp">
-                                </div>
-                <!--    Fim tabela Tablea goodenough -------------------  -->
-
-                <!-- Fig Humana ------------------- -->
-                <img src="media_graph/figura_humana.webp">
+                <h2>Aspectos da Noção Corporal</h2>
+                <img src="media_graph/cinestesia.webp">
                 <div class="txt-relatorio">
-
-
-                        {% for figura in desenho_figura_humana %}
-                        {% if segunda.obs_desenho_figura_humana %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ figura.obs_desenho_figura_humana }}</p>{% endif %}
-                        {% endfor %}
-                    {% else %}
-
+                    <h5>Nomeação de pontos táteis</h5>
+                    <p><strong>Período das avaliações:</strong> {{ txt_nomeia_pontos_tateis }}</p>
+                    <p><strong>Relativo à última avaliação:</strong> {{ json_nomeia_pontos_tateis }}</p>
                 </div>
-                 <!-- ----------------------Fim FigHumana   ------------------------     -->
+        </div>
+        {%endif%}
+        {%if imitacao_de_gestos%}
+        <div>
+                <img src="media_graph/imitacao_de_gestos.webp">
 
+
+                <div class="txt-relatorio">
+                    <h5>Imitação de gestos</h5>
+                    <p><strong>Período das avaliações:</strong> {{ txt_imitacao_de_gestos }}</p>
+                    <p><strong>Relativo à última avaliação:</strong> {{ json_imitacao_de_gestos }}</p>
+
+
+                    {% for segunda in segunda_unidade %}
+                    {% if segunda.obs_imitacao_de_gestos %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ segunda.obs_imitacao_de_gestos }}</p>{% endif %}
+                    {% endfor %}
+                </div>
 
             </div>
-        </div>
-
-        <h2>Aspectos da Lateralização</h2>
-        <div>
-
-
-            <div class="txt-relatorio">
+        {%endif%}
+        {%if lateralizacao_ocular %}
+        <div class="txt-relatorio">
+                <h2>Aspectos da Lateralização</h2>
                 <h5>Dominancia lateral funcional ocular</h5>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_lateralizacao_ocular }}</p>
-
-                <h5>Dominancia lateral funcional manual</h5>
-                <p><strong>Relativo à última avaliação:</strong> {{ json_lateralizacao_manual }}</p>
-
-                <h5>Dominancia lateral funcional pedal</h5>
-                <p><strong>Relativo à última avaliação:</strong> {{ json_lateralizacao_pedal }}</p>
-
-
-                {% for segunda in segunda_unidade %}
-                {% if segunda.obs_lateralizacoes %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ segunda.obs_lateralizacoes }}</p>{% endif %}
-                {% endfor %}
             </div>
+        {% endif %}
+        {% if lateralizacao_manual %}
+        <div class="txt-relatorio">
+            <h5>Dominancia lateral funcional manual</h5>
+            <p><strong>Relativo à última avaliação:</strong> {{ json_lateralizacao_manual }}</p>
         </div>
-
-        <h2>Aspectos da estruturação Espaço Temporal</h2>
+        {% endif %}
+        {% if lateralizacao_pedal %}
+        <div class="txt-relatorio">
+            <h5>Dominancia lateral funcional pedal</h5>
+            <p><strong>Relativo à última avaliação:</strong> {{ json_lateralizacao_pedal }}</p>
+        </div>
+        {% endif %}
+        <div class="txt-relatorio">
+            {% for segunda in segunda_unidade %}
+            {% if segunda.obs_lateralizacoes %}
+            <p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ segunda.obs_lateralizacoes }}</p>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {%if organizacao_perceptiva%}
         <div>
-
-            <div class="txt-relatorio">
-                <h5>Organização perceptiva</h5>
-                <p><strong>Período das avaliações:</strong> {{ txt_organizacao_perceptiva }}</p>
-                <p><strong>Relativo à última avaliação:</strong> {{ json_organizacao_perceptiva }}</p>
+                <h2>Aspectos da estruturação Espaço Temporal</h2>
+                <div class="txt-relatorio">
+                    <h5>Organização perceptiva</h5>
+                    <p><strong>Período das avaliações:</strong> {{ txt_organizacao_perceptiva }}</p>
+                    <p><strong>Relativo à última avaliação:</strong> {{ json_organizacao_perceptiva }}</p>
+                </div>
+        </div>
+        {%endif%}
+        {%if estruturacao_dinamica_espacial%}
+        <div>
+                <div class="txt-relatorio">
+                    <h5>Estruturação dinâmica espacial</h5>
+                    <p><strong>Período das avaliações:</strong> {{ txt_estruturacao_dinamica }}</p>
+                    <p><strong>Relativo à última avaliação:</strong> {{ json_estruturacao_dinamica }}</p>
+                </div>
+        </div>
+        {%endif%}
+        {%if representacao_topografica%}
+        <div>
+                <div class="txt-relatorio">
+                    <h5>Representação topográfica</h5>
+                    <p><strong>Período das avaliações:</strong> {{ txt_representacao_topografica }}</p>
+                    <p><strong>Relativo à última avaliação:</strong> {{ json_representacao_topografica }}</p>
+                </div>
             </div>
-        </div>
-
-        <div>
-            <div class="txt-relatorio">
-                <h5>Estruturação dinâmica espacial</h5>
-                <p><strong>Período das avaliações:</strong> {{ txt_estruturacao_dinamica }}</p>
-                <p><strong>Relativo à última avaliação:</strong> {{ json_estruturacao_dinamica }}</p>
-            </div>
-        </div>
-
-        <div>
-            <div class="txt-relatorio">
-                <h5>Representação topográfica</h5>
-                <p><strong>Período das avaliações:</strong> {{ txt_representacao_topografica }}</p>
-                <p><strong>Relativo à última avaliação:</strong> {{ json_representacao_topografica }}</p>
-            </div>
-        </div>
-
-        <div>
+        {%endif%}
+        <div class="txt-relatorio">
             <img src="media_graph/estruturacao_ritmica.webp">
-            <div class="txt-relatorio">
-            Stambak, M. (1972). Trois Épreuves de Rytme.
-            </div>
+        </div>
+        {% if codificacao %}
+        <div class="txt-relatorio">
+            <h5>Codificação</h5>
+            <p><strong>Período das avaliações:</strong> {{ txt_codificacao }}</p>
+            <p><strong>Relativo à última avaliação:</strong> {{ json_codificacao }}</p>
+        </div>
+        {% endif %}
+        {% if decodificacao%}
+        <div class="txt-relatorio">
+            <h5>Decodificação</h5>
+            <p><strong>Período das avaliações:</strong> {{ txt_decodificacao }}</p>
+            <p><strong>Relativo à última avaliação:</strong> {{ json_decodificacao }}</p>
+        </div>
+        {% endif %}
+        {% if transcodificacao_auditiva %}
+        <div class="txt-relatorio">
+            <h5>Transcodificação auditiva</h5>
+            <p><strong>Período das avaliações:</strong> {{ txt_transcodificacao_auditiva }}</p>
+            <p><strong>Relativo à última avaliação:</strong> {{ json_transcodificacao_auditiva }}</p>
+        </div>
+        {% endif %}
+        {% if transcodificacao_visual%}
+        <div class="txt-relatorio">
+            <h5>Transcodificação visual</h5>
+            <p><strong>Período das avaliações:</strong> {{ txt_transcodificacao_visual }}</p>
+            <p><strong>Relativo à última avaliação:</strong> {{ json_transcodificacao_visual }}</p>
+        </div>
+        {% endif %}
+        <div class="txt-relatorio">
+                    {% for segunda in segunda_unidade %}
+                    {% if segunda.obs_estruturacao_ritmica %}
+                    <p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ segunda.obs_estruturacao_ritmica }}</p>
+                    {% endif %}
+                    {% endfor %}
+        </div>
 
-            <div class="txt-relatorio">
-                <h5>Codificação</h5>
-                <p><strong>Período das avaliações:</strong> {{ txt_codificacao }}</p>
-                <p><strong>Relativo à última avaliação:</strong> {{ json_codificacao }}</p>
 
-                <h5>Decodificação</h5>
-                <p><strong>Período das avaliações:</strong> {{ txt_decodificacao }}</p>
-                <p><strong>Relativo à última avaliação:</strong> {{ json_decodificacao }}</p>
+    </section>
+    {% endif %}
 
-                <h5>Transcodificação auditiva</h5>
-                <p><strong>Período das avaliações:</strong> {{ txt_transcodificacao_auditiva }}</p>
-                <p><strong>Relativo à última avaliação:</strong> {{ json_transcodificacao_auditiva }}</p>
+    <!-- Figura Humana -->
+    {% if desenho_figura_humana %}
+    <section class="section-unidades-funcionais">
+        <div>
+                    <h2>Tabela montada baseada nos exercicios da figura humana:</h2>
+                                    <div class="table-goodnough">
+                                        <img src="media_goodnough/goodnough.webp">
+                                    </div>
 
-                <h5>Transcodificação visual</h5>
-                <p><strong>Período das avaliações:</strong> {{ txt_transcodificacao_visual }}</p>
-                <p><strong>Relativo à última avaliação:</strong> {{ json_transcodificacao_visual }}</p>
-
-                {% for segunda in segunda_unidade %}
-                {% if segunda.obs_estruturacao_ritmica %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ segunda.obs_estruturacao_ritmica }}</p>{% endif %}
-                {% endfor %}
-            </div>
+                    <img src="media_graph/figura_humana.webp">
+                    <div class="txt-relatorio">
+                        {% for figura in desenho_figura_humana %}
+                            {% if figura.obs_desenho_figura_humana %}
+                            <p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ figura.obs_desenho_figura_humana }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
         </div>
     </section>
-    {%endif%}
+    {% endif %}
 
     <!-- Terceira unidade -->
     {%if terceira_unidade%}
     <section class="section-unidades-funcionais">
 
-        <h2>Aspectos da Praxia Global</h2>
-        <div>
-
-            <div class="txt-relatorio">
+        {% if jogar_quatro_bolas%}
+        <div class="txt-relatorio">
+            <h2>Aspectos da Praxia Global</h2>
                 <h5>Coordenação Óculo-manual ao Jogar bolas.</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_jogar_quatro_bolas }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_jogar_quatro_bolas }}</p>
-
+            </div>
+        {% endif %}
+        {% if agarrar_bola_de_tenis%}
+        <div class="txt-relatorio">
                 <h5>Coordenação Óculo-manual ao Agarrar bolas.</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_agarrar_bola_de_tenis }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_agarrar_bola_de_tenis }}</p>
@@ -374,13 +406,9 @@
                 {%if terceira.obs_oculo_manual %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ terceira.obs_oculo_manual }}</p>{% endif %}
                 {% endfor %}
             </div>
-        </div>
-
-        <div>
-
-
-
-            <div class="txt-relatorio">
+        {% endif %}
+        {% if quatro_chutes_ao_gol%}
+        <div class="txt-relatorio">
                 <h5>Coordenação Óculo-pedal ao chutar bolas</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_quatro_chutes_ao_gol }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_quatro_chutes_ao_gol }}</p>
@@ -389,13 +417,9 @@
                 {%if terceira.obs_oculo_pedal %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ terceira.obs_oculo_pedal }}</p>{% endif %}
                 {% endfor %}
             </div>
-        </div>
-
-        <div>
-
-
-
-            <div class="txt-relatorio">
+        {% endif %}
+        {% if dissociacao_membros_superiores%}
+        <div class="txt-relatorio">
                 <h5>Dissociação dos Membros superiores</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_dissociacao_membros_superiores }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_dissociacao_membros_superiores }}</p>
@@ -403,7 +427,10 @@
                 {% for terceira in terceira_unidade %}
                 {%if terceira.obs_dissociacao_membros_superiores %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ terceira.obs_dissociacao_membros_superiores }}</p>{% endif %}
                 {% endfor %}
-
+            </div>
+        {% endif %}
+        {% if dissociacao_membros_inferiores%}
+        <div class="txt-relatorio">
                 <h5>Dissociação dos Membros inferiores</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_dissociacao_membros_inferiores }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_dissociacao_membros_inferiores }}</p>
@@ -412,21 +439,17 @@
                 {%if terceira.obs_dissociacao_membros_inferiores %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ terceira.obs_dissociacao_membros_inferiores }}</p>{% endif %}
                 {% endfor %}
             </div>
-        </div>
-
-        <div>
-
-
-            <div class="txt-relatorio">
+        {% endif %}
+        {% if agilidade%}
+        <div class="txt-relatorio">
                 <h5>Agilidade</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_agilidade }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_agilidade }}</p>
             </div>
-        </div>
-
-        <h2>Aspectos da Praxia Fina</h2>
-        <div>
-            <div class="txt-relatorio">
+        {% endif %}
+        {% if pulseira_de_clipes%}
+        <div class="txt-relatorio">
+                <h2>Aspectos da Praxia Fina</h2>
                 <h5>Aspectos especificos manuais</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_pulseira_de_clipes }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_pulseira_de_clipes }}</p>
@@ -435,11 +458,9 @@
                 {%if terceira.obs_pulseira_de_clipes %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ terceira.obs_pulseira_de_clipes }}</p>{% endif %}
                 {% endfor %}
             </div>
-        </div>
-
-        <div>
-
-            <div class="txt-relatorio">
+        {% endif %}
+        {% if tamborilar%}
+        <div class="txt-relatorio">
                 <h5>Tamborilar</h5>
                 <p><strong>Período das avaliações:</strong> {{ txt_tamborilar }}</p>
                 <p><strong>Relativo à última avaliação:</strong> {{ json_tamborilar }}</p>
@@ -448,29 +469,26 @@
                 {%if terceira.obs_tamborilar %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ terceira.obs_tamborilar }}</p>{% endif %}
                 {% endfor %}
             </div>
-        </div>
-
-
+        {% endif %}
+        {% if velocidade_precisao%}
         <div class="txt-relatorio">
             <h5>Velocidade e precisão</h5>
             <p><strong>Período das avaliações:</strong> {{ txt_velocidade_precisao }}</p>
             <p><strong>Relativo à última avaliação:</strong> {{ json_velocidade_precisao }}</p>
         </div>
-
-
-        <h2>Aspectos da Grafomotricidade</h2>
-        <div>
+        {% endif %}
+        <div class="txt-relatorio">
+            <h2>Aspectos da Grafomotricidade</h2>
             <img src="media_graph/tracados.webp">
-
-
         </div>
-
+        {% if tracado_vertical%}
         <div class="txt-relatorio">
             <h5>Observações sobre à Grafomotricidade:</h5>
             {% for terceira in terceira_unidade %}
             {% if terceira.obs_grafomotricidade %}<p><strong>Observação na {{ forloop.counter }}ª passagem: </strong>{{ terceira.obs_grafomotricidade }}</p>{% endif %}
             {% endfor %}
         </div>
+        {% endif %}
 
     </section>
     {%endif%}
@@ -555,6 +573,7 @@
         </div>
     </section>
     {%endif%}
+
     <div class="confirmacao">
         <h2>Confirmação do especialista: Denise Paranhos CBO: 190104 - CNº 21465</h2>
         <hr>
