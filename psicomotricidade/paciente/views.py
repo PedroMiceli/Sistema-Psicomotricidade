@@ -1017,6 +1017,7 @@ class RelatorioView(TemplateView):
 
 
 def render_pdf_view(request, pk):
+
     template_path = 'relatorio/relatorio_pdf.html'
 
     # nome do paciente
@@ -1055,6 +1056,7 @@ def render_pdf_view(request, pk):
     # dados sobre as unidades funcionais
     primeira_unidade = PrimeiraUnidadeFuncional.objects.all().filter(paciente=pk).order_by(
         'data_avaliacao')
+
     segunda_unidade = SegundaUnidadeFuncional.objects.all().filter(paciente=pk).order_by(
         'data_avaliacao')
     terceira_unidade = TerceiraUnidadeFuncional.objects.all().filter(paciente=pk).order_by(
@@ -1066,8 +1068,6 @@ def render_pdf_view(request, pk):
 
     # textos do relatório
     relatorio = relatorio_textos().df_unidade_relatorio(pk)
-
-
 
     context = {
         # ---------------------------- Informações do Paciente ----------------------
@@ -1226,7 +1226,6 @@ def render_pdf_view(request, pk):
         'json_colorir_graficamente': relatorio['colorir_graficamente'][0],
     }
 
-
     #-------------Confirmação dos itens das passagens para adicionar caso tenha ou nao --------
 
     for passagem in primeira_unidade:
@@ -1294,9 +1293,8 @@ def render_pdf_view(request, pk):
             context.update({'velocidade_precisao': passagem.velocidade_precisao})
         if passagem.tracado_vertical:
             context.update({'tracado_vertical': passagem.tracado_vertical})
-
-
-
+        if passagem.obs_grafomotricidade:
+            context.update({'obs_grafomotricidade': passagem.obs_grafomotricidade})
 
 
     # Create a Django response object, and specify content_type as pdf

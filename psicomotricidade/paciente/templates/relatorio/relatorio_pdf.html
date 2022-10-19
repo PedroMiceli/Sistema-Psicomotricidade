@@ -132,7 +132,7 @@
 <main class="main">
 
     <!-- Primeira unidade -->
-    {%if primeira_unidade%}
+    {%if primeira_unidade.count > 1%}
     <section class="section-unidades-funcionais">
         <hr>
         {% if extensibilidade_membros_superiores %}
@@ -231,10 +231,99 @@
         </div>
         {%endif%}
     </section>
+    {% elif primeira_unidade.count == 1 %}
+    <section class="section-unidades-funcionais">
+        <hr>
+        {% if extensibilidade_membros_superiores %}
+        <div class="txt-relatorio">
+            <h2>Aspectos da Extensibilidade dos membros superiores</h2>
+                <h5>Extensibilidade dos membros superiores</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_extensibilidade_membros_superiores }}</p>
+
+                {% for primeira in primeira_unidade %}
+                {% if primeira.obs_extensibilidade_membros_superiores %}
+                <p><strong>Observação na passagem: </strong>{{ primeira.obs_extensibilidade_membros_superiores }}</p>
+                {% endif %}
+                {% endfor %}
+            </div>
+        {%endif%}
+        {%if extensibilidade_membros_inferiores%}
+        <div class="txt-relatorio">
+            <h2>Aspectos da Extensibilidade dos membros inferiores</h2>
+                <h5>Extensibilidade dos membros inferiores</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_extensibilidade_membros_inferiores }}</p>
+
+
+                {% for primeira in primeira_unidade %}
+                {% if primeira.obs_extensibilidade_membros_inferiores %}
+                <p><strong>Observação na passagem: </strong>{{ primeira.obs_extensibilidade_membros_inferiores }}</p>
+                {% endif %}
+                {% endfor %}
+
+            </div>
+        {%endif%}
+        {% if paratonia_membros_superiores %}
+        <div class="txt-relatorio">
+            <h5>Paratonia nos membros superiores</h5>
+            <p><strong>Relativo à avaliação:</strong> {{ json_paratonia_membros_superiores }}</p>
+        </div>
+        {%endif%}
+        {%if pronacao%}
+        <div class="txt-relatorio">
+                <h5>Diadococinesia na Pronação</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_pronacao }}</p>
+            </div>
+        {%endif%}
+        {% if supinacao%}
+        <div class="txt-relatorio">
+                <h5>Diadococinesia na Supinação</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_supinacao }}</p>
+            </div>
+        {%endif%}
+        {% if tonico %}
+        <div class="txt-relatorio">
+                <h5>Sincinesia em Movimento Tônico</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_tonico }}</p>
+
+                {% for primeira in primeira_unidade %}
+                {% if primeira.obs_tonico %}
+                <p><strong>Observação na passagem: </strong>{{ primeira.obs_tonico }}</p>
+                {% endif %}
+                {% endfor %}
+            </div>
+        {%endif%}
+        {% if tonico_cinetico %}
+        <div class="txt-relatorio">
+                <h5>Sincinesia em Movimento Tônico-cinético</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_tonico_cinetico }}</p>
+
+
+                {% for primeira in primeira_unidade %}
+                {% if primeira.obs_tonico_cinetico %}
+                <p><strong>Observação na passagem: </strong>{{ primeira.obs_tonico_cinetico }}</p>
+                {% endif %}
+                {% endfor %}
+
+        </div>
+        {%endif%}
+        {% if imobilidade%}
+        <div class="txt-relatorio">
+            <h2>Aspectos da Equilibração</h2>
+                <h5>Imobilidade</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_imobilidade }}</p>
+
+                {% for primeira in primeira_unidade %}
+                {% if primeira.obs_imobilidade %}
+                <p><strong>Observação na passagem: </strong>{{ primeira.obs_imobilidade }}
+                </p>{% endif %}
+                {% endfor %}
+        </div>
+        {%endif%}
+    </section>
     {%endif%}
 
     <!-- Segunda unidade -->
-    {% if segunda_unidade %}
+    {% if segunda_unidade.count > 1 %}
     <section class="section-unidades-funcionais">
         {% if nomeia_pontos_tateis %}
         <div>
@@ -360,8 +449,125 @@
 
 
     </section>
-    {% endif %}
+    {% elif segunda_unidade.count == 1 %}
+    <section class="section-unidades-funcionais">
+        {% if nomeia_pontos_tateis %}
+        <div>
+                <h2>Aspectos da Noção Corporal</h2>
+                <img src="media_graph/cinestesia.webp">
+                <div class="txt-relatorio">
+                    <h5>Nomeação de pontos táteis</h5>
+                    <p><strong>Relativo à avaliação:</strong> {{ json_nomeia_pontos_tateis }}</p>
+                </div>
+        </div>
+        {%endif%}
+        {%if imitacao_de_gestos%}
+        <div>
+                <img src="media_graph/imitacao_de_gestos.webp">
 
+
+                <div class="txt-relatorio">
+                    <h5>Imitação de gestos</h5>
+
+                    <p><strong>Relativo à avaliação:</strong> {{ json_imitacao_de_gestos }}</p>
+
+
+                    {% for segunda in segunda_unidade %}
+                    {% if segunda.obs_imitacao_de_gestos %}<p><strong>Observação na passagem: </strong>{{ segunda.obs_imitacao_de_gestos }}</p>{% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+        {%endif%}
+        {%if lateralizacao_ocular %}
+        <div class="txt-relatorio">
+                <h2>Aspectos da Lateralização</h2>
+                <h5>Dominancia lateral funcional ocular</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_lateralizacao_ocular }}</p>
+            </div>
+        {% endif %}
+        {% if lateralizacao_manual %}
+        <div class="txt-relatorio">
+            <h5>Dominancia lateral funcional manual</h5>
+            <p><strong>Relativo à avaliação:</strong> {{ json_lateralizacao_manual }}</p>
+        </div>
+        {% endif %}
+        {% if lateralizacao_pedal %}
+        <div class="txt-relatorio">
+            <h5>Dominancia lateral funcional pedal</h5>
+            <p><strong>Relativo à avaliação:</strong> {{ json_lateralizacao_pedal }}</p>
+        </div>
+        {% endif %}
+        <div class="txt-relatorio">
+            {% for segunda in segunda_unidade %}
+            {% if segunda.obs_lateralizacoes %}
+            <p><strong>Observação na passagem: </strong>{{ segunda.obs_lateralizacoes }}</p>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {%if organizacao_perceptiva%}
+        <div>
+                <h2>Aspectos da estruturação Espaço Temporal</h2>
+                <div class="txt-relatorio">
+                    <h5>Organização perceptiva</h5>
+                    <p><strong>Relativo à avaliação:</strong> {{ json_organizacao_perceptiva }}</p>
+                </div>
+        </div>
+        {%endif%}
+        {%if estruturacao_dinamica_espacial%}
+        <div>
+                <div class="txt-relatorio">
+                    <h5>Estruturação dinâmica espacial</h5>
+                    <p><strong>Relativo à avaliação:</strong> {{ json_estruturacao_dinamica }}</p>
+                </div>
+        </div>
+        {%endif%}
+        {%if representacao_topografica%}
+        <div>
+                <div class="txt-relatorio">
+                    <h5>Representação topográfica</h5>
+                    <p><strong>Relativo à avaliação:</strong> {{ json_representacao_topografica }}</p>
+                </div>
+            </div>
+        {%endif%}
+        <div class="txt-relatorio">
+            <img src="media_graph/estruturacao_ritmica.webp">
+        </div>
+        {% if codificacao %}
+        <div class="txt-relatorio">
+            <h5>Codificação</h5>
+            <p><strong>Relativo à avaliação:</strong> {{ json_codificacao }}</p>
+        </div>
+        {% endif %}
+        {% if decodificacao%}
+        <div class="txt-relatorio">
+            <h5>Decodificação</h5>
+            <p><strong>Relativo à avaliação:</strong> {{ json_decodificacao }}</p>
+        </div>
+        {% endif %}
+        {% if transcodificacao_auditiva %}
+        <div class="txt-relatorio">
+            <h5>Transcodificação auditiva</h5>
+            <p><strong>Relativo à avaliação:</strong> {{ json_transcodificacao_auditiva }}</p>
+        </div>
+        {% endif %}
+        {% if transcodificacao_visual%}
+        <div class="txt-relatorio">
+            <h5>Transcodificação visual</h5>
+            <p><strong>Relativo à avaliação:</strong> {{ json_transcodificacao_visual }}</p>
+        </div>
+        {% endif %}
+        <div class="txt-relatorio">
+                    {% for segunda in segunda_unidade %}
+                    {% if segunda.obs_estruturacao_ritmica %}
+                    <p><strong>Observação na passagem: </strong>{{ segunda.obs_estruturacao_ritmica }}</p>
+                    {% endif %}
+                    {% endfor %}
+        </div>
+
+
+    </section>
+    {% endif %}
     <!-- Figura Humana -->
     {% if desenho_figura_humana %}
     <section class="section-unidades-funcionais">
@@ -384,7 +590,7 @@
     {% endif %}
 
     <!-- Terceira unidade -->
-    {%if terceira_unidade%}
+    {%if terceira_unidade.count > 1 %}
     <section class="section-unidades-funcionais">
 
         {% if jogar_quatro_bolas%}
@@ -478,10 +684,10 @@
         </div>
         {% endif %}
         <div class="txt-relatorio">
-            <h2>Aspectos da Grafomotricidade</h2>
+            
             <img src="media_graph/tracados.webp">
         </div>
-        {% if tracado_vertical%}
+        {% if obs_grafomotricidade %}
         <div class="txt-relatorio">
             <h5>Observações sobre à Grafomotricidade:</h5>
             {% for terceira in terceira_unidade %}
@@ -490,6 +696,102 @@
         </div>
         {% endif %}
 
+    </section>
+    {% elif terceira_unidade.count == 1%}
+    <section class="section-unidades-funcionais">
+
+        {% if jogar_quatro_bolas%}
+        <div class="txt-relatorio">
+            <h2>Aspectos da Praxia Global</h2>
+                <h5>Coordenação Óculo-manual ao Jogar bolas.</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_jogar_quatro_bolas }}</p>
+            </div>
+        {% endif %}
+        {% if agarrar_bola_de_tenis%}
+        <div class="txt-relatorio">
+                <h5>Coordenação Óculo-manual ao Agarrar bolas.</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_agarrar_bola_de_tenis }}</p>
+
+
+                {% for terceira in terceira_unidade %}
+                {%if terceira.obs_oculo_manual %}<p><strong>Observação na passagem: </strong>{{ terceira.obs_oculo_manual }}</p>{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if quatro_chutes_ao_gol%}
+        <div class="txt-relatorio">
+                <h5>Coordenação Óculo-pedal ao chutar bolas</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_quatro_chutes_ao_gol }}</p>
+
+                {% for terceira in terceira_unidade %}
+                {%if terceira.obs_oculo_pedal %}<p><strong>Observação na passagem: </strong>{{ terceira.obs_oculo_pedal }}</p>{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if dissociacao_membros_superiores%}
+        <div class="txt-relatorio">
+                <h5>Dissociação dos Membros superiores</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_dissociacao_membros_superiores }}</p>
+
+                {% for terceira in terceira_unidade %}
+                {%if terceira.obs_dissociacao_membros_superiores %}<p><strong>Observação na passagem: </strong>{{ terceira.obs_dissociacao_membros_superiores }}</p>{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if dissociacao_membros_inferiores%}
+        <div class="txt-relatorio">
+                <h5>Dissociação dos Membros inferiores</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_dissociacao_membros_inferiores }}</p>
+
+                {% for terceira in terceira_unidade %}
+                {%if terceira.obs_dissociacao_membros_inferiores %}<p><strong>Observação na passagem: </strong>{{ terceira.obs_dissociacao_membros_inferiores }}</p>{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if agilidade%}
+        <div class="txt-relatorio">
+                <h5>Agilidade</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_agilidade }}</p>
+            </div>
+        {% endif %}
+        {% if pulseira_de_clipes%}
+        <div class="txt-relatorio">
+                <h2>Aspectos da Praxia Fina</h2>
+                <h5>Aspectos especificos manuais</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_pulseira_de_clipes }}</p>
+
+                {% for terceira in terceira_unidade %}
+                {%if terceira.obs_pulseira_de_clipes %}<p><strong>Observação na passagem: </strong>{{ terceira.obs_pulseira_de_clipes }}</p>{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if tamborilar%}
+        <div class="txt-relatorio">
+                <h5>Tamborilar</h5>
+                <p><strong>Relativo à avaliação:</strong> {{ json_tamborilar }}</p>
+
+                {% for terceira in terceira_unidade %}
+                {%if terceira.obs_tamborilar %}<p><strong>Observação na passagem: </strong>{{ terceira.obs_tamborilar }}</p>{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if velocidade_precisao%}
+        <div class="txt-relatorio">
+            <h5>Velocidade e precisão</h5>
+            <p><strong>Relativo à avaliação:</strong> {{ json_velocidade_precisao }}</p>
+        </div>
+        {% endif %}
+        <div class="txt-relatorio">
+            <img src="media_graph/tracados.webp">
+        </div>
+        {% if obs_grafomotricidade%}
+        <div class="txt-relatorio">
+            <h5>Observações sobre à Grafomotricidade:</h5>
+            {% for terceira in terceira_unidade %}
+            {% if terceira.obs_grafomotricidade %}<p><strong>Observação na passagem: </strong>{{ terceira.obs_grafomotricidade }}</p>{% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
     </section>
     {%endif%}
 
